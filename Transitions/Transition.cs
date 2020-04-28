@@ -4,8 +4,8 @@ using System.Text;
 using System.Reflection;
 using System.Timers;
 using System.Diagnostics;
-using System.Windows.Forms;
 using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace Transitions
 {
