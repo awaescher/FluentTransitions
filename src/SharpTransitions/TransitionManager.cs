@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Timers;
 
-namespace Transitions
+namespace SharpTransitions
 {
     /// <summary>
     /// This class is responsible for running transitions. It holds the timer that

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 
-namespace Transitions
+namespace SharpTransitions
 {
     public interface ITransitionType
     {

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Reflection;
 
-namespace Transitions
+namespace SharpTransitions
 {
     /// <summary>
     /// Interface for all types we can perform transitions on. 

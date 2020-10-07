@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Transitions
+namespace SharpTransitions
 {
     /// <summary>
     /// This class allows you to create user-defined transition types. You specify these

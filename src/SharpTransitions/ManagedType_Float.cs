@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
-namespace Transitions
+namespace SharpTransitions
 {
     internal class ManagedType_Float : IManagedType
     {

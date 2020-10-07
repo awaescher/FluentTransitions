@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
-namespace Transitions
+namespace SharpTransitions
 {
     /// <summary>
     /// This transition animates with an exponential decay. This has a damping effect

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Transitions
+namespace SharpTransitions
 {
     /// <summary>
     /// This transition bounces the property to a destination value and back to the

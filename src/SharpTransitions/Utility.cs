@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Reflection;
 using System.ComponentModel;
 
-namespace Transitions
+namespace SharpTransitions
 {
 	/// <summary>
 	/// A class holding static utility functions.

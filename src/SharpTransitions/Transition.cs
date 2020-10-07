@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Reflection;
-using System.Timers;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace Transitions
+namespace SharpTransitions
 {
     /// <summary>
     /// Lets you perform animated transitions of properties on arbitrary objects. These 

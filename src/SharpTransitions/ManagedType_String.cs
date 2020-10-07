@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
-namespace Transitions
+namespace SharpTransitions
 {
     /// <summary>
     /// Manages transitions for strings. This doesn't make as much sense as transitions

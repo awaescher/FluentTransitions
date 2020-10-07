@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
-namespace Transitions
+namespace SharpTransitions
 {
 	/// <summary>
 	/// This class manages a linear transition. The percentage complete for the transition

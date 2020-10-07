@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
 
-namespace Transitions
+namespace SharpTransitions
 {
 	/// <summary>
 	/// Class that manages transitions for Color properties. For these we

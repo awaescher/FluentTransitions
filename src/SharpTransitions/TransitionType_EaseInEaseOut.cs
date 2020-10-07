@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
-namespace Transitions
+namespace SharpTransitions
 {
 	/// <summary>
 	/// Manages an ease-in-ease-out transition. This accelerates during the first 
