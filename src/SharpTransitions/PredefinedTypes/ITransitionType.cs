@@ -2,8 +2,8 @@
 
 namespace SharpTransitions
 {
-    public interface ITransitionType
-    {
+	public interface ITransitionType
+	{
 		/// <summary>
 		/// Called by the Transition framework when its timer ticks to pass in the
 		/// time (in ms) since the transition started. 
@@ -20,5 +20,5 @@ namespace SharpTransitions
 		/// (This may not be at the same time as the percentage has moved to 100%.)
 		/// </summary>
 		void OnTimer(int time, out double percentage, out bool completed);
-    }
+	}
 }

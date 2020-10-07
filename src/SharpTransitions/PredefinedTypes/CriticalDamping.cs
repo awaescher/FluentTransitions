@@ -3,10 +3,10 @@ using System.Text;
 
 namespace SharpTransitions
 {
-    /// <summary>
-    /// This transition animates with an exponential decay. This has a damping effect
-    /// similar to the motion of a needle on an electomagnetically controlled dial.
-    /// </summary>
+	/// <summary>
+	/// This transition animates with an exponential decay. This has a damping effect
+	/// similar to the motion of a needle on an electomagnetically controlled dial.
+	/// </summary>
 	public class CriticalDamping : ITransitionType
 	{
 		/// <summary>
@@ -41,6 +41,6 @@ namespace SharpTransitions
 			}
 		}
 
-		private double _transitionTime = 0.0;
+		private readonly double _transitionTime = 0.0;
 	}
 }

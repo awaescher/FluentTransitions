@@ -3,15 +3,15 @@ using System.Text;
 
 namespace SharpTransitions
 {
-    /// <summary>
-    /// Manages transitions for int properties.
-    /// </summary>
-    internal class ManagedInt : IManagedType
-    {
+	/// <summary>
+	/// Manages transitions for int properties.
+	/// </summary>
+	internal class ManagedInt : IManagedType
+	{
 		/// <summary>
 		/// Returns the type we are managing.
 		/// </summary>
-		public Type GetManagedType() =>  typeof(int);
+		public Type GetManagedType() => typeof(int);
 
 		/// <summary>
 		/// Returns a copy of the int passed in.

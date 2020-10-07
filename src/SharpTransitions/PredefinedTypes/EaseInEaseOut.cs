@@ -33,7 +33,7 @@ namespace SharpTransitions
 		{
 			// We find the percentage time elapsed...
 			double elapsed = time / _transitionTime;
-            percentage = Utility.ConvertLinearToEaseInEaseOut(elapsed);
+			percentage = Utility.ConvertLinearToEaseInEaseOut(elapsed);
 
 			if (elapsed >= 1.0)
 			{
@@ -46,6 +46,6 @@ namespace SharpTransitions
 			}
 		}
 
-		private double _transitionTime = 0.0;
+		private readonly double _transitionTime = 0.0;
 	}
 }

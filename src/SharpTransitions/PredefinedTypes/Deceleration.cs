@@ -46,6 +46,6 @@ namespace SharpTransitions
 			}
 		}
 
-		private double _transitionTime = 0.0;
+		private readonly double _transitionTime = 0.0;
 	}
 }

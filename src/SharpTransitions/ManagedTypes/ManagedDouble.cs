@@ -12,7 +12,7 @@ namespace SharpTransitions
 		/// <summary>
 		///  Returns the type managed by this class.
 		/// </summary>
-		public Type GetManagedType() =>  typeof(double);
+		public Type GetManagedType() => typeof(double);
 
 		/// <summary>
 		/// Returns a copy of the double passed in.
