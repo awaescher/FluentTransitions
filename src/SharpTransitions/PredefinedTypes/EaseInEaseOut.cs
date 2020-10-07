@@ -7,7 +7,7 @@ namespace SharpTransitions
 	/// Manages an ease-in-ease-out transition. This accelerates during the first 
 	/// half of the transition, and then decelerates during the second half.
 	/// </summary>
-	public class TransitionType_EaseInEaseOut : ITransitionType
+	public class EaseInEaseOut : ITransitionType
 	{
 		#region Public methods
 
@@ -15,7 +15,7 @@ namespace SharpTransitions
 		/// Constructor. You pass in the time that the transition 
 		/// will take (in milliseconds).
 		/// </summary>
-		public TransitionType_EaseInEaseOut(int iTransitionTime)
+		public EaseInEaseOut(int iTransitionTime)
 		{
 			if (iTransitionTime <= 0)
 			{

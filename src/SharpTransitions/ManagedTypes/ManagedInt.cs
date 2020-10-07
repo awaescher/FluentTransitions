@@ -6,7 +6,7 @@ namespace SharpTransitions
     /// <summary>
     /// Manages transitions for int properties.
     /// </summary>
-    internal class ManagedType_Int : IManagedType
+    internal class ManagedInt : IManagedType
     {
 		#region IManagedType Members
 

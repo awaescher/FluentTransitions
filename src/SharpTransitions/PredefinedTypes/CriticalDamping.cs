@@ -7,7 +7,7 @@ namespace SharpTransitions
     /// This transition animates with an exponential decay. This has a damping effect
     /// similar to the motion of a needle on an electomagnetically controlled dial.
     /// </summary>
-	public class TransitionType_CriticalDamping : ITransitionType
+	public class CriticalDamping : ITransitionType
 	{
 		#region Public methods
 
@@ -15,7 +15,7 @@ namespace SharpTransitions
 		/// Constructor. You pass in the time that the transition 
 		/// will take (in milliseconds).
 		/// </summary>
-		public TransitionType_CriticalDamping(int iTransitionTime)
+		public CriticalDamping(int iTransitionTime)
 		{
 			if (iTransitionTime <= 0)
 			{

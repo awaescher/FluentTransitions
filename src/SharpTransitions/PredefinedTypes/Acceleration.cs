@@ -4,10 +4,9 @@ using System.Text;
 namespace SharpTransitions
 {
 	/// <summary>
-	/// Manages a transition starting from a high speed and decelerating to zero by
-	/// the end of the transition.
+	/// Manages transitions under constant acceleration from a standing start.
 	/// </summary>
-	public class TransitionType_Deceleration : ITransitionType
+	public class Acceleration : ITransitionType
 	{
 		#region Public methods
 
@@ -15,7 +14,7 @@ namespace SharpTransitions
 		/// Constructor. You pass in the time that the transition 
 		/// will take (in milliseconds).
 		/// </summary>
-		public TransitionType_Deceleration(int iTransitionTime)
+		public Acceleration(int iTransitionTime)
 		{
 			if (iTransitionTime <= 0)
 			{
@@ -32,15 +31,15 @@ namespace SharpTransitions
 		/// Works out the percentage completed given the time passed in.
 		/// This uses the formula:
 		///   s = ut + 1/2at^2
-		/// The initial velocity is 2, and the acceleration to get to 1.0
-		/// at t=1.0 is -2, so the formula becomes:
-		///   s = t(2-t)
+		/// The initial velocity is 0, and the acceleration to get to 1.0
+		/// at t=1.0 is 2, so the formula just becomes:
+		///   s = t^2
 		/// </summary>
 		public void onTimer(int iTime, out double dPercentage, out bool bCompleted)
 		{
 			// We find the percentage time elapsed...
 			double dElapsed = iTime / m_dTransitionTime;
-			dPercentage = dElapsed * (2.0 - dElapsed);
+			dPercentage = dElapsed * dElapsed;
 			if (dElapsed >= 1.0)
 			{
 				dPercentage = 1.0;

@@ -44,11 +44,11 @@ namespace SharpTransitions
         /// </summary>
         static Transition()
         {
-            registerType(new ManagedType_Int());
-            registerType(new ManagedType_Float());
-			registerType(new ManagedType_Double());
-            registerType(new ManagedType_Color());
-            registerType(new ManagedType_String());
+            registerType(new ManagedInt());
+            registerType(new ManagedFloat());
+			registerType(new ManagedDouble());
+            registerType(new ManagedColor());
+            registerType(new ManagedString());
         }
 
         #endregion

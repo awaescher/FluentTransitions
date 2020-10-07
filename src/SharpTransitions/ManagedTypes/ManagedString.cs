@@ -7,7 +7,7 @@ namespace SharpTransitions
     /// Manages transitions for strings. This doesn't make as much sense as transitions
     /// on other types, but I like the way it looks!
     /// </summary>
-    internal class ManagedType_String : IManagedType
+    internal class ManagedString : IManagedType
     {
         #region IManagedType Members
 

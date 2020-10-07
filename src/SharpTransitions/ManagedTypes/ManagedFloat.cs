@@ -3,7 +3,7 @@ using System.Text;
 
 namespace SharpTransitions
 {
-    internal class ManagedType_Float : IManagedType
+    internal class ManagedFloat : IManagedType
     {
         #region IManagedType Members
 

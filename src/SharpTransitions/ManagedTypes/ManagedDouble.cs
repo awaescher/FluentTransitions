@@ -6,7 +6,8 @@ namespace SharpTransitions
 	/// <summary>
 	/// Manages transitions for double properties.
 	/// </summary>
-	internal class ManagedType_Double : IManagedType
+	internal class ManagedDouble
+		: IManagedType
 	{
 		#region IManagedType Members
 

@@ -7,7 +7,7 @@ namespace SharpTransitions
 	/// This class manages a linear transition. The percentage complete for the transition
 	/// increases linearly with time.
 	/// </summary>
-    public class TransitionType_Linear : ITransitionType
+    public class Linear : ITransitionType
     {
         #region Public methods
 
@@ -15,7 +15,7 @@ namespace SharpTransitions
         /// Constructor. You pass in the time (in milliseconds) that the
         /// transition will take.
         /// </summary>
-        public TransitionType_Linear(int iTransitionTime)
+        public Linear(int iTransitionTime)
         {
 			if (iTransitionTime <= 0)
 			{

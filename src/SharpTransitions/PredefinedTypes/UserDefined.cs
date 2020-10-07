@@ -35,14 +35,14 @@ namespace SharpTransitions
     /// heights each time.
     /// 
     /// </summary>
-    public class TransitionType_UserDefined : ITransitionType
+    public class UserDefined : ITransitionType
     {
         #region Public methods
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        public TransitionType_UserDefined()
+        public UserDefined()
         {
         }
 
@@ -50,7 +50,7 @@ namespace SharpTransitions
         /// Constructor. You pass in the list of TransitionElements and the total time
         /// (in milliseconds) for the transition.
         /// </summary>
-        public TransitionType_UserDefined(IList<TransitionElement> elements, int iTransitionTime)
+        public UserDefined(IList<TransitionElement> elements, int iTransitionTime)
         {
             setup(elements, iTransitionTime);
         }
