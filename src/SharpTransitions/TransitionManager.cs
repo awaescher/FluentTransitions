@@ -146,7 +146,7 @@ namespace SharpTransitions
 			}
 
 			// We tick the timer for each transition we're managing...
-			foreach (Transition transition in listTransitions)
+			foreach (var transition in listTransitions)
 				transition.OnTimer();
 
 			// We restart the timer...

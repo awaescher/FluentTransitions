@@ -46,12 +46,12 @@ namespace TestApp
 
 			// We perform the transition which moves the active image off the
 			// screen, and the inactive one onto the screen...
-			var transition = new Transition(new EaseInEaseOut(1000));
-			transition.Add(_inactivePicture, "Left", 0);
-			transition.Add(_inactivePicture, "Top", 0);
-			transition.Add(_activePicture, "Left", destinationLeft);
-			transition.Add(_activePicture, "Top", destinationTop);
-			transition.Run();
+			Transition
+				.With(_inactivePicture, "Left", 0)
+				.With(_inactivePicture, "Top", 0)
+				.With(_activePicture, "Left", destinationLeft)
+				.With(_activePicture, "Top", destinationTop)
+				.EaseInEaseOut(TimeSpan.FromSeconds(1));
 
 			// We swap over which image is active and inactive for next time
 			// the function is called...

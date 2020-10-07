@@ -65,6 +65,12 @@ namespace SharpTransitions
 			RegisterType(new ManagedString());
 		}
 
+		public static TransitionDefinition With(object target, string propertyName, object destinationValue)
+		{
+			return new TransitionDefinition()
+				.With(target, propertyName, destinationValue);
+		}
+
 		/// <summary>
 		/// Constructor. You pass in the object that holds the properties 
 		/// that you are performing transitions on.
@@ -105,7 +111,7 @@ namespace SharpTransitions
 		/// <summary>
 		/// Adds a property that should be animated as part of this transition.
 		/// </summary>
-		public void Add(object target, string propertyName, object destinationValue)
+		public Transition Add(object target, string propertyName, object destinationValue)
 		{
 			// We get the property info...
 			var targetType = target.GetType();
@@ -138,6 +144,8 @@ namespace SharpTransitions
 			{
 				TransitionedProperties.Add(info);
 			}
+
+			return this;
 		}
 
 		/// <summary>

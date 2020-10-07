@@ -65,10 +65,10 @@ namespace TestApp
 			// The ease-in-ease-out transition acclerates the rate of change for the 
 			// first half of the animation, and decelerates during the second half.
 
-			var transition = new Transition(new EaseInEaseOut(1000));
-			transition.Add(controlOnScreen, "Left", -1 * controlOnScreen.Width);
-			transition.Add(controlOffScreen, "Left", GROUP_BOX_LEFT);
-			transition.Run();
+			Transition
+				.With(controlOnScreen, "Left", -1 * controlOnScreen.Width)
+				.With(controlOffScreen, "Left", GROUP_BOX_LEFT)
+				.EaseInEaseOut(TimeSpan.FromSeconds(1));
 		}
 
 		/// <summary>
@@ -161,12 +161,12 @@ namespace TestApp
 			}
 
 			// We create a transition to animate all four properties at the same time...
-			var t = new Transition(new Linear(1000));
-			t.Add(lblTextTransition1, "Text", text1);
-			t.Add(lblTextTransition1, "ForeColor", color1);
-			t.Add(lblTextTransition2, "Text", text2);
-			t.Add(lblTextTransition2, "ForeColor", color2);
-			t.Run();
+			Transition
+				.With(lblTextTransition1, "Text", text1)
+				.With(lblTextTransition1, "ForeColor", color1)
+				.With(lblTextTransition2, "Text", text2)
+				.With(lblTextTransition2, "ForeColor", color2)
+				.EaseInEaseOut(TimeSpan.FromSeconds(1));
 		}
 
 		/// <summary>
@@ -244,12 +244,14 @@ namespace TestApp
 			// to its starting position as the second item in the chain. The second 
 			// transition starts as soon as the first is complete...
 
-			var transition1 = new Transition(new Linear(2000));
-			transition1.Add(cmdDropAndBounce, "Left", cmdDropAndBounce.Left + 400);
+			var transition1 = Transition
+				.With(cmdDropAndBounce, "Left", cmdDropAndBounce.Left + 400)
+				.Build(new Linear(2000));
 
-			var transition2 = new Transition(new EaseInEaseOut(2000));
-			transition2.Add(cmdDropAndBounce, "Top", 19);
-			transition2.Add(cmdDropAndBounce, "Left", 6);
+			var transition2 = Transition
+				.With(cmdDropAndBounce, "Top", 19)
+				.With(cmdDropAndBounce, "Left", 6)
+				.Build(new EaseInEaseOut(2000));
 
 			Transition.RunChain(transition1, transition2);
 		}
