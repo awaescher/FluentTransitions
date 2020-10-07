@@ -4,9 +4,11 @@ using System.Collections.Generic;
 namespace SharpTransitions.Methods
 {
 	/// <summary>
-	/// This class allows you to create user-defined transition types. You specify these
-	/// as a list of TransitionElements. Each of these defines: 
-	/// End time , End value, Interpolation method
+	/// Allows the creation of user-defined transition methods.
+	/// Specify these as a list of transition elements.
+	/// 
+	/// Each of these defines: 
+	/// End time, End value, Interpolation method
 	/// 
 	/// For example, say you want to make a bouncing effect with a decay:
 	/// 

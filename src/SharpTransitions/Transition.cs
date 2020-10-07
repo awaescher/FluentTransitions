@@ -65,6 +65,13 @@ namespace SharpTransitions
 			RegisterType(new ManagedString());
 		}
 
+		/// <summary>
+		/// Includes a target object and interpolates its property value to the destination value
+		/// </summary>
+		/// <param name="target">The target object to include to the transition</param>
+		/// <param name="propertyName">The name of the property to animate</param>
+		/// <param name="destinationValue">The destination value which should be reached at the end of the transition</param>
+		/// <returns></returns>
 		public static TransitionDefinition With(object target, string propertyName, object destinationValue)
 		{
 			return new TransitionDefinition()
