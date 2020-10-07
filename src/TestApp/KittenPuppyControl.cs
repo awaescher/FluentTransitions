@@ -12,6 +12,10 @@ namespace TestApp
 	/// </summary>
 	public partial class KittenPuppyControl : UserControl
 	{
+		private PictureBox _activePicture = null;
+		private PictureBox _inactivePicture = null;
+		private readonly Random _random = new Random();
+
 		/// <summary>
 		/// Constructor.
 		/// </summary>
@@ -55,9 +59,5 @@ namespace TestApp
 			_activePicture = _inactivePicture;
 			_inactivePicture = temp;
 		}
-
-		private PictureBox _activePicture = null;
-		private PictureBox _inactivePicture = null;
-		private readonly Random _random = new Random();
 	}
 }

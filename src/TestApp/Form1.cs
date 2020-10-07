@@ -14,6 +14,17 @@ namespace TestApp
 	/// </summary>
 	public partial class Form1 : Form
 	{
+		// Colors used by the change-form-color transition...
+		private readonly Color BACKCOLOR_PINK = Color.FromArgb(255, 220, 220);
+		private readonly Color BACK_COLOR_YELLOW = Color.FromArgb(255, 255, 220);
+
+		// The left point of the 'bounce' and 'throw-and-catch' group boxes...
+		private const int GROUP_BOX_LEFT = 12;
+
+		// Strings used for the text transition...
+		private const string STRING_SHORT = "Hello, World!";
+		private const string STRING_LONG = "A longer piece of text.";
+
 		/// <summary>
 		/// Constructor.
 		/// </summary>
@@ -242,16 +253,5 @@ namespace TestApp
 
 			Transition.RunChain(transition1, transition2);
 		}
-
-		// Colors used by the change-form-color transition...
-		private readonly Color BACKCOLOR_PINK = Color.FromArgb(255, 220, 220);
-		private readonly Color BACK_COLOR_YELLOW = Color.FromArgb(255, 255, 220);
-
-		// The left point of the 'bounce' and 'throw-and-catch' group boxes...
-		private const int GROUP_BOX_LEFT = 12;
-
-		// Strings used for the text transition...
-		private const string STRING_SHORT = "Hello, World!";
-		private const string STRING_LONG = "A longer piece of text.";
 	}
 }

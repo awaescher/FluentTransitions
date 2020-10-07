@@ -7,6 +7,8 @@ namespace SharpTransitions.Methods
 	/// </summary>
 	public class Acceleration : IMethod
 	{
+		private readonly double _transitionTime = 0.0;
+
 		/// <summary>
 		/// Constructor. You pass in the time that the transition 
 		/// will take (in milliseconds).
@@ -43,7 +45,5 @@ namespace SharpTransitions.Methods
 				completed = false;
 			}
 		}
-
-		private readonly double _transitionTime = 0.0;
 	}
 }

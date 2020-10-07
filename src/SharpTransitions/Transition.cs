@@ -18,10 +18,10 @@ namespace SharpTransitions
 	/// 
 	/// Example transition
 	/// ------------------
-	/// a.      Transition t = new Transition(new TransitionMethod_Linear(500));
-	/// b.      t.add(form1, "Width", 500);
-	/// c.      t.add(form1, "BackColor", Color.Red);
-	/// d.      t.run();
+	/// a.      var transition = new Transition(new Linear(500));
+	/// b.      transition.add(form1, nameof(Width), 500);
+	/// c.      transition.add(form1, nameof(BackColor), Color.Red);
+	/// d.      transition.run();
 	///   
 	/// Line a:         Creates a new transition. You specify the transition method.
 	///                 
@@ -39,6 +39,21 @@ namespace SharpTransitions
 	public class Transition
 	{
 		/// <summary>
+		/// Event raised when the transition hass completed.
+		/// </summary>
+		public event EventHandler<Args> TransitionCompletedEvent;
+
+		// Helps us find the time interval from the time the transition starts to each timer tick...
+		private readonly Stopwatch _stopwatch = new Stopwatch();
+
+		// A map of Type info to IManagedType objects. These are all the types that we
+		// know how to perform transitions on...
+		private static readonly IDictionary<Type, IManagedType> _mapManagedTypes = new Dictionary<Type, IManagedType>();
+
+		// The transition method used by this transition...
+		private readonly IMethod _method = null;
+
+		/// <summary>
 		/// You should register all managed-types here.
 		/// </summary>
 		static Transition()
@@ -51,16 +66,13 @@ namespace SharpTransitions
 		}
 
 		/// <summary>
-		/// Args passed with the TransitionCompletedEvent.
+		/// Constructor. You pass in the object that holds the properties 
+		/// that you are performing transitions on.
 		/// </summary>
-		public class Args : EventArgs
+		public Transition(IMethod transitionMethod)
 		{
+			_method = transitionMethod;
 		}
-
-		/// <summary>
-		/// Event raised when the transition hass completed.
-		/// </summary>
-		public event EventHandler<Args> TransitionCompletedEvent;
 
 		/// <summary>
 		/// Creates and immediately runs a transition on the property passed in.
@@ -88,15 +100,6 @@ namespace SharpTransitions
 		public static void RunChain(params Transition[] transitions)
 		{
 			_ = new TransitionChain(transitions);
-		}
-
-		/// <summary>
-		/// Constructor. You pass in the object that holds the properties 
-		/// that you are performing transitions on.
-		/// </summary>
-		public Transition(IMethod transitionMethod)
-		{
-			_method = transitionMethod;
 		}
 
 		/// <summary>
@@ -133,7 +136,7 @@ namespace SharpTransitions
 
 			lock (_lock)
 			{
-				_listTransitionedProperties.Add(info);
+				TransitionedProperties.Add(info);
 			}
 		}
 
@@ -144,7 +147,7 @@ namespace SharpTransitions
 		{
 			// We find the current start values for the properties we 
 			// are animating...
-			foreach (TransitionedPropertyInfo info in _listTransitionedProperties)
+			foreach (TransitionedPropertyInfo info in TransitionedProperties)
 			{
 				object value = info.PropertyInfo.GetValue(info.Target, null);
 				info.StartValue = info.ManagedType.Copy(value);
@@ -160,19 +163,13 @@ namespace SharpTransitions
 		}
 
 		/// <summary>
-		/// Property that returns a list of information about each property managed
-		/// by this transition.
-		/// </summary>
-		internal IList<TransitionedPropertyInfo> TransitionedProperties => _listTransitionedProperties;
-
-		/// <summary>
 		/// We remove the property with the info passed in from the transition.
 		/// </summary>
 		internal void RemoveProperty(TransitionedPropertyInfo info)
 		{
 			lock (_lock)
 			{
-				_listTransitionedProperties.Remove(info);
+				TransitionedProperties.Remove(info);
 			}
 		}
 
@@ -197,7 +194,7 @@ namespace SharpTransitions
 			var listTransitionedProperties = new List<TransitionedPropertyInfo>();
 			lock (_lock)
 			{
-				foreach (TransitionedPropertyInfo info in _listTransitionedProperties)
+				foreach (TransitionedPropertyInfo info in TransitionedProperties)
 				{
 					listTransitionedProperties.Add(info.Copy());
 				}
@@ -309,12 +306,11 @@ namespace SharpTransitions
 			_mapManagedTypes[type] = transitionType;
 		}
 
-		// A map of Type info to IManagedType objects. These are all the types that we
-		// know how to perform transitions on...
-		private static readonly IDictionary<Type, IManagedType> _mapManagedTypes = new Dictionary<Type, IManagedType>();
-
-		// The transition method used by this transition...
-		private readonly IMethod _method = null;
+		/// <summary>
+		/// Property that returns a list of information about each property managed
+		/// by this transition.
+		/// </summary>
+		internal IList<TransitionedPropertyInfo> TransitionedProperties { get; } = new List<TransitionedPropertyInfo>();
 
 		// Holds information about one property on one taregt object that we are performing
 		// a transition on...
@@ -339,11 +335,12 @@ namespace SharpTransitions
 			}
 		}
 
-		// The collection of properties that the current transition is animating...
-		private readonly IList<TransitionedPropertyInfo> _listTransitionedProperties = new List<TransitionedPropertyInfo>();
-
-		// Helps us find the time interval from the time the transition starts to each timer tick...
-		private readonly Stopwatch _stopwatch = new Stopwatch();
+		/// <summary>
+		/// Args passed with the TransitionCompletedEvent.
+		/// </summary>
+		public class Args : EventArgs
+		{
+		}
 
 		// Event args used for the event we raise when updating a property...
 		private class PropertyUpdateArgs : EventArgs

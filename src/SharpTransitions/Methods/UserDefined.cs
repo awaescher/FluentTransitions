@@ -37,6 +37,15 @@ namespace SharpTransitions.Methods
 	/// </summary>
 	public class UserDefined : IMethod
 	{
+		// The collection of elements that make up the transition...
+		private IList<TransitionElement> _elements = null;
+
+		// The total transition time...
+		private double _transitionTime = 0.0;
+
+		// The element that we are currently in (i.e. the current time within this element)...
+		private int _currentElement = 0;
+
 		/// <summary>
 		/// Constructor.
 		/// </summary>
@@ -172,14 +181,5 @@ namespace SharpTransitions.Methods
 			endValue = currentElement.EndValue / 100.0;
 			interpolationMethod = currentElement.InterpolationMethod;
 		}
-
-		// The collection of elements that make up the transition...
-		private IList<TransitionElement> _elements = null;
-
-		// The total transition time...
-		private double _transitionTime = 0.0;
-
-		// The element that we are currently in (i.e. the current time within this element)...
-		private int _currentElement = 0;
 	}
 }

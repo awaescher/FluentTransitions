@@ -39,14 +39,11 @@ namespace SharpTransitions.ManagedTypes
 				// We get the start and end chars at this position...
 				char startChar = 'a';
 				if (i < startLength)
-				{
 					startChar = startString[i];
-				}
+				
 				char cEnd = 'a';
 				if (i < endLength)
-				{
 					cEnd = endString[i];
-				}
 
 				// We interpolate them...
 				char interpolatedChar;

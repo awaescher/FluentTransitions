@@ -8,6 +8,8 @@ namespace SharpTransitions.Methods
 	/// </summary>
 	public class Linear : IMethod
 	{
+		private readonly double _transitionTime = 0.0;
+
 		/// <summary>
 		/// Constructor. You pass in the time (in milliseconds) that the
 		/// transition will take.
@@ -15,9 +17,8 @@ namespace SharpTransitions.Methods
 		public Linear(int transitionTime)
 		{
 			if (transitionTime <= 0)
-			{
 				throw new Exception("Transition time must be greater than zero.");
-			}
+			
 			_transitionTime = transitionTime;
 		}
 
@@ -37,7 +38,5 @@ namespace SharpTransitions.Methods
 				completed = false;
 			}
 		}
-
-		private readonly double _transitionTime = 0.0;
 	}
 }

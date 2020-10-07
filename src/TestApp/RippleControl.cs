@@ -18,6 +18,9 @@ namespace TestApp
 	/// </summary>
 	public partial class RippleControl : UserControl
 	{
+		// A collection of cell-infos, i.e. info on each label on the control...
+		private readonly IList<CellInfo> _cellInfos = new List<CellInfo>();
+
 		/// <summary>
 		/// Constructor.
 		/// </summary>
@@ -97,8 +100,5 @@ namespace TestApp
 
 			public int TransitionInterval { get; set; }
 		}
-
-		// A collection of cell-infos, i.e. info on each label on the control...
-		private readonly IList<CellInfo> _cellInfos = new List<CellInfo>();
 	}
 }

@@ -5,8 +5,7 @@ namespace SharpTransitions.ManagedTypes
 	/// <summary>
 	/// Manages transitions for double properties.
 	/// </summary>
-	internal class ManagedDouble
-		: IManagedType
+	internal class ManagedDouble : IManagedType
 	{
 		/// <summary>
 		///  Returns the type managed by this class.

@@ -4,6 +4,9 @@ namespace SharpTransitions
 {
 	internal class TransitionChain
 	{
+		// The list of transitions in the chain...
+		private readonly LinkedList<Transition> _listTransitions = new LinkedList<Transition>();
+
 		public TransitionChain(params Transition[] transitions)
 		{
 			// We store the list of transitions...
@@ -44,8 +47,5 @@ namespace SharpTransitions
 			_listTransitions.RemoveFirst();
 			RunNextTransition();
 		}
-
-		// The list of transitions in the chain...
-		private readonly LinkedList<Transition> _listTransitions = new LinkedList<Transition>();
 	}
 }

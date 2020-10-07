@@ -8,6 +8,8 @@ namespace SharpTransitions.Methods
 	/// </summary>
 	public class Deceleration : IMethod
 	{
+		private readonly double _transitionTime = 0.0;
+
 		/// <summary>
 		/// Constructor. You pass in the time that the transition 
 		/// will take (in milliseconds).
@@ -15,9 +17,8 @@ namespace SharpTransitions.Methods
 		public Deceleration(int transitionTime)
 		{
 			if (transitionTime <= 0)
-			{
 				throw new Exception("Transition time must be greater than zero.");
-			}
+			
 			_transitionTime = transitionTime;
 		}
 
@@ -44,7 +45,5 @@ namespace SharpTransitions.Methods
 				completed = false;
 			}
 		}
-
-		private readonly double _transitionTime = 0.0;
 	}
 }

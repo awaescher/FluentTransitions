@@ -20,6 +20,31 @@ namespace SharpTransitions
 	/// </remarks>
 	internal class TransitionManager
 	{
+		// The singleton instance...
+		private static TransitionManager _instance = null;
+
+		// The collection of transitions we're managing. (This should really be a set.)
+		private readonly IDictionary<Transition, bool> _transitions = new Dictionary<Transition, bool>();
+
+		// The timer that controls the transition animation...
+		private readonly Timer _timer = null;
+
+		// An object to lock on. This class can be accessed by multiple threads: the 
+		// user thread can add new transitions; and the timerr thread can be animating 
+		// them. As they access the same collections, the methods need to be protected 
+		// by a lock...
+		private readonly object _lock = new object();
+
+		/// <summary>
+		/// Private constructor (for singleton).
+		/// </summary>
+		private TransitionManager()
+		{
+			_timer = new Timer(15);
+			_timer.Elapsed += OnTimerElapsed;
+			_timer.Enabled = true;
+		}
+
 		/// <summary>
 		/// Singleton's getInstance method.
 		/// </summary>
@@ -99,16 +124,6 @@ namespace SharpTransitions
 		}
 
 		/// <summary>
-		/// Private constructor (for singleton).
-		/// </summary>
-		private TransitionManager()
-		{
-			_timer = new Timer(15);
-			_timer.Elapsed += OnTimerElapsed;
-			_timer.Enabled = true;
-		}
-
-		/// <summary>
 		/// Called when the timer ticks.
 		/// </summary>
 		private void OnTimerElapsed(object sender, ElapsedEventArgs e)
@@ -153,21 +168,6 @@ namespace SharpTransitions
 				_transitions.Remove(transition);
 			}
 		}
-
-		// The singleton instance...
-		private static TransitionManager _instance = null;
-
-		// The collection of transitions we're managing. (This should really be a set.)
-		private readonly IDictionary<Transition, bool> _transitions = new Dictionary<Transition, bool>();
-
-		// The timer that controls the transition animation...
-		private readonly Timer _timer = null;
-
-		// An object to lock on. This class can be accessed by multiple threads: the 
-		// user thread can add new transitions; and the timerr thread can be animating 
-		// them. As they access the same collections, the methods need to be protected 
-		// by a lock...
-		private readonly object _lock = new object();
 	}
 }
 
