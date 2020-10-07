@@ -71,10 +71,8 @@ namespace SharpTransitions.Methods
 			_transitionTime = transitionTime;
 
 			// We check that the elements list has some members...
-			if (elements.Count == 0)
-			{
-				throw new Exception("The list of elements passed to the constructor of TransitionType_UserDefined had zero elements. It must have at least one element.");
-			}
+			if (elements?.Count == 0)
+				throw new ArgumentException($"The list of elements passed to the constructor of {nameof(UserDefined)} had zero elements. It must have at least one element.");
 		}
 
 		/// <summary>
@@ -114,7 +112,7 @@ namespace SharpTransitions.Methods
 					break;
 
 				default:
-					throw new Exception("Interpolation method not handled: " + interpolationMethod.ToString());
+					throw new InvalidOperationException($"Interpolation method not handled: {interpolationMethod}");
 			}
 
 			// We now know how far through the transition we have moved, so we can interpolate

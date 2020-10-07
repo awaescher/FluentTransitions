@@ -11,12 +11,12 @@ namespace SharpTransitions
 		/// <summary>
 		/// Returns the value of the property passed in.
 		/// </summary>
-		public static object GetValue(object target, string strPropertyName)
+		public static object GetValue(object target, string propertyName)
 		{
 			var targetType = target.GetType();
-			var propertyInfo = targetType.GetProperty(strPropertyName);
+			var propertyInfo = targetType.GetProperty(propertyName);
 			if (propertyInfo == null)
-				throw new Exception("Object: " + target.ToString() + " does not have the property: " + strPropertyName);
+				throw new InvalidOperationException($"Object: {target} does not have the property: {propertyName}");
 
 			return propertyInfo.GetValue(target, null);
 		}
@@ -24,12 +24,12 @@ namespace SharpTransitions
 		/// <summary>
 		/// Sets the value of the property passed in.
 		/// </summary>
-		public static void SetValue(object target, string strPropertyName, object value)
+		public static void SetValue(object target, string propertyName, object value)
 		{
 			var targetType = target.GetType();
-			var propertyInfo = targetType.GetProperty(strPropertyName);
+			var propertyInfo = targetType.GetProperty(propertyName);
 			if (propertyInfo == null)
-				throw new Exception("Object: " + target.ToString() + " does not have the property: " + strPropertyName);
+				throw new InvalidOperationException($"Object: {target} does not have the property: {propertyName}");
 
 			propertyInfo.SetValue(target, value, null);
 		}
@@ -37,11 +37,11 @@ namespace SharpTransitions
 		/// <summary>
 		/// Returns a value between d1 and d2 for the percentage passed in.
 		/// </summary>
-		public static double Interpolate(double d1, double d2, double dPercentage)
+		public static double Interpolate(double value1, double value2, double percentage)
 		{
-			double difference = d2 - d1;
-			double distance = difference * dPercentage;
-			double result = d1 + distance;
+			double difference = value2 - value1;
+			double distance = difference * percentage;
+			double result = value1 + distance;
 
 			return result;
 		}
@@ -57,9 +57,9 @@ namespace SharpTransitions
 		/// <summary>
 		/// Returns a value betweeen f1 and f2 for the percentage passed in.
 		/// </summary>
-		public static float Interpolate(float value1, float value2, double dPercentage)
+		public static float Interpolate(float value1, float value2, double percentage)
 		{
-			return (float)Interpolate((double)value1, (double)value2, dPercentage);
+			return (float)Interpolate((double)value1, (double)value2, percentage);
 		}
 
 		/// <summary>

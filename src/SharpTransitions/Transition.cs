@@ -111,16 +111,16 @@ namespace SharpTransitions
 			var targetType = target.GetType();
 			var propertyInfo = targetType.GetProperty(propertyName);
 			if (propertyInfo == null)
-				throw new Exception("Object: " + target.ToString() + " does not have the property: " + propertyName);
+				throw new InvalidOperationException($"Object: {target} does not have the property: {propertyName}");
 
 			// We check that we support the property type...
 			var propertyType = propertyInfo.PropertyType;
 			if (!_mapManagedTypes.ContainsKey(propertyType))
-				throw new Exception("Transition does not handle properties of type: " + propertyType.ToString());
+				throw new InvalidOperationException($"Transition does not handle properties of type: {propertyType}");
 
 			// We can only transition properties that are both getable and setable...
 			if (propertyInfo.CanRead == false || propertyInfo.CanWrite == false)
-				throw new Exception("Property is not both getable and setable: " + propertyName);
+				throw new InvalidOperationException($"Property is not both getable and setable: {propertyName}");
 
 			var managedType = _mapManagedTypes[propertyType];
 

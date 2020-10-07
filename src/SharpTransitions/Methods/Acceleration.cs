@@ -16,9 +16,8 @@ namespace SharpTransitions.Methods
 		public Acceleration(int transitionTime)
 		{
 			if (transitionTime <= 0)
-			{
-				throw new Exception("Transition time must be greater than zero.");
-			}
+				throw new ArgumentOutOfRangeException("Transition time must be greater than zero.");
+
 			_transitionTime = transitionTime;
 		}
 
