@@ -239,8 +239,7 @@ namespace SharpTransitions
 				if (IsDisposed(args.Target))
 					return;
 
-				var invokeTarget = args.Target as ISynchronizeInvoke;
-				if (invokeTarget != null && invokeTarget.InvokeRequired)
+				if (args.Target is ISynchronizeInvoke invokeTarget && invokeTarget.InvokeRequired)
 				{
 					// There is some history behind the next two lines, which is worth
 					// going through to understand why they are the way they are.
@@ -293,8 +292,7 @@ namespace SharpTransitions
 		private bool IsDisposed(object target)
 		{
 			// Is the object passed in a Control?
-			var controlTarget = target as Control;
-			if (controlTarget == null)
+			if (!(target is Control controlTarget))
 				return false;
 
 			// Is it disposed or disposing?

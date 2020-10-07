@@ -17,8 +17,6 @@ namespace TestApp
 	/// </summary>
 	public partial class RippleControl : UserControl
 	{
-		#region Public methods
-
 		/// <summary>
 		/// Constructor.
 		/// </summary>
@@ -34,49 +32,43 @@ namespace TestApp
 		{
 			// We run a transition on each of the labels shown on the control.
 			// This means that we will be running 100 simulataneous transitions...
-			foreach (CellInfo info in m_CellInfos)
-			{
+			foreach (var info in _cellInfos)
 				Transition.Run(info.Control, "BackColor", Color.Pink, new Flash(1, info.TransitionInterval));
-			}
 		}
-
-		#endregion
-
-		#region Private functions
 
 		/// <summary>
 		/// Called when the control is first loaded.
 		/// </summary>
 		private void RippleControl_Load(object sender, EventArgs e)
 		{
-			double dCellWidth = Width / 10.0;
-			double dCellHeight = Height / 10.0;
+			double cellWidth = Width / 10.0;
+			double cellHeight = Height / 10.0;
 
 			// We set up a 10x10 grid of labels...
-			double dTop = 0;
-			for (int iRow = 0; iRow < 10; ++iRow)
+			double top = 0;
+			for (int row = 0; row < 10; ++row)
 			{
-				double dLeft = 0;
-				double dBottom = dTop + dCellHeight;
+				double left = 0;
+				double bottom = top + cellHeight;
 
-				for (int iCol = 0; iCol < 10; ++iCol)
+				for (int col = 0; col < 10; ++col)
 				{
 					// We work out the size of this label...
-					double dRight = dLeft + dCellWidth;
-					int iLeft = (int)dLeft;
-					int iTop = (int)dTop;
-					int iRight = (int)dRight;
-					int iBottom = (int)dBottom;
-					int iWidth = iRight - iLeft;
-					int iHeight = iBottom - iTop;
+					double right = left + cellWidth;
+					int leftInt = (int)left;
+					int topInt = (int)top;
+					int rightInt = (int)right;
+					int bottomInt = (int)bottom;
+					int width = rightInt - leftInt;
+					int height = bottomInt - topInt;
 
 					// We create the label...
-					Label label = new Label
+					var label = new Label
 					{
-						Left = iLeft,
-						Top = iTop,
-						Width = iWidth,
-						Height = iHeight,
+						Left = leftInt,
+						Top = topInt,
+						Width = width,
+						Height = height,
 						BackColor = Color.White
 					};
 
@@ -85,32 +77,27 @@ namespace TestApp
 
 					// We work out a transition time for it, and store the information
 					// to use when we do the ripple effect...
-					int iTransitionInterval = iRow * 100 + iCol * 100;
-					m_CellInfos.Add(new CellInfo { Control = label, TransitionInterval = iTransitionInterval });
+					int transitionInterval = row * 100 + col * 100;
+					_cellInfos.Add(new CellInfo { Control = label, TransitionInterval = transitionInterval });
 
 					// The left for the next column is the right for this one...
-					dLeft = dRight;
+					left = right;
 				}
 
 				// The top of the next row is the bottom of this one...
-				dTop = dBottom;
+				top = bottom;
 			}
 		}
-
-		#endregion
-
-		#region Private data
 
 		// A small class that holds information about one of the labels on the control.
 		private class CellInfo
 		{
 			public Control Control { get; set; }
+
 			public int TransitionInterval { get; set; }
 		}
 
 		// A collection of cell-infos, i.e. info on each label on the control...
-		private readonly IList<CellInfo> m_CellInfos = new List<CellInfo>();
-
-		#endregion
+		private readonly IList<CellInfo> _cellInfos = new List<CellInfo>();
 	}
 }

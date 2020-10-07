@@ -11,16 +11,14 @@ namespace TestApp
 	/// </summary>
 	public partial class KittenPuppyControl : UserControl
 	{
-		#region Public methods
-
 		/// <summary>
 		/// Constructor.
 		/// </summary>
 		public KittenPuppyControl()
 		{
 			InitializeComponent();
-			m_ActivePicture = ctrlPuppy;
-			m_InactivePicture = ctrlKitten;
+			_activePicture = ctrlPuppy;
+			_inactivePicture = ctrlKitten;
 		}
 
 		/// <summary>
@@ -31,40 +29,34 @@ namespace TestApp
 			// We randomly choose where the current image is going to 
 			// slide off to (and where we are going to slide the inactive
 			// image in from)...
-			int iDestinationLeft = (m_Random.Next(2) == 0) ? Width : -Width;
-			int iDestinationTop = (m_Random.Next(3) - 1) * Height;
+			int destinationLeft = (_random.Next(2) == 0) ? Width : -Width;
+			int destinationTop = (_random.Next(3) - 1) * Height;
 
 			// We move the inactive image to this location...
 			SuspendLayout();
-			m_InactivePicture.Top = iDestinationTop;
-			m_InactivePicture.Left = iDestinationLeft;
-			m_InactivePicture.BringToFront();
+			_inactivePicture.Top = destinationTop;
+			_inactivePicture.Left = destinationLeft;
+			_inactivePicture.BringToFront();
 			ResumeLayout();
 
 			// We perform the transition which moves the active image off the
 			// screen, and the inactive one onto the screen...
-			Transition t = new Transition(new EaseInEaseOut(1000));
-			t.Add(m_InactivePicture, "Left", 0);
-			t.Add(m_InactivePicture, "Top", 0);
-			t.Add(m_ActivePicture, "Left", iDestinationLeft);
-			t.Add(m_ActivePicture, "Top", iDestinationTop);
-			t.Run();
+			var transition = new Transition(new EaseInEaseOut(1000));
+			transition.Add(_inactivePicture, "Left", 0);
+			transition.Add(_inactivePicture, "Top", 0);
+			transition.Add(_activePicture, "Left", destinationLeft);
+			transition.Add(_activePicture, "Top", destinationTop);
+			transition.Run();
 
 			// We swap over which image is active and inactive for next time
 			// the function is called...
-			PictureBox tmp = m_ActivePicture;
-			m_ActivePicture = m_InactivePicture;
-			m_InactivePicture = tmp;
+			var temp = _activePicture;
+			_activePicture = _inactivePicture;
+			_inactivePicture = temp;
 		}
 
-		#endregion
-
-		#region Private data
-
-		private PictureBox m_ActivePicture = null;
-		private PictureBox m_InactivePicture = null;
-		private readonly Random m_Random = new Random();
-
-		#endregion
+		private PictureBox _activePicture = null;
+		private PictureBox _inactivePicture = null;
+		private readonly Random _random = new Random();
 	}
 }

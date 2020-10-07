@@ -116,8 +116,7 @@ namespace SharpTransitions
 			{
 				try
 				{
-					var target = handler.Target as ISynchronizeInvoke;
-					if (target == null || target.InvokeRequired == false)
+					if (!(handler.Target is ISynchronizeInvoke target) || !target.InvokeRequired)
 					{
 						// Either the target is not a form or control, or we are already
 						// on the right thread for it. Either way we can just fire the

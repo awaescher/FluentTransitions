@@ -13,8 +13,6 @@ namespace TestApp
 	/// </summary>
 	public partial class Form1 : Form
 	{
-		#region Public methods
-
 		/// <summary>
 		/// Constructor.
 		/// </summary>
@@ -22,10 +20,6 @@ namespace TestApp
 		{
 			InitializeComponent();
 		}
-
-		#endregion
-
-		#region Form event handlers
 
 		/// <summary>
 		/// Called when the "Swap" button is pressed.
@@ -39,19 +33,19 @@ namespace TestApp
 
 			// We work out which box is currently on screen and
 			// which is off screen...
-			Control ctrlOnScreen, ctrlOffScreen;
+			Control controlOnScreen, controlOffScreen;
 			if (gbBounce.Left == GROUP_BOX_LEFT)
 			{
-				ctrlOnScreen = gbBounce;
-				ctrlOffScreen = gbThrowAndCatch;
+				controlOnScreen = gbBounce;
+				controlOffScreen = gbThrowAndCatch;
 			}
 			else
 			{
-				ctrlOnScreen = gbThrowAndCatch;
-				ctrlOffScreen = gbBounce;
+				controlOnScreen = gbThrowAndCatch;
+				controlOffScreen = gbBounce;
 			}
-			ctrlOnScreen.SendToBack();
-			ctrlOffScreen.BringToFront();
+			controlOnScreen.SendToBack();
+			controlOffScreen.BringToFront();
 
 			// We create a transition to animate the two boxes simultaneously. One is
 			// animated onto the screen, the other off the screen.
@@ -59,10 +53,10 @@ namespace TestApp
 			// The ease-in-ease-out transition acclerates the rate of change for the 
 			// first half of the animation, and decelerates during the second half.
 
-			Transition t = new Transition(new EaseInEaseOut(1000));
-			t.Add(ctrlOnScreen, "Left", -1 * ctrlOnScreen.Width);
-			t.Add(ctrlOffScreen, "Left", GROUP_BOX_LEFT);
-			t.Run();
+			var transition = new Transition(new EaseInEaseOut(1000));
+			transition.Add(controlOnScreen, "Left", -1 * controlOnScreen.Width);
+			transition.Add(controlOffScreen, "Left", GROUP_BOX_LEFT);
+			transition.Run();
 		}
 
 		/// <summary>
@@ -77,8 +71,8 @@ namespace TestApp
 			// (as if with gravity) and decelerates it back  to its original value (as
 			// if against gravity).
 
-			int iDestination = gbBounce.Height - cmdBounceMe.Height;
-			Transition.Run(cmdBounceMe, "Top", iDestination, new Bounce(1500));
+			int destination = gbBounce.Height - cmdBounceMe.Height;
+			Transition.Run(cmdBounceMe, "Top", destination, new Bounce(1500));
 		}
 
 		/// <summary>
@@ -137,28 +131,28 @@ namespace TestApp
 			// - The two labels' colors are changed.
 
 			// We work out the new text and colors to transition to...
-			string strText1, strText2;
+			string text1, text2;
 			Color color1, color2;
 			if (lblTextTransition1.Text == STRING_SHORT)
 			{
-				strText1 = STRING_LONG;
+				text1 = STRING_LONG;
 				color1 = Color.Red;
-				strText2 = STRING_SHORT;
+				text2 = STRING_SHORT;
 				color2 = Color.Blue;
 			}
 			else
 			{
-				strText1 = STRING_SHORT;
+				text1 = STRING_SHORT;
 				color1 = Color.Blue;
-				strText2 = STRING_LONG;
+				text2 = STRING_LONG;
 				color2 = Color.Red;
 			}
 
 			// We create a transition to animate all four properties at the same time...
-			Transition t = new Transition(new Linear(1000));
-			t.Add(lblTextTransition1, "Text", strText1);
+			var t = new Transition(new Linear(1000));
+			t.Add(lblTextTransition1, "Text", text1);
 			t.Add(lblTextTransition1, "ForeColor", color1);
-			t.Add(lblTextTransition2, "Text", strText2);
+			t.Add(lblTextTransition2, "Text", text2);
 			t.Add(lblTextTransition2, "ForeColor", color2);
 			t.Run();
 		}
@@ -169,7 +163,7 @@ namespace TestApp
 		private void ctrlChangeFormColor_Click(object sender, EventArgs e)
 		{
 			// We alternate the form's background color...
-			Color destination = (BackColor == BACKCOLOR_PINK) ? BACK_COLOR_YELLOW : BACKCOLOR_PINK;
+			var destination = (BackColor == BACKCOLOR_PINK) ? BACK_COLOR_YELLOW : BACKCOLOR_PINK;
 			Transition.Run(this, "BackColor", destination, new Linear(1000));
 		}
 
@@ -180,20 +174,20 @@ namespace TestApp
 		{
 			// We either show more screen or less screen depending on the current state.
 			// We find out whether we need to make the screen wider or narrower...
-			int iFormWidth;
+			int formWidth;
 			if (cmdMore.Text == "More >>")
 			{
-				iFormWidth = 984;
+				formWidth = 984;
 				cmdMore.Text = "<< Less";
 			}
 			else
 			{
-				iFormWidth = 452;
+				formWidth = 452;
 				cmdMore.Text = "More >>";
 			}
 
 			// We animate it with an ease-in-ease-out transition...
-			Transition.Run(this, "Width", iFormWidth, new EaseInEaseOut(1000));
+			Transition.Run(this, "Width", formWidth, new EaseInEaseOut(1000));
 		}
 
 		/// <summary>
@@ -217,7 +211,7 @@ namespace TestApp
 			// 40% - 65%    The button bounces back (decelerating) to 70% distance.
 			// etc...
 
-			IList<TransitionElement> elements = new List<TransitionElement>
+			var elements = new List<TransitionElement>
 			{
 				new TransitionElement(40, 100, InterpolationMethod.Accleration),
 				new TransitionElement(65, 70, InterpolationMethod.Deceleration),
@@ -226,8 +220,8 @@ namespace TestApp
 				new TransitionElement(100, 100, InterpolationMethod.Accleration)
 			};
 
-			int iDestination = gbDropAndBounce.Height - cmdDropAndBounce.Height - 10;
-			Transition.Run(cmdDropAndBounce, "Top", iDestination, new UserDefined(elements, 2000));
+			int destination = gbDropAndBounce.Height - cmdDropAndBounce.Height - 10;
+			Transition.Run(cmdDropAndBounce, "Top", destination, new UserDefined(elements, 2000));
 
 			// The transition above just animates the vertical bounce of the button, but not
 			// the left-to-right movement. This can't use the same transition, as otherwise the
@@ -238,19 +232,15 @@ namespace TestApp
 			// to its starting position as the second item in the chain. The second 
 			// transition starts as soon as the first is complete...
 
-			Transition t1 = new Transition(new Linear(2000));
-			t1.Add(cmdDropAndBounce, "Left", cmdDropAndBounce.Left + 400);
+			var transition1 = new Transition(new Linear(2000));
+			transition1.Add(cmdDropAndBounce, "Left", cmdDropAndBounce.Left + 400);
 
-			Transition t2 = new Transition(new EaseInEaseOut(2000));
-			t2.Add(cmdDropAndBounce, "Top", 19);
-			t2.Add(cmdDropAndBounce, "Left", 6);
+			var transition2 = new Transition(new EaseInEaseOut(2000));
+			transition2.Add(cmdDropAndBounce, "Top", 19);
+			transition2.Add(cmdDropAndBounce, "Left", 6);
 
-			Transition.RunChain(t1, t2);
+			Transition.RunChain(transition1, transition2);
 		}
-
-		#endregion
-
-		#region Private data
 
 		// Colors used by the change-form-color transition...
 		private readonly Color BACKCOLOR_PINK = Color.FromArgb(255, 220, 220);
@@ -262,8 +252,5 @@ namespace TestApp
 		// Strings used for the text transition...
 		private const string STRING_SHORT = "Hello, World!";
 		private const string STRING_LONG = "A longer piece of text.";
-
-		#endregion
-
 	}
 }
