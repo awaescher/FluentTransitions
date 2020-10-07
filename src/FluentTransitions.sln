@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpTransitions", "SharpTransitions\SharpTransitions.csproj", "{95CDE461-0720-4C3B-B5E1-D188391FB7C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentTransitions", "FluentTransitions\FluentTransitions.csproj", "{95CDE461-0720-4C3B-B5E1-D188391FB7C0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{E5B3CEE3-973B-4400-BF81-62EEC02625F4}"
 EndProject

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SharpTransitions.Methods
+namespace FluentTransitions.Methods
 {
 	/// <summary>
 	/// Allows the creation of user-defined transition methods.

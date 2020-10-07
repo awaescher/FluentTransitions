@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SharpTransitions.Methods
+namespace FluentTransitions.Methods
 {
 	/// <summary>
 	/// Manages an ease-in-ease-out transition. This accelerates during the first 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SharpTransitions.ManagedTypes
+namespace FluentTransitions.ManagedTypes
 {
 	/// <summary>
 	/// Manages transitions for strings. This doesn't make as much sense as transitions

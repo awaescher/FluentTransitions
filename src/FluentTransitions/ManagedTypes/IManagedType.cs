@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SharpTransitions.ManagedTypes
+namespace FluentTransitions.ManagedTypes
 {
 	/// <summary>
 	/// Interface for all types we can perform transitions on. 

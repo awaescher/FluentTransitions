@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SharpTransitions.ManagedTypes
+namespace FluentTransitions.ManagedTypes
 {
 	/// <summary>
 	/// Manages transitions for int properties.

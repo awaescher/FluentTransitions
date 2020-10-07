@@ -1,4 +1,4 @@
-# SharpTransitions
+# FluentTransitions
 
 A library for animated UI transitions for .NET.
 
@@ -42,7 +42,7 @@ For more information on how to code with the Transitions library see the coding 
 2020-10-07 Andreas Wäscher
 - Migrated to .NET Core 3.1 and .NET Framework 4.8
 - Updated namespaces, class names and the code itself to meet modern code standards
-- Switched from "dot-net-transitions" to "SharpTransitions"
+- Switched from "dot-net-transitions" to "FluentTransitions"
 
 2015-07-16 Uwe Keim
 - Copied this repository from [Google Code](https://code.google.com/p/dot-net-transitions/) to save it from disappearing when Google Code shuts down.

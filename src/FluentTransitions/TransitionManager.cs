@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Timers;
 
-namespace SharpTransitions
+namespace FluentTransitions
 {
 	/// <summary>
 	/// This class is responsible for running transitions. It holds the timer that

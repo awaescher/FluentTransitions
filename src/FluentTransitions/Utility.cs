@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace SharpTransitions
+namespace FluentTransitions
 {
 	/// <summary>
 	/// A class holding static utility functions.

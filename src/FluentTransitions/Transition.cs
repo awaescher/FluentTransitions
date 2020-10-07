@@ -4,9 +4,9 @@ using System.Reflection;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Windows.Forms;
-using SharpTransitions.ManagedTypes;
+using FluentTransitions.ManagedTypes;
 
-namespace SharpTransitions
+namespace FluentTransitions
 {
 	/// <summary>
 	/// Lets you perform animated transitions of properties on arbitrary objects. These 

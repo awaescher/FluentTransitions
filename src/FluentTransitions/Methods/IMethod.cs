@@ -1,4 +1,4 @@
-﻿namespace SharpTransitions
+﻿namespace FluentTransitions
 {
 	public interface IMethod
 	{

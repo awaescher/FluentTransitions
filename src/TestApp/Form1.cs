@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
-using SharpTransitions;
+using FluentTransitions;
 using System.Drawing;
 using System.Collections.Generic;
-using SharpTransitions.Methods;
+using FluentTransitions.Methods;
 
 namespace TestApp
 {

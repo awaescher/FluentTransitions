@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SharpTransitions.Methods
+namespace FluentTransitions.Methods
 {
 	/// <summary>
 	/// This class manages a linear transition. The percentage complete for the transition

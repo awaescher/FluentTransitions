@@ -1,8 +1,8 @@
-﻿using SharpTransitions.Methods;
+﻿using FluentTransitions.Methods;
 using System;
 using System.Collections.Generic;
 
-namespace SharpTransitions
+namespace FluentTransitions
 {
 	/// <summary>
 	/// The transition definition providing fluent syntax to build and run transitions

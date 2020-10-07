@@ -7,7 +7,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\SharpTransitions\SharpTransitions.csproj" />
+		<ProjectReference Include="..\FluentTransitions\FluentTransitions.csproj" />
 	</ItemGroup>
 
 	<PropertyGroup Condition="!$(TargetFramework.StartsWith('net4')) Or '$(MSBuildRuntimeType)'=='Core'">
