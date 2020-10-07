@@ -9,8 +9,6 @@ namespace SharpTransitions
     /// </summary>
     public class Flash : UserDefined
     {
-        #region Public methods
-
         /// <summary>
         /// You specify the number of bounces and the time taken for each bounce.
         /// </summary>
@@ -34,10 +32,7 @@ namespace SharpTransitions
                 elements.Add(new TransitionElement(dFlashEndTime, 0, InterpolationMethod.EaseInEaseOut));
             }
 
-            base.setup(elements, iFlashTime * iNumberOfFlashes);
+            base.Setup(elements, iFlashTime * iNumberOfFlashes);
         }
-
-        #endregion
-
     }
 }

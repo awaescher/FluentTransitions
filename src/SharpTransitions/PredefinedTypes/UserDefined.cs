@@ -37,8 +37,6 @@ namespace SharpTransitions
     /// </summary>
     public class UserDefined : ITransitionType
     {
-        #region Public methods
-
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -52,16 +50,16 @@ namespace SharpTransitions
         /// </summary>
         public UserDefined(IList<TransitionElement> elements, int iTransitionTime)
         {
-            setup(elements, iTransitionTime);
+            Setup(elements, iTransitionTime);
         }
 
         /// <summary>
         /// Sets up the transitions. 
         /// </summary>
-        public void setup(IList<TransitionElement> elements, int iTransitionTime)
+        public void Setup(IList<TransitionElement> elements, int iTransitionTime)
         {
-            m_Elements = elements;
-            m_dTransitionTime = iTransitionTime;
+            _elements = elements;
+            _transitionTime = iTransitionTime;
 
             // We check that the elements list has some members...
             if (elements.Count == 0)
@@ -70,16 +68,12 @@ namespace SharpTransitions
             }
         }
 
-        #endregion
-
-        #region ITransitionMethod Members
-
         /// <summary>
         /// Called to find the value for the movement of properties for the time passed in.
         /// </summary>
-        public void onTimer(int iTime, out double dPercentage, out bool bCompleted)
+        public void OnTimer(int iTime, out double dPercentage, out bool bCompleted)
         {
-            double dTransitionTimeFraction = iTime / m_dTransitionTime;
+            double dTransitionTimeFraction = iTime / _transitionTime;
 
             // We find the information for the element that we are currently processing...
             double dElementStartTime;
@@ -87,7 +81,7 @@ namespace SharpTransitions
             double dElementStartValue;
             double dElementEndValue;
             InterpolationMethod eInterpolationMethod;
-            getElementInfo(dTransitionTimeFraction, out dElementStartTime, out dElementEndTime, out dElementStartValue, out dElementEndValue, out eInterpolationMethod);
+            GetElementInfo(dTransitionTimeFraction, out dElementStartTime, out dElementEndTime, out dElementStartValue, out dElementEndValue, out eInterpolationMethod);
 
             // We find how far through this element we are as a fraction...
             double dElementInterval = dElementEndTime - dElementStartTime;
@@ -104,15 +98,15 @@ namespace SharpTransitions
                     break;
 
                 case InterpolationMethod.Accleration:
-                    dElementDistance = Utility.convertLinearToAcceleration(dElementTimeFraction);
+                    dElementDistance = Utility.ConvertLinearToAcceleration(dElementTimeFraction);
                     break;
 
                 case InterpolationMethod.Deceleration:
-                    dElementDistance = Utility.convertLinearToDeceleration(dElementTimeFraction);
+                    dElementDistance = Utility.ConvertLinearToDeceleration(dElementTimeFraction);
                     break;
 
                 case InterpolationMethod.EaseInEaseOut:
-                    dElementDistance = Utility.convertLinearToEaseInEaseOut(dElementTimeFraction);
+                    dElementDistance = Utility.ConvertLinearToEaseInEaseOut(dElementTimeFraction);
                     break;
 
                 default:
@@ -121,10 +115,10 @@ namespace SharpTransitions
 
             // We now know how far through the transition we have moved, so we can interpolate
             // the start and end values by this amount...
-            dPercentage = Utility.interpolate(dElementStartValue, dElementEndValue, dElementDistance);
+            dPercentage = Utility.Interpolate(dElementStartValue, dElementEndValue, dElementDistance);
 
             // Has the transition completed?
-            if (iTime >= m_dTransitionTime)
+            if (iTime >= _transitionTime)
             {
                 // The transition has completed, so we make sure that
                 // it is at its final value...
@@ -140,7 +134,7 @@ namespace SharpTransitions
         /// <summary>
         /// Returns the element info for the time-fraction passed in. 
         /// </summary>
-        private void getElementInfo(double dTimeFraction, out double dStartTime, out double dEndTime, out double dStartValue, out double dEndValue, out InterpolationMethod eInterpolationMethod)
+        private void GetElementInfo(double dTimeFraction, out double dStartTime, out double dEndTime, out double dStartValue, out double dEndValue, out InterpolationMethod eInterpolationMethod)
         {
             // We need to return the start and end values for the current element. So this
             // means finding the element for the time passed in as well as the previous element.
@@ -149,10 +143,10 @@ namespace SharpTransitions
             // element used the last time this function was called. In most cases
             // it will be the same one again, but it may have moved to a subsequent
             // on (maybe even skipping elements if enough time has passed)...
-            int iCount = m_Elements.Count;
-            for (; m_iCurrentElement < iCount; ++m_iCurrentElement)
+            int iCount = _elements.Count;
+            for (; _currentElement < iCount; ++_currentElement)
             {
-                TransitionElement element = m_Elements[m_iCurrentElement];
+                TransitionElement element = _elements[_currentElement];
                 double dElementEndTime = element.EndTime / 100.0;
                 if (dTimeFraction < dElementEndTime)
                 {
@@ -161,42 +155,36 @@ namespace SharpTransitions
             }
 
             // If we have gone past the last element, we just use the last element...
-            if (m_iCurrentElement == iCount)
+            if (_currentElement == iCount)
             {
-                m_iCurrentElement = iCount - 1;
+                _currentElement = iCount - 1;
             }
 
             // We find the start values. These come from the previous element, except in the
             // case where we are currently in the first element, in which case they are zeros...
             dStartTime = 0.0;
             dStartValue = 0.0;
-            if (m_iCurrentElement > 0)
+            if (_currentElement > 0)
             {
-                TransitionElement previousElement = m_Elements[m_iCurrentElement - 1];
+                TransitionElement previousElement = _elements[_currentElement - 1];
                 dStartTime = previousElement.EndTime / 100.0;
                 dStartValue = previousElement.EndValue / 100.0;
             }
 
             // We get the end values from the current element...
-            TransitionElement currentElement = m_Elements[m_iCurrentElement];
+            TransitionElement currentElement = _elements[_currentElement];
             dEndTime = currentElement.EndTime / 100.0;
             dEndValue = currentElement.EndValue / 100.0;
             eInterpolationMethod = currentElement.InterpolationMethod;
         }
 
-        #endregion
-
-        #region Private data
-
         // The collection of elements that make up the transition...
-        private IList<TransitionElement> m_Elements = null;
+        private IList<TransitionElement> _elements = null;
 
         // The total transition time...
-        private double m_dTransitionTime = 0.0;
+        private double _transitionTime = 0.0;
 
         // The element that we are currently in (i.e. the current time within this element)...
-        private int m_iCurrentElement = 0;
-
-        #endregion
+        private int _currentElement = 0;
     }
 }

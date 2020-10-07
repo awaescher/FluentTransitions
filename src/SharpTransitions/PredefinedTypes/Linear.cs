@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 
 namespace SharpTransitions
 {
@@ -9,8 +8,6 @@ namespace SharpTransitions
 	/// </summary>
     public class Linear : ITransitionType
     {
-        #region Public methods
-
         /// <summary>
         /// Constructor. You pass in the time (in milliseconds) that the
         /// transition will take.
@@ -21,19 +18,15 @@ namespace SharpTransitions
 			{
 				throw new Exception("Transition time must be greater than zero.");
 			}
-			m_dTransitionTime = iTransitionTime;
+			_transitionTime = iTransitionTime;
         }
-
-        #endregion
-
-		#region ITransitionMethod Members
 
 		/// <summary>
 		/// We return the percentage completed.
 		/// </summary>
-		public void onTimer(int iTime, out double dPercentage, out bool bCompleted)
+		public void OnTimer(int iTime, out double dPercentage, out bool bCompleted)
 		{
-			dPercentage = (iTime / m_dTransitionTime);
+			dPercentage = (iTime / _transitionTime);
 			if (dPercentage >= 1.0)
 			{
 				dPercentage = 1.0;
@@ -45,12 +38,6 @@ namespace SharpTransitions
 			}
 		}
 
-		#endregion
-
-		#region Private data
-
-		private double m_dTransitionTime = 0.0;
-
-		#endregion
+		private double _transitionTime = 0.0;
 	}
 }

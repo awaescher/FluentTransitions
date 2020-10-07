@@ -60,9 +60,9 @@ namespace TestApp
             // first half of the animation, and decelerates during the second half.
 
             Transition t = new Transition(new EaseInEaseOut(1000));
-            t.add(ctrlOnScreen, "Left", -1 * ctrlOnScreen.Width);
-            t.add(ctrlOffScreen, "Left", GROUP_BOX_LEFT);
-            t.run();
+            t.Add(ctrlOnScreen, "Left", -1 * ctrlOnScreen.Width);
+            t.Add(ctrlOffScreen, "Left", GROUP_BOX_LEFT);
+            t.Run();
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace TestApp
             // if against gravity).
 
             int iDestination = gbBounce.Height - cmdBounceMe.Height;
-            Transition.run(cmdBounceMe, "Top", iDestination, new Bounce(1500));
+            Transition.Run(cmdBounceMe, "Top", iDestination, new Bounce(1500));
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace TestApp
             // decelerates to zero (as if against gravity) at the destination value. It 
             // then accelerates the value (as if with gravity) back to the original value.
 
-            Transition.run(cmdThrowAndCatch, "Top", 12, new ThrowAndCatch(1500));
+            Transition.Run(cmdThrowAndCatch, "Top", 12, new ThrowAndCatch(1500));
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace TestApp
             // The Flash transition animates the property to the destination value
             // and back again. You specify how many flashes to show and the length
             // of each flash...
-            Transition.run(cmdFlashMe, "BackColor", Color.Pink, new Flash(2, 300));
+            Transition.Run(cmdFlashMe, "BackColor", Color.Pink, new Flash(2, 300));
         }
 
         /// <summary>
@@ -156,11 +156,11 @@ namespace TestApp
 
             // We create a transition to animate all four properties at the same time...
             Transition t = new Transition(new Linear(1000));
-            t.add(lblTextTransition1, "Text", strText1);
-            t.add(lblTextTransition1, "ForeColor", color1);
-            t.add(lblTextTransition2, "Text", strText2);
-            t.add(lblTextTransition2, "ForeColor", color2);
-            t.run();
+            t.Add(lblTextTransition1, "Text", strText1);
+            t.Add(lblTextTransition1, "ForeColor", color1);
+            t.Add(lblTextTransition2, "Text", strText2);
+            t.Add(lblTextTransition2, "ForeColor", color2);
+            t.Run();
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace TestApp
         {
             // We alternate the form's background color...
             Color destination = (BackColor == BACKCOLOR_PINK) ? BACK_COLOR_YELLOW : BACKCOLOR_PINK;
-            Transition.run(this, "BackColor", destination, new Linear(1000));
+            Transition.Run(this, "BackColor", destination, new Linear(1000));
         }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace TestApp
             }
 
             // We animate it with an ease-in-ease-out transition...
-            Transition.run(this, "Width", iFormWidth, new EaseInEaseOut(1000));
+            Transition.Run(this, "Width", iFormWidth, new EaseInEaseOut(1000));
         }
 
         /// <summary>
@@ -225,7 +225,7 @@ namespace TestApp
             elements.Add(new TransitionElement(100, 100, InterpolationMethod.Accleration));
 
             int iDestination = gbDropAndBounce.Height - cmdDropAndBounce.Height - 10;
-            Transition.run(cmdDropAndBounce, "Top", iDestination, new UserDefined(elements, 2000));
+            Transition.Run(cmdDropAndBounce, "Top", iDestination, new UserDefined(elements, 2000));
 
             // The transition above just animates the vertical bounce of the button, but not
             // the left-to-right movement. This can't use the same transition, as otherwise the
@@ -237,13 +237,13 @@ namespace TestApp
             // transition starts as soon as the first is complete...
 
             Transition t1 = new Transition(new Linear(2000));
-            t1.add(cmdDropAndBounce, "Left", cmdDropAndBounce.Left + 400);
+            t1.Add(cmdDropAndBounce, "Left", cmdDropAndBounce.Left + 400);
 
             Transition t2 = new Transition(new EaseInEaseOut(2000));
-            t2.add(cmdDropAndBounce, "Top", 19);
-            t2.add(cmdDropAndBounce, "Left", 6);
+            t2.Add(cmdDropAndBounce, "Top", 19);
+            t2.Add(cmdDropAndBounce, "Left", 6);
 
-            Transition.runChain(t1, t2);
+            Transition.RunChain(t1, t2);
         }
 
         #endregion

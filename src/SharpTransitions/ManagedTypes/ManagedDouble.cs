@@ -9,12 +9,10 @@ namespace SharpTransitions
 	internal class ManagedDouble
 		: IManagedType
 	{
-		#region IManagedType Members
-
 		/// <summary>
 		///  Returns the type managed by this class.
 		/// </summary>
-		public Type getManagedType()
+		public Type GetManagedType()
 		{
 			return typeof(double);
 		}
@@ -22,7 +20,7 @@ namespace SharpTransitions
 		/// <summary>
 		/// Returns a copy of the double passed in.
 		/// </summary>
-		public object copy(object o)
+		public object Copy(object o)
 		{
 			double d = (double)o;
 			return d;
@@ -31,13 +29,11 @@ namespace SharpTransitions
 		/// <summary>
 		/// Returns the value between start and end for the percentage passed in.
 		/// </summary>
-		public object getIntermediateValue(object start, object end, double dPercentage)
+		public object GetIntermediateValue(object start, object end, double dPercentage)
 		{
 			double dStart = (double)start;
 			double dEnd = (double)end;
-			return Utility.interpolate(dStart, dEnd, dPercentage);
+			return Utility.Interpolate(dStart, dEnd, dPercentage);
 		}
-
-		#endregion
 	}
 }

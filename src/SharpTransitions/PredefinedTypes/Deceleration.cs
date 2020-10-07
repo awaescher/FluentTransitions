@@ -9,8 +9,6 @@ namespace SharpTransitions
 	/// </summary>
 	public class Deceleration : ITransitionType
 	{
-		#region Public methods
-
 		/// <summary>
 		/// Constructor. You pass in the time that the transition 
 		/// will take (in milliseconds).
@@ -21,12 +19,8 @@ namespace SharpTransitions
 			{
 				throw new Exception("Transition time must be greater than zero.");
 			}
-			m_dTransitionTime = iTransitionTime;
+			_transitionTime = iTransitionTime;
 		}
-
-		#endregion
-
-		#region ITransitionMethod Members
 
 		/// <summary>
 		/// Works out the percentage completed given the time passed in.
@@ -36,10 +30,10 @@ namespace SharpTransitions
 		/// at t=1.0 is -2, so the formula becomes:
 		///   s = t(2-t)
 		/// </summary>
-		public void onTimer(int iTime, out double dPercentage, out bool bCompleted)
+		public void OnTimer(int iTime, out double dPercentage, out bool bCompleted)
 		{
 			// We find the percentage time elapsed...
-			double dElapsed = iTime / m_dTransitionTime;
+			double dElapsed = iTime / _transitionTime;
 			dPercentage = dElapsed * (2.0 - dElapsed);
 			if (dElapsed >= 1.0)
 			{
@@ -52,12 +46,6 @@ namespace SharpTransitions
 			}
 		}
 
-		#endregion
-
-		#region Private data
-
-		private double m_dTransitionTime = 0.0;
-
-		#endregion
+		private double _transitionTime = 0.0;
 	}
 }

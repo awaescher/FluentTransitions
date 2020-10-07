@@ -20,54 +20,48 @@ namespace SharpTransitions
     /// </remarks>
     internal class TransitionManager
     {
-        #region Public methods
-
         /// <summary>
         /// Singleton's getInstance method.
         /// </summary>
-        public static TransitionManager getInstance()
+        public static TransitionManager GetInstance()
         {
-            if (m_Instance == null)
+            if (_instance == null)
             {
-                m_Instance = new TransitionManager();
+                _instance = new TransitionManager();
             }
-            return m_Instance;
+            return _instance;
         }
 
         /// <summary>
         /// You register a transition with the manager here. This will start to run
         /// the transition as the manager's timer ticks.
         /// </summary>
-        public void register(Transition transition)
+        public void Register(Transition transition)
         {
-            lock (m_Lock)
+            lock (_lock)
             {
                 // We check to see if the properties of this transition
                 // are already being animated by any existing transitions...
-                removeDuplicates(transition);
+                RemoveDuplicates(transition);
 
                 // We add the transition to the collection we manage, and 
                 // observe it so that we know when it has completed...
-                m_Transitions[transition] = true;
-                transition.TransitionCompletedEvent += onTransitionCompleted;
+                _transitions[transition] = true;
+                transition.TransitionCompletedEvent += OnTransitionCompleted;
             }
         }
-
-        #endregion
-
-        #region Private functions
 
         /// <summary>
         /// Checks if any existing transitions are acting on the same properties as the
         /// transition passed in. If so, we remove the duplicated properties from the 
         /// older transitions.
         /// </summary>
-        private void removeDuplicates(Transition transition)
+        private void RemoveDuplicates(Transition transition)
         {
             // We look through the set of transitions we're currently managing...
-            foreach (KeyValuePair<Transition, bool> pair in m_Transitions)
+            foreach (KeyValuePair<Transition, bool> pair in _transitions)
             {
-                removeDuplicates(transition, pair.Key);
+                RemoveDuplicates(transition, pair.Key);
             }
         }
 
@@ -75,7 +69,7 @@ namespace SharpTransitions
         /// Finds any properties in the old-transition that are also in the new one,
         /// and removes them from the old one.
         /// </summary>
-        private void removeDuplicates(Transition newTransition, Transition oldTransition)
+        private void RemoveDuplicates(Transition newTransition, Transition oldTransition)
         {
             // Note: This checking might be a bit more efficient if it did the checking
             //       with a set rather than looking through lists. That said, it is only done 
@@ -102,7 +96,7 @@ namespace SharpTransitions
                     {
                         // The old transition contains the same property as the new one,
                         // so we remove it from the old transition...
-                        oldTransition.removeProperty(oldProperty);
+                        oldTransition.RemoveProperty(oldProperty);
                     }
                 }
             }
@@ -113,31 +107,31 @@ namespace SharpTransitions
         /// </summary>
         private TransitionManager()
         {
-            m_Timer = new Timer(15);
-            m_Timer.Elapsed += onTimerElapsed;
-            m_Timer.Enabled = true;
+            _timer = new Timer(15);
+            _timer.Elapsed += OnTimerElapsed;
+            _timer.Enabled = true;
         }
 
         /// <summary>
         /// Called when the timer ticks.
         /// </summary>
-        private void onTimerElapsed(object sender, ElapsedEventArgs e)
+        private void OnTimerElapsed(object sender, ElapsedEventArgs e)
         {
             // We turn the timer off while we process the tick, in case the
             // actions take longer than the tick itself...
-            if (m_Timer == null)
+            if (_timer == null)
             {
                 return;
             }
-            m_Timer.Enabled = false;
+            _timer.Enabled = false;
 
             IList<Transition> listTransitions;
-            lock (m_Lock)
+            lock (_lock)
             {
                 // We take a copy of the collection of transitions as elements 
                 // might be removed as we iterate through it...
                 listTransitions = new List<Transition>();
-                foreach (KeyValuePair<Transition, bool> pair in m_Transitions)
+                foreach (KeyValuePair<Transition, bool> pair in _transitions)
                 {
                     listTransitions.Add(pair.Key);
                 }
@@ -146,49 +140,43 @@ namespace SharpTransitions
             // We tick the timer for each transition we're managing...
             foreach (Transition transition in listTransitions)
             {
-                transition.onTimer();
+                transition.OnTimer();
             }
 
             // We restart the timer...
-            m_Timer.Enabled = true;
+            _timer.Enabled = true;
         }
 
         /// <summary>
         /// Called when a transition has completed. 
         /// </summary>
-        private void onTransitionCompleted(object sender, Transition.Args e)
+        private void OnTransitionCompleted(object sender, Transition.Args e)
         {
             // We stop observing the transition...
             Transition transition = (Transition)sender;
-            transition.TransitionCompletedEvent -= onTransitionCompleted;
+            transition.TransitionCompletedEvent -= OnTransitionCompleted;
 
             // We remove the transition from the collection we're managing...
-            lock (m_Lock)
+            lock (_lock)
             {
-                m_Transitions.Remove(transition);
+                _transitions.Remove(transition);
             }
         }
 
-        #endregion
-
-        #region Private data
-
         // The singleton instance...
-        private static TransitionManager m_Instance = null;
+        private static TransitionManager _instance = null;
 
         // The collection of transitions we're managing. (This should really be a set.)
-        private IDictionary<Transition, bool> m_Transitions = new Dictionary<Transition, bool>();
+        private IDictionary<Transition, bool> _transitions = new Dictionary<Transition, bool>();
 
         // The timer that controls the transition animation...
-        private Timer m_Timer = null;
+        private Timer _timer = null;
 
         // An object to lock on. This class can be accessed by multiple threads: the 
         // user thread can add new transitions; and the timerr thread can be animating 
         // them. As they access the same collections, the methods need to be protected 
         // by a lock...
-        private object m_Lock = new object();
-
-        #endregion
+        private object _lock = new object();
     }
 }
 
