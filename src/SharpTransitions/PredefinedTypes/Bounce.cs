@@ -12,13 +12,15 @@ namespace SharpTransitions
         /// <summary>
         /// Constructor. You pass in the total time taken for the bounce.
         /// </summary>
-        public Bounce(int iTransitionTime)
+        public Bounce(int transitionTime)
         {
-            // We create a custom "user-defined" transition to do the work...
-            IList<TransitionElement> elements = new List<TransitionElement>();
-            elements.Add(new TransitionElement(50, 100, InterpolationMethod.Accleration));
-            elements.Add(new TransitionElement(100, 0, InterpolationMethod.Deceleration));
-            base.Setup(elements, iTransitionTime);
+			// We create a custom "user-defined" transition to do the work...
+			var elements = new List<TransitionElement>
+			{
+				new TransitionElement(50, 100, InterpolationMethod.Accleration),
+				new TransitionElement(100, 0, InterpolationMethod.Deceleration)
+			};
+			base.Setup(elements, transitionTime);
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace SharpTransitions
+﻿namespace SharpTransitions
 {
     public enum InterpolationMethod
     {

@@ -64,10 +64,10 @@ namespace SharpTransitions
         /// <summary>
         /// Creates and immediately runs a transition on the property passed in.
         /// </summary>
-        public static void Run(object target, string strPropertyName, object destinationValue, ITransitionType transitionMethod)
+        public static void Run(object target, string propertyName, object destinationValue, ITransitionType transitionMethod)
         {
             var transition = new Transition(transitionMethod);
-            transition.Add(target, strPropertyName, destinationValue);
+            transition.Add(target, propertyName, destinationValue);
             transition.Run();
         }
 
@@ -75,10 +75,10 @@ namespace SharpTransitions
         /// Sets the property passed in to the initial value passed in, then creates and 
         /// immediately runs a transition on it.
         /// </summary>
-        public static void Run(object target, string strPropertyName, object initialValue, object destinationValue, ITransitionType transitionMethod)
+        public static void Run(object target, string propertyName, object initialValue, object destinationValue, ITransitionType transitionMethod)
         {
-            Utility.SetValue(target, strPropertyName, initialValue);
-            Run(target, strPropertyName, destinationValue, transitionMethod);
+            Utility.SetValue(target, propertyName, initialValue);
+            Run(target, propertyName, destinationValue, transitionMethod);
         }
 
         /// <summary>
@@ -86,55 +86,51 @@ namespace SharpTransitions
         /// </summary>
         public static void RunChain(params Transition[] transitions)
         {
-            TransitionChain chain = new TransitionChain(transitions);
+            var chain = new TransitionChain(transitions);
         }
 
         /// <summary>
         /// Constructor. You pass in the object that holds the properties 
         /// that you are performing transitions on.
         /// </summary>
-        public Transition(ITransitionType effect)
+        public Transition(ITransitionType transitionMethod)
         {
-			_effect = effect;
+			_transitionMethod = transitionMethod;
         }
 
 		/// <summary>
 		/// Adds a property that should be animated as part of this transition.
 		/// </summary>
-		public void Add(object target, string strPropertyName, object destinationValue)
+		public void Add(object target, string propertyName, object destinationValue)
 		{
 			// We get the property info...
-			Type targetType = target.GetType();
-			PropertyInfo propertyInfo = targetType.GetProperty(strPropertyName);
+			var targetType = target.GetType();
+			var propertyInfo = targetType.GetProperty(propertyName);
 			if (propertyInfo == null)
-			{
-				throw new Exception("Object: " + target.ToString() + " does not have the property: " + strPropertyName);
-			}
+				throw new Exception("Object: " + target.ToString() + " does not have the property: " + propertyName);
 
 			// We check that we support the property type...
-			Type propertyType = propertyInfo.PropertyType;
-			if (_mapManagedTypes.ContainsKey(propertyType) == false)
-			{
+			var propertyType = propertyInfo.PropertyType;
+			if (!_mapManagedTypes.ContainsKey(propertyType))
 				throw new Exception("Transition does not handle properties of type: " + propertyType.ToString());
-			}
 
             // We can only transition properties that are both getable and setable...
             if (propertyInfo.CanRead == false || propertyInfo.CanWrite == false)
-            {
-                throw new Exception("Property is not both getable and setable: " + strPropertyName);
-            }
+                throw new Exception("Property is not both getable and setable: " + propertyName);
 
-            IManagedType managedType = _mapManagedTypes[propertyType];
-            
-            // We can manage this type, so we store the information for the
+            var managedType = _mapManagedTypes[propertyType];
+
+			// We can manage this type, so we store the information for the
 			// transition of this property...
-			TransitionedPropertyInfo info = new TransitionedPropertyInfo();
-			info.endValue = destinationValue;
-			info.target = target;
-			info.propertyInfo = propertyInfo;
-			info.managedType = managedType;
+			var info = new TransitionedPropertyInfo
+			{
+				EndValue = destinationValue,
+				Target = target,
+				PropertyInfo = propertyInfo,
+				ManagedType = managedType
+			};
 
-            lock (_lock)
+			lock (_lock)
             {
                 _listTransitionedProperties.Add(info);
             }
@@ -149,8 +145,8 @@ namespace SharpTransitions
             // are animating...
             foreach (TransitionedPropertyInfo info in _listTransitionedProperties)
             {
-                object value = info.propertyInfo.GetValue(info.target, null);
-                info.startValue = info.managedType.Copy(value);
+                object value = info.PropertyInfo.GetValue(info.Target, null);
+                info.StartValue = info.ManagedType.Copy(value);
             }
 
 			// We start the stopwatch. We use this when the timer ticks to measure 
@@ -162,19 +158,16 @@ namespace SharpTransitions
             TransitionManager.GetInstance().Register(this);
 		}
 
-        /// <summary>
-        /// Property that returns a list of information about each property managed
-        /// by this transition.
-        /// </summary>
-        internal IList<TransitionedPropertyInfo> TransitionedProperties
-        {
-            get { return _listTransitionedProperties; }
-        }
+		/// <summary>
+		/// Property that returns a list of information about each property managed
+		/// by this transition.
+		/// </summary>
+		internal IList<TransitionedPropertyInfo> TransitionedProperties => _listTransitionedProperties;
 
-        /// <summary>
-        /// We remove the property with the info passed in from the transition.
-        /// </summary>
-        internal void RemoveProperty(TransitionedPropertyInfo info)
+		/// <summary>
+		/// We remove the property with the info passed in from the transition.
+		/// </summary>
+		internal void RemoveProperty(TransitionedPropertyInfo info)
         {
             lock (_lock)
             {
@@ -193,16 +186,14 @@ namespace SharpTransitions
             // c. Find the actual values of each property, and set them.
 
             // a.
-            int iElapsedTime = (int)_stopwatch.ElapsedMilliseconds;
+            var elapsedTime = (int)_stopwatch.ElapsedMilliseconds;
 
-            // b.
-            double dPercentage;
-            bool bCompleted;
-            _effect.OnTimer(iElapsedTime, out dPercentage, out bCompleted);
+			// b.
+			_transitionMethod.OnTimer(elapsedTime, out double percentage, out bool completed);
 
-            // We take a copy of the list of properties we are transitioning, as
-            // they can be changed by another thread while this method is running...
-            IList<TransitionedPropertyInfo> listTransitionedProperties = new List<TransitionedPropertyInfo>();
+			// We take a copy of the list of properties we are transitioning, as
+			// they can be changed by another thread while this method is running...
+			var listTransitionedProperties = new List<TransitionedPropertyInfo>();
             lock (_lock)
             {
                 foreach (TransitionedPropertyInfo info in _listTransitionedProperties)
@@ -215,15 +206,15 @@ namespace SharpTransitions
             foreach (TransitionedPropertyInfo info in listTransitionedProperties)
             {
                 // We get the current value for this property...
-                object value = info.managedType.GetIntermediateValue(info.startValue, info.endValue, dPercentage);
+                object value = info.ManagedType.GetIntermediateValue(info.StartValue, info.EndValue, percentage);
 
                 // We set it...
-                PropertyUpdateArgs args = new PropertyUpdateArgs(info.target, info.propertyInfo, value);
+                var args = new PropertyUpdateArgs(info.Target, info.PropertyInfo, value);
                 SetProperty(this, args);
             }
 
             // Has the transition completed?
-            if (bCompleted == true)
+            if (completed)
             {
                 // We stop the stopwatch and the timer...
                 _stopwatch.Stop();
@@ -245,12 +236,10 @@ namespace SharpTransitions
                 // If the target is a control that has been disposed then we don't 
                 // try to update its properties. This can happen if the control is
                 // on a form that has been closed while the transition is running...
-                if (IsDisposed(args.target) == true)
-                {
+                if (IsDisposed(args.Target))
                     return;
-                }
 
-                ISynchronizeInvoke invokeTarget = args.target as ISynchronizeInvoke;
+                var invokeTarget = args.Target as ISynchronizeInvoke;
                 if (invokeTarget != null && invokeTarget.InvokeRequired)
                 {
                     // There is some history behind the next two lines, which is worth
@@ -280,13 +269,13 @@ namespace SharpTransitions
                     // the UI a chance to process the update. So what we do is to do the
                     // asynchronous BeginInvoke, but then wait (with a short timeout) for
                     // it to complete.
-                    IAsyncResult asyncResult = invokeTarget.BeginInvoke(new EventHandler<PropertyUpdateArgs>(SetProperty), new object[] { sender, args });
+                    var asyncResult = invokeTarget.BeginInvoke(new EventHandler<PropertyUpdateArgs>(SetProperty), new object[] { sender, args });
                     asyncResult.AsyncWaitHandle.WaitOne(50);
                 }
                 else
                 {
                     // We are on the correct thread, so we update the property...
-                    args.propertyInfo.SetValue(args.target, args.value, null);
+                    args.PropertyInfo.SetValue(args.Target, args.Value, null);
                 }
             }
             catch (Exception)
@@ -304,21 +293,12 @@ namespace SharpTransitions
         private bool IsDisposed(object target)
         {
             // Is the object passed in a Control?
-            Control controlTarget = target as Control;
+            var controlTarget = target as Control;
             if (controlTarget == null)
-            {
                 return false;
-            }
 
             // Is it disposed or disposing?
-            if (controlTarget.IsDisposed == true || controlTarget.Disposing)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return controlTarget.IsDisposed || controlTarget.Disposing;
         }
 
 		/// <summary>
@@ -326,7 +306,7 @@ namespace SharpTransitions
 		/// </summary>
 		private static void RegisterType(IManagedType transitionType)
 		{
-			Type type = transitionType.GetManagedType();
+			var type = transitionType.GetManagedType();
 			_mapManagedTypes[type] = transitionType;
 		}
 
@@ -335,27 +315,28 @@ namespace SharpTransitions
         private static IDictionary<Type, IManagedType> _mapManagedTypes = new Dictionary<Type, IManagedType>();
 
 		// The transition method used by this transition...
-		private ITransitionType _effect = null;
+		private ITransitionType _transitionMethod = null;
 
 		// Holds information about one property on one taregt object that we are performing
 		// a transition on...
 		internal class TransitionedPropertyInfo
 		{
-			public object startValue;
-			public object endValue;
-			public object target;
-			public PropertyInfo propertyInfo;
-			public IManagedType managedType;
+			public object StartValue;
+			public object EndValue;
+			public object Target;
+			public PropertyInfo PropertyInfo;
+			public IManagedType ManagedType;
 
             public TransitionedPropertyInfo Copy()
             {
-                TransitionedPropertyInfo info = new TransitionedPropertyInfo();
-                info.startValue = startValue;
-                info.endValue = endValue;
-                info.target = target;
-                info.propertyInfo = propertyInfo;
-                info.managedType = managedType;
-                return info;
+				return new TransitionedPropertyInfo
+				{
+					StartValue = StartValue,
+					EndValue = EndValue,
+					Target = Target,
+					PropertyInfo = PropertyInfo,
+					ManagedType = ManagedType
+				};
             }
 		}
 
@@ -370,13 +351,16 @@ namespace SharpTransitions
 		{
 			public PropertyUpdateArgs(object t, PropertyInfo pi, object v)
 			{
-				target = t;
-				propertyInfo = pi;
-				value = v;
+				Target = t;
+				PropertyInfo = pi;
+				Value = v;
 			}
-			public object target;
-			public PropertyInfo propertyInfo;
-			public object value;
+
+			public object Target;
+
+			public PropertyInfo PropertyInfo;
+
+			public object Value;
 		}
 
         // An object used to lock the list of transitioned properties, as it can be 

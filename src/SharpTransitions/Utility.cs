@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using System.ComponentModel;
 
 namespace SharpTransitions
@@ -14,12 +13,11 @@ namespace SharpTransitions
         /// </summary>
         public static object GetValue(object target, string strPropertyName)
         {
-            Type targetType = target.GetType();
-            PropertyInfo propertyInfo = targetType.GetProperty(strPropertyName);
+            var targetType = target.GetType();
+            var propertyInfo = targetType.GetProperty(strPropertyName);
             if (propertyInfo == null)
-            {
                 throw new Exception("Object: " + target.ToString() + " does not have the property: " + strPropertyName);
-            }
+            
             return propertyInfo.GetValue(target, null);
         }
 
@@ -28,12 +26,11 @@ namespace SharpTransitions
         /// </summary>
         public static void SetValue(object target, string strPropertyName, object value)
         {
-            Type targetType = target.GetType();
-            PropertyInfo propertyInfo = targetType.GetProperty(strPropertyName);
+            var targetType = target.GetType();
+            var propertyInfo = targetType.GetProperty(strPropertyName);
             if (propertyInfo == null)
-            {
                 throw new Exception("Object: " + target.ToString() + " does not have the property: " + strPropertyName);
-            }
+
             propertyInfo.SetValue(target, value, null);
         }
 
@@ -42,58 +39,59 @@ namespace SharpTransitions
 		/// </summary>
 		public static double Interpolate(double d1, double d2, double dPercentage)
 		{
-			double dDifference = d2 - d1;
-			double dDistance = dDifference * dPercentage;
-			double dResult = d1 + dDistance;
-			return dResult;
+			double difference = d2 - d1;
+			double distance = difference * dPercentage;
+			double result = d1 + distance;
+
+			return result;
 		}
 
         /// <summary>
         /// Returns a value betweeen i1 and i2 for the percentage passed in.
         /// </summary>
-        public static int Interpolate(int i1, int i2, double dPercentage)
+        public static int Interpolate(int value1, int value2, double percentage)
         {
-            return (int)Interpolate((double)i1, (double)i2, dPercentage);
+            return (int)Interpolate((double)value1, (double)value2, percentage);
         }
     
         /// <summary>
         /// Returns a value betweeen f1 and f2 for the percentage passed in.
         /// </summary>
-        public static float Interpolate(float f1, float f2, double dPercentage)
+        public static float Interpolate(float value1, float value2, double dPercentage)
         {
-            return (float)Interpolate((double)f1, (double)f2, dPercentage);
+            return (float)Interpolate((double)value1, (double)value2, dPercentage);
         }
 
         /// <summary>
         /// Converts a fraction representing linear time to a fraction representing
         /// the distance traveled under an ease-in-ease-out transition.
         /// </summary>
-        public static double ConvertLinearToEaseInEaseOut(double dElapsed)
+        public static double ConvertLinearToEaseInEaseOut(double elapsed)
         {
             // The distance traveled is made up of two parts: the initial acceleration,
             // and then the subsequent deceleration...
-            double dFirstHalfTime = (dElapsed > 0.5) ? 0.5 : dElapsed;
-            double dSecondHalfTime = (dElapsed > 0.5) ? dElapsed - 0.5 : 0.0;
-            double dResult = 2 * dFirstHalfTime * dFirstHalfTime + 2 * dSecondHalfTime * (1.0 - dSecondHalfTime);
-            return dResult;
+            double firstHalfTime = (elapsed > 0.5) ? 0.5 : elapsed;
+            double secondHalfTime = (elapsed > 0.5) ? elapsed - 0.5 : 0.0;
+            double result = 2 * firstHalfTime * firstHalfTime + 2 * secondHalfTime * (1.0 - secondHalfTime);
+            return result;
         }
 
         /// <summary>
         /// Converts a fraction representing linear time to a fraction representing
         /// the distance traveled under a constant acceleration transition.
         /// </summary>
-        public static double ConvertLinearToAcceleration(double dElapsed)
+        public static double ConvertLinearToAcceleration(double elapsed)
         {
-            return dElapsed * dElapsed;
+            return elapsed * elapsed;
         }
 
         /// <summary>
         /// Converts a fraction representing linear time to a fraction representing
         /// the distance traveled under a constant deceleration transition.
         /// </summary>
-        public static double ConvertLinearToDeceleration(double dElapsed)
+        public static double ConvertLinearToDeceleration(double elapsed)
         {
-            return dElapsed * (2.0 - dElapsed);
+            return elapsed * (2.0 - elapsed);
         }
 
         /// <summary>
@@ -108,11 +106,8 @@ namespace SharpTransitions
         /// </remarks>
         public static void RaiseEvent<T>(EventHandler<T> theEvent, object sender, T args) where T : System.EventArgs
         {
-            // Is the event set up?
             if (theEvent == null)
-            {
                 return;
-            }
 
             // We loop through each of the delegate handlers for this event. For each of 
             // them we need to decide whether to invoke it on the current thread or to
@@ -121,7 +116,7 @@ namespace SharpTransitions
             {
                 try
                 {
-                    ISynchronizeInvoke target = handler.Target as ISynchronizeInvoke;
+                    var target = handler.Target as ISynchronizeInvoke;
                     if (target == null || target.InvokeRequired == false)
                     {
                         // Either the target is not a form or control, or we are already
@@ -143,6 +138,5 @@ namespace SharpTransitions
                 }
             }
         }
-
     }
 }

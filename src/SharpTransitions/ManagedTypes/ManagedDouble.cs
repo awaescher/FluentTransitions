@@ -12,28 +12,19 @@ namespace SharpTransitions
 		/// <summary>
 		///  Returns the type managed by this class.
 		/// </summary>
-		public Type GetManagedType()
-		{
-			return typeof(double);
-		}
+		public Type GetManagedType() =>  typeof(double);
 
 		/// <summary>
 		/// Returns a copy of the double passed in.
 		/// </summary>
-		public object Copy(object o)
-		{
-			double d = (double)o;
-			return d;
-		}
+		public object Copy(object o) => (double)o;
 
 		/// <summary>
 		/// Returns the value between start and end for the percentage passed in.
 		/// </summary>
-		public object GetIntermediateValue(object start, object end, double dPercentage)
+		public object GetIntermediateValue(object start, object end, double percentage)
 		{
-			double dStart = (double)start;
-			double dEnd = (double)end;
-			return Utility.Interpolate(dStart, dEnd, dPercentage);
+			return Utility.Interpolate((double)start, (double)end, percentage);
 		}
 	}
 }

@@ -13,13 +13,13 @@ namespace SharpTransitions
 		/// Constructor. You pass in the time that the transition 
 		/// will take (in milliseconds).
 		/// </summary>
-		public EaseInEaseOut(int iTransitionTime)
+		public EaseInEaseOut(int transitionTime)
 		{
-			if (iTransitionTime <= 0)
+			if (transitionTime <= 0)
 			{
 				throw new Exception("Transition time must be greater than zero.");
 			}
-			_transitionTime = iTransitionTime;
+			_transitionTime = transitionTime;
 		}
 
 		/// <summary>
@@ -29,20 +29,20 @@ namespace SharpTransitions
 		/// We accelerate as at the rate needed (a=4) to get to 0.5 at t=0.5, and
 		/// then decelerate at the same rate to end up at 1.0 at t=1.0.
 		/// </summary>
-		public void OnTimer(int iTime, out double dPercentage, out bool bCompleted)
+		public void OnTimer(int time, out double percentage, out bool completed)
 		{
 			// We find the percentage time elapsed...
-			double dElapsed = iTime / _transitionTime;
-            dPercentage = Utility.ConvertLinearToEaseInEaseOut(dElapsed);
+			double elapsed = time / _transitionTime;
+            percentage = Utility.ConvertLinearToEaseInEaseOut(elapsed);
 
-			if (dElapsed >= 1.0)
+			if (elapsed >= 1.0)
 			{
-				dPercentage = 1.0;
-				bCompleted = true;
+				percentage = 1.0;
+				completed = true;
 			}
 			else
 			{
-				bCompleted = false;
+				completed = false;
 			}
 		}
 

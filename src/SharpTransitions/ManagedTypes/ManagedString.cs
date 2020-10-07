@@ -12,68 +12,61 @@ namespace SharpTransitions
         /// <summary>
         /// Returns the type we're managing.
         /// </summary>
-        public Type GetManagedType()
-        {
-            return typeof(string);
-        }
+        public Type GetManagedType() => typeof(string);
 
         /// <summary>
         /// Returns a copy of the string passed in.
         /// </summary>
-        public object Copy(object o)
-        {
-            string s = (string)o;
-            return new string(s.ToCharArray());
-        }
+        public object Copy(object o) => new string(((string)o).ToCharArray());
 
         /// <summary>
         /// Returns an "interpolated" string.
         /// </summary>
-        public object GetIntermediateValue(object start, object end, double dPercentage)
+        public object GetIntermediateValue(object start, object end, double percentage)
         {
-            string strStart = (string)start;
-            string strEnd = (string)end;
+            string startString = (string)start;
+            string endString = (string)end;
 
             // We find the length of the interpolated string...
-            int iStartLength = strStart.Length;
-            int iEndLength = strEnd.Length;
-            int iLength = Utility.Interpolate(iStartLength, iEndLength, dPercentage);
-            char[] result = new char[iLength];
+            int startLength = startString.Length;
+            int endLength = endString.Length;
+            int length = Utility.Interpolate(startLength, endLength, percentage);
+            char[] result = new char[length];
 
             // Now we assign the letters of the results by interpolating the
             // letters from the start and end strings...
-            for (int i = 0; i < iLength; ++i)
+            for (int i = 0; i < length; ++i)
             {
                 // We get the start and end chars at this position...
-                char cStart = 'a';
-                if(i < iStartLength)
+                char startChar = 'a';
+                if(i < startLength)
                 {
-                    cStart = strStart[i];
+                    startChar = startString[i];
                 }
                 char cEnd = 'a';
-                if(i < iEndLength)
+                if(i < endLength)
                 {
-                    cEnd = strEnd[i];
+                    cEnd = endString[i];
                 }
 
                 // We interpolate them...
-				char cInterpolated;
+				char interpolatedChar;
 				if (cEnd == ' ')
 				{
 					// If the end character is a space we just show a space 
 					// regardless of interpolation. It looks better this way...
-					cInterpolated = ' ';
+					interpolatedChar = ' ';
 				}
 				else
 				{
 					// The end character is not a space, so we interpolate...
-					int iStart = Convert.ToInt32(cStart);
-					int iEnd = Convert.ToInt32(cEnd);
-					int iInterpolated = Utility.Interpolate(iStart, iEnd, dPercentage);
-					cInterpolated = Convert.ToChar(iInterpolated);
+					int startCharValue = Convert.ToInt32(startChar);
+					int endCharValue = Convert.ToInt32(cEnd);
+					int interpolatedValue = Utility.Interpolate(startCharValue, endCharValue, percentage);
+					interpolatedChar = Convert.ToChar(interpolatedValue);
 				}
 
-                result[i] = cInterpolated;
+                result[i] = interpolatedChar;
             }
 
             return new string(result);

@@ -27,6 +27,6 @@ namespace SharpTransitions
 		/// to the percentage passed in. (Note: the percentage can be less than 0% or
 		/// greater than 100%.)
 		/// </summary>
-		object GetIntermediateValue(object start, object end, double dPercentage);
+		object GetIntermediateValue(object start, object end, double percentage);
     }
 }

@@ -12,29 +12,29 @@ namespace SharpTransitions
         /// Constructor. You pass in the time (in milliseconds) that the
         /// transition will take.
         /// </summary>
-        public Linear(int iTransitionTime)
+        public Linear(int transitionTime)
         {
-			if (iTransitionTime <= 0)
+			if (transitionTime <= 0)
 			{
 				throw new Exception("Transition time must be greater than zero.");
 			}
-			_transitionTime = iTransitionTime;
+			_transitionTime = transitionTime;
         }
 
 		/// <summary>
 		/// We return the percentage completed.
 		/// </summary>
-		public void OnTimer(int iTime, out double dPercentage, out bool bCompleted)
+		public void OnTimer(int time, out double percentage, out bool completed)
 		{
-			dPercentage = (iTime / _transitionTime);
-			if (dPercentage >= 1.0)
+			percentage = (time / _transitionTime);
+			if (percentage >= 1.0)
 			{
-				dPercentage = 1.0;
-				bCompleted = true;
+				percentage = 1.0;
+				completed = true;
 			}
 			else
 			{
-				bCompleted = false;
+				completed = false;
 			}
 		}
 

@@ -26,9 +26,8 @@ namespace SharpTransitions
         public static TransitionManager GetInstance()
         {
             if (_instance == null)
-            {
                 _instance = new TransitionManager();
-            }
+
             return _instance;
         }
 
@@ -60,9 +59,7 @@ namespace SharpTransitions
         {
             // We look through the set of transitions we're currently managing...
             foreach (KeyValuePair<Transition, bool> pair in _transitions)
-            {
                 RemoveDuplicates(transition, pair.Key);
-            }
         }
 
         /// <summary>
@@ -77,22 +74,21 @@ namespace SharpTransitions
             //       timer, so I don't think this matters too much.
 
             // We get the list of properties for the old and new transitions...
-            IList<Transition.TransitionedPropertyInfo> newProperties = newTransition.TransitionedProperties;
-            IList<Transition.TransitionedPropertyInfo> oldProperties = oldTransition.TransitionedProperties;
+            var newProperties = newTransition.TransitionedProperties;
+            var oldProperties = oldTransition.TransitionedProperties;
 
             // We loop through the old properties backwards (as we may be removing 
             // items from the list if we find a match)...
             for (int i = oldProperties.Count - 1; i >= 0; i--)
             {
                 // We get one of the properties from the old transition...
-                Transition.TransitionedPropertyInfo oldProperty = oldProperties[i];
+                var oldProperty = oldProperties[i];
 
                 // Is this property part of the new transition?
-                foreach (Transition.TransitionedPropertyInfo newProperty in newProperties)
+                foreach (var newProperty in newProperties)
                 {
-                    if (oldProperty.target == newProperty.target
-                        &&
-                        oldProperty.propertyInfo == newProperty.propertyInfo)
+                    if (oldProperty.Target == newProperty.Target
+                        && oldProperty.PropertyInfo == newProperty.PropertyInfo)
                     {
                         // The old transition contains the same property as the new one,
                         // so we remove it from the old transition...
@@ -120,9 +116,8 @@ namespace SharpTransitions
             // We turn the timer off while we process the tick, in case the
             // actions take longer than the tick itself...
             if (_timer == null)
-            {
                 return;
-            }
+            
             _timer.Enabled = false;
 
             IList<Transition> listTransitions;
@@ -132,16 +127,12 @@ namespace SharpTransitions
                 // might be removed as we iterate through it...
                 listTransitions = new List<Transition>();
                 foreach (KeyValuePair<Transition, bool> pair in _transitions)
-                {
                     listTransitions.Add(pair.Key);
-                }
             }
 
             // We tick the timer for each transition we're managing...
             foreach (Transition transition in listTransitions)
-            {
                 transition.OnTimer();
-            }
 
             // We restart the timer...
             _timer.Enabled = true;
@@ -153,7 +144,7 @@ namespace SharpTransitions
         private void OnTransitionCompleted(object sender, Transition.Args e)
         {
             // We stop observing the transition...
-            Transition transition = (Transition)sender;
+            var transition = (Transition)sender;
             transition.TransitionCompletedEvent -= OnTransitionCompleted;
 
             // We remove the transition from the collection we're managing...

@@ -8,9 +8,7 @@ namespace SharpTransitions
         {
             // We store the list of transitions...
             foreach (Transition transition in transitions)
-            {
                 _listTransitions.AddLast(transition);
-            }
 
             // We start running them...
             RunNextTransition();
@@ -22,14 +20,12 @@ namespace SharpTransitions
         private void RunNextTransition()
         {
             if (_listTransitions.Count == 0)
-            {
                 return;
-            }
 
             // We find the next transition and run it. We also register
             // for its completed event, so that we can start the next transition
             // when this one completes...
-            Transition nextTransition = _listTransitions.First.Value;
+            var nextTransition = _listTransitions.First.Value;
             nextTransition.TransitionCompletedEvent += OnTransitionCompleted;
             nextTransition.Run();
         }
@@ -40,7 +36,7 @@ namespace SharpTransitions
         private void OnTransitionCompleted(object sender, Transition.Args e)
         {
             // We unregister from the completed event...
-            Transition transition = (Transition)sender;
+            var transition = (Transition)sender;
             transition.TransitionCompletedEvent -= OnTransitionCompleted;
 
             // We remove the completed transition from our collection, and
