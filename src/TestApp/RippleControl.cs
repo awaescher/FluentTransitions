@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Transitions;
+using SharpTransitions;
 
 namespace TestApp
 {
@@ -36,7 +36,7 @@ namespace TestApp
             // This means that we will be running 100 simulataneous transitions...
             foreach (CellInfo info in m_CellInfos)
             {
-                Transition.run(info.Control, "BackColor", Color.Pink, new TransitionType_Flash(1, info.TransitionInterval));
+                Transition.run(info.Control, "BackColor", Color.Pink, new Flash(1, info.TransitionInterval));
             }
         }
         

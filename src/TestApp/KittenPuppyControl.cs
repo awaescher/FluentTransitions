@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Transitions;
+using SharpTransitions;
 
 namespace TestApp
 {
@@ -43,7 +43,7 @@ namespace TestApp
 
             // We perform the transition which moves the active image off the
             // screen, and the inactive one onto the screen...
-            Transition t = new Transition(new TransitionType_EaseInEaseOut(1000));
+            Transition t = new Transition(new EaseInEaseOut(1000));
             t.add(m_InactivePicture, "Left", 0);
             t.add(m_InactivePicture, "Top", 0);
             t.add(m_ActivePicture, "Left", iDestinationLeft);
