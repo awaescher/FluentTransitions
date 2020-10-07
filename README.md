@@ -1,4 +1,4 @@
-# Dotnet Transitions
+# SharpTransitions
 
 A library for animated UI transitions for .NET.
 
@@ -8,50 +8,43 @@ A library for animated UI transitions for .NET.
 
 The Transitions library lets you create animated transitions of any properties of user-interface elements for .NET. It provides an easy way to perform UI animations in .NET in a similar way to the Core Animation library for Apple and the iPhone.
 
-The Transitions library is built with Visual Studio 2008 but targets version 2 of the .NET runtime, so it can be used with projects built with VS2005.
-
-## Downloads
-
-- [**Get it on NuGet**](https://www.nuget.org/packages/dot-net-transitions/)
-- [Download latest DLL](https://github.com/UweKeim/dot-net-transitions/blob/master/Bin/Transitions/Transitions.dll?raw=true)
-- [Download TestApp 1.2](https://github.com/UweKeim/dot-net-transitions/blob/master/Downloads/TransitionsTestApp_1_2.zip?raw=true)
-- [Download code 1.2](https://github.com/UweKeim/dot-net-transitions/blob/master/Downloads/TransitionsCode_1_2.zip?raw=true)
-
 ## Getting started
 
 You can animate a single property of an object with a single line of code like this:
 
-```csharp
-Transition.run(this, "BackColor", Color.Red, new TransitionType_Linear(1000));
+```
+Transition.run(this, nameof(BackColor), Color.Red, new PredefinedTypes.Linear(1000));
 ```
 
-If this code is in a Form class, it animates the background color from its initial color to red over the course of 1000ms.
+If this code is in a form class, it animates the background color from its initial color to red over the course of 1000ms.
 
 You can animate multiple properties (maybe across multiple objects) simultaneously with code like this:
 
 ```csharp
-Transition t = new Transition(new TransitionType_EaseInEaseOut(2000));
-t.add(pictureBox1, "Left", 300);
-t.add(pictureBox1, "Top", 200);
-t.run();
+var transition = new Transition(new PredefinedTypes.EaseInEaseOut(2000));
+transition.add(pictureBox1, nameof(Left), 300);
+transition.add(pictureBox1, nameof(Top), 200);
+transition.run();
 ```
 
 This animates the movement of pictureBox1 from its initial location to (300, 200) over the course of 2000ms.
 
 ## Coding with Transitions
 
-The TestApp project (which is part of the code download) demonstrates a number of different transitions. It is fairly well commented, and can act as a tutorial to help get you started.
+The TestApp project demonstrates a number of different transitions. It is fairly well commented, and can act as a tutorial to help get you started.
 
 For more information on how to code with the Transitions library see the coding reference.
 
-## Version History
-
-Transitions is currently at version 1.2. See the VersionHistory page for details of previous version.
-
 ## Acknowledgements
-
-Thanks to Maxim Gready for writing the critical-damping transition-type.
 
 &copy; 2009 Richard S. Shepherd.
 
-2015-07-16, Uwe Keim: I've copied this repository from [Google Code](https://code.google.com/p/dot-net-transitions/) to save it from disappearing when Google Code shuts down.
+2020-10-07 Andreas Wäscher
+- Updated the solution and the code to .NET Core 3.1 and .NET Framework 4.8
+- Updated namespaces and class names to meet modern code standards
+- Switched from "dot-net-transitions" to "SharpTransitions"
+
+2015-07-16 Uwe Keim
+- Copied this repository from [Google Code](https://code.google.com/p/dot-net-transitions/) to save it from disappearing when Google Code shuts down.
+
+Thanks to Maxim Gready for writing the critical-damping transition-type.
