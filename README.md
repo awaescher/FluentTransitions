@@ -14,7 +14,7 @@ The Transitions library is built with Visual Studio 2008 but targets version 2 o
 
 - [**Get it on NuGet**](https://www.nuget.org/packages/dot-net-transitions/)
 - [Download latest DLL](https://github.com/UweKeim/dot-net-transitions/blob/master/Bin/Transitions/Transitions.dll?raw=true)
-- [Download sample 1.2](https://github.com/UweKeim/dot-net-transitions/blob/master/Downloads/TransitionsSample_1_2.zip?raw=true)
+- [Download TestApp 1.2](https://github.com/UweKeim/dot-net-transitions/blob/master/Downloads/TransitionsTestApp_1_2.zip?raw=true)
 - [Download code 1.2](https://github.com/UweKeim/dot-net-transitions/blob/master/Downloads/TransitionsCode_1_2.zip?raw=true)
 
 ## Getting started
@@ -40,7 +40,7 @@ This animates the movement of pictureBox1 from its initial location to (300, 200
 
 ## Coding with Transitions
 
-The TestSample project (which is part of the code download) demonstrates a number of different transitions. It is fairly well commented, and can act as a tutorial to help get you started.
+The TestApp project (which is part of the code download) demonstrates a number of different transitions. It is fairly well commented, and can act as a tutorial to help get you started.
 
 For more information on how to code with the Transitions library see the coding reference.
 
