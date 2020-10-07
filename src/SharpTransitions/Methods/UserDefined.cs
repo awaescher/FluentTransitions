@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SharpTransitions
+namespace SharpTransitions.Methods
 {
 	/// <summary>
 	/// This class allows you to create user-defined transition types. You specify these
@@ -35,7 +35,7 @@ namespace SharpTransitions
 	/// heights each time.
 	/// 
 	/// </summary>
-	public class UserDefined : ITransitionType
+	public class UserDefined : IMethod
 	{
 		/// <summary>
 		/// Constructor.

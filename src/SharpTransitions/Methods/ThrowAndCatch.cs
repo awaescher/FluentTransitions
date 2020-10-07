@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SharpTransitions
+namespace SharpTransitions.Methods
 {
 	/// <summary>
 	/// This transition bounces the property to a destination value and back to the

@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Reflection;
 
-namespace SharpTransitions
+namespace SharpTransitions.ManagedTypes
 {
 	/// <summary>
 	/// Interface for all types we can perform transitions on. 

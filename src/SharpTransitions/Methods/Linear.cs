@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace SharpTransitions
+namespace SharpTransitions.Methods
 {
 	/// <summary>
 	/// This class manages a linear transition. The percentage complete for the transition
 	/// increases linearly with time.
 	/// </summary>
-	public class Linear : ITransitionType
+	public class Linear : IMethod
 	{
 		/// <summary>
 		/// Constructor. You pass in the time (in milliseconds) that the

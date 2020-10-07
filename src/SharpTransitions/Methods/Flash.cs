@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SharpTransitions
+namespace SharpTransitions.Methods
 {
 	/// <summary>
 	/// This transition type 'flashes' the properties a specified number of times, ending

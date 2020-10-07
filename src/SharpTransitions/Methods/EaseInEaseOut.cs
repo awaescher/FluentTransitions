@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Text;
 
-namespace SharpTransitions
+namespace SharpTransitions.Methods
 {
 	/// <summary>
 	/// Manages an ease-in-ease-out transition. This accelerates during the first 
 	/// half of the transition, and then decelerates during the second half.
 	/// </summary>
-	public class EaseInEaseOut : ITransitionType
+	public class EaseInEaseOut : IMethod
 	{
 		/// <summary>
 		/// Constructor. You pass in the time that the transition 

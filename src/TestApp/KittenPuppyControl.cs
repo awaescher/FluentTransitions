@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using SharpTransitions;
+using SharpTransitions.Methods;
 
 namespace TestApp
 {

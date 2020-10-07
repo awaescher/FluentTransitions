@@ -1,8 +1,6 @@
-﻿using System.Text;
-
-namespace SharpTransitions
+﻿namespace SharpTransitions
 {
-	public interface ITransitionType
+	public interface IMethod
 	{
 		/// <summary>
 		/// Called by the Transition framework when its timer ticks to pass in the

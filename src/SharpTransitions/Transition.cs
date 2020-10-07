@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Windows.Forms;
+using SharpTransitions.ManagedTypes;
 
 namespace SharpTransitions
 {
@@ -64,7 +65,7 @@ namespace SharpTransitions
 		/// <summary>
 		/// Creates and immediately runs a transition on the property passed in.
 		/// </summary>
-		public static void Run(object target, string propertyName, object destinationValue, ITransitionType transitionMethod)
+		public static void Run(object target, string propertyName, object destinationValue, IMethod transitionMethod)
 		{
 			var transition = new Transition(transitionMethod);
 			transition.Add(target, propertyName, destinationValue);
@@ -75,7 +76,7 @@ namespace SharpTransitions
 		/// Sets the property passed in to the initial value passed in, then creates and 
 		/// immediately runs a transition on it.
 		/// </summary>
-		public static void Run(object target, string propertyName, object initialValue, object destinationValue, ITransitionType transitionMethod)
+		public static void Run(object target, string propertyName, object initialValue, object destinationValue, IMethod transitionMethod)
 		{
 			Utility.SetValue(target, propertyName, initialValue);
 			Run(target, propertyName, destinationValue, transitionMethod);
@@ -93,9 +94,9 @@ namespace SharpTransitions
 		/// Constructor. You pass in the object that holds the properties 
 		/// that you are performing transitions on.
 		/// </summary>
-		public Transition(ITransitionType transitionMethod)
+		public Transition(IMethod transitionMethod)
 		{
-			_transitionMethod = transitionMethod;
+			_method = transitionMethod;
 		}
 
 		/// <summary>
@@ -189,7 +190,7 @@ namespace SharpTransitions
 			var elapsedTime = (int)_stopwatch.ElapsedMilliseconds;
 
 			// b.
-			_transitionMethod.OnTimer(elapsedTime, out double percentage, out bool completed);
+			_method.OnTimer(elapsedTime, out double percentage, out bool completed);
 
 			// We take a copy of the list of properties we are transitioning, as
 			// they can be changed by another thread while this method is running...
@@ -313,7 +314,7 @@ namespace SharpTransitions
 		private static readonly IDictionary<Type, IManagedType> _mapManagedTypes = new Dictionary<Type, IManagedType>();
 
 		// The transition method used by this transition...
-		private readonly ITransitionType _transitionMethod = null;
+		private readonly IMethod _method = null;
 
 		// Holds information about one property on one taregt object that we are performing
 		// a transition on...
