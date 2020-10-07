@@ -13,7 +13,7 @@ The Transitions library lets you create animated transitions of any properties o
 You can animate a single property of an object with a single line of code like this:
 
 ```
-Transition.run(this, nameof(BackColor), Color.Red, new PredefinedTypes.Linear(1000));
+Transition.Run(this, nameof(BackColor), Color.Red, new Methods.Linear(1000));
 ```
 
 If this code is in a form class, it animates the background color from its initial color to red over the course of 1000ms.
@@ -21,10 +21,10 @@ If this code is in a form class, it animates the background color from its initi
 You can animate multiple properties (maybe across multiple objects) simultaneously with code like this:
 
 ```csharp
-var transition = new Transition(new PredefinedTypes.EaseInEaseOut(2000));
-transition.add(pictureBox1, nameof(Left), 300);
-transition.add(pictureBox1, nameof(Top), 200);
-transition.run();
+var transition = new Transition(new Methods.EaseInEaseOut(2000));
+transition.Add(pictureBox1, nameof(Left), 300);
+transition.Add(pictureBox1, nameof(Top), 200);
+transition.Run();
 ```
 
 This animates the movement of pictureBox1 from its initial location to (300, 200) over the course of 2000ms.
@@ -40,8 +40,8 @@ For more information on how to code with the Transitions library see the coding 
 &copy; 2009 Richard S. Shepherd.
 
 2020-10-07 Andreas Wäscher
-- Updated the solution and the code to .NET Core 3.1 and .NET Framework 4.8
-- Updated namespaces and class names to meet modern code standards
+- Migrated to .NET Core 3.1 and .NET Framework 4.8
+- Updated namespaces, class names and the code itself to meet modern code standards
 - Switched from "dot-net-transitions" to "SharpTransitions"
 
 2015-07-16 Uwe Keim
