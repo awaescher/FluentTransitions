@@ -1,12 +1,8 @@
 # FluentTransitions
 
-Animated UI transitions for .NET
+FluentTransitions lets you create animated transitions of any property of user-interface elements in .NET. It provides an easy way to perform UI animations in a similar way to Apple's Core Animation library for iOS, iPadOS and macOS.
 
-## Overview
-
-FluentTransitions lets you create animated transitions of any properties of user-interface elements for .NET. It provides an easy way to perform UI animations in .NET in a similar way to the Core Animation library for Apple and the iPhone.
-
-## Getting started
+## Simple API
 
 Animate one or multiple properties from one or multiple objects simultaneously:
 
