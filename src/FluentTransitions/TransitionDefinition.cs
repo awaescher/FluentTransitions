@@ -81,6 +81,7 @@ namespace FluentTransitions
 		/// <summary>
 		/// Flashes the property values a specified number of times, ending up by reverting them to their initial values.
 		/// </summary>
+		/// <param name="numberOfFlashes">The number of flashes to animate</param>
 		/// <param name="durationOfEachFlash">The duration of each flash</param>
 		public void Flash(int numberOfFlashes, TimeSpan durationOfEachFlash)
 		{
