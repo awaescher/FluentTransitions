@@ -15,15 +15,17 @@ namespace TestApp
 	public partial class Form1 : Form
 	{
 		// Colors used by the change-form-color transition...
-		private readonly Color BACKCOLOR_PINK = Color.FromArgb(255, 220, 220);
-		private readonly Color BACK_COLOR_YELLOW = Color.FromArgb(255, 255, 220);
+		private readonly Color BACKCOLOR_GRAY = Color.FromArgb(80, 80, 80);
+		private readonly Color BACKCOLOR_WHITE = Color.FromArgb(255, 255, 255);
 
 		// The left point of the 'bounce' and 'throw-and-catch' group boxes...
 		private const int GROUP_BOX_LEFT = 12;
 
 		// Strings used for the text transition...
-		private const string STRING_SHORT = "Hello, World!";
-		private const string STRING_LONG = "A longer piece of text.";
+		private const string STRING_SHORT1 = "I've got two tickets";
+		private const string STRING_LONG1 = "to Iron Maiden, baby.";
+		private const string STRING_SHORT2 = "Come with me friday";
+		private const string STRING_LONG2 = "don't say maybe!";
 
 		/// <summary>
 		/// Constructor.
@@ -84,7 +86,7 @@ namespace TestApp
 			// if against gravity).
 
 			int destination = gbBounce.Height - cmdBounceMe.Height;
-			Transition.Run(cmdBounceMe, "Top", destination, new Bounce(1500));
+			Transition.Run(cmdBounceMe, "Top", destination, new Bounce(500));
 		}
 
 		/// <summary>
@@ -145,18 +147,18 @@ namespace TestApp
 			// We work out the new text and colors to transition to...
 			string text1, text2;
 			Color color1, color2;
-			if (lblTextTransition1.Text == STRING_SHORT)
+			if (lblTextTransition1.Text == STRING_SHORT1)
 			{
-				text1 = STRING_LONG;
+				text1 = STRING_SHORT2;
 				color1 = Color.Red;
-				text2 = STRING_SHORT;
+				text2 = STRING_LONG2;
 				color2 = Color.Blue;
 			}
 			else
 			{
-				text1 = STRING_SHORT;
+				text1 = STRING_SHORT1;
 				color1 = Color.Blue;
-				text2 = STRING_LONG;
+				text2 = STRING_LONG1;
 				color2 = Color.Red;
 			}
 
@@ -175,7 +177,7 @@ namespace TestApp
 		private void ctrlChangeFormColor_Click(object sender, EventArgs e)
 		{
 			// We alternate the form's background color...
-			var destination = (BackColor == BACKCOLOR_PINK) ? BACK_COLOR_YELLOW : BACKCOLOR_PINK;
+			var destination = (BackColor == BACKCOLOR_GRAY) ? BACKCOLOR_WHITE : BACKCOLOR_GRAY;
 			Transition.Run(this, "BackColor", destination, new Linear(1000));
 		}
 
