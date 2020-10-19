@@ -4,24 +4,75 @@
 
 FluentTransitions lets you create animated transitions of any property of user-interface elements in .NET. It provides a simple API to perform UI animations in a similar way to Apple's Core Animation library for iOS, iPadOS and macOS.
 
-## Simple API
+![FluentDragDrop effects with FluentTransitions](./doc/Effects.gif)
 
-Animate one or multiple properties from one or multiple objects simultaneously:
-
-```csharp
-Transition()
-    .With(button1, nameof(Left), 300)
-    .With(button1, nameof(Top), 200)
-    .EaseInEaseOut(TimeSpan.FromSeconds(2));
-```
-
-This code animates the movement of button1 from its initial location to (300, 200) over the course of two seconds.
+<sup>FluentTransitions powering [FluentDragDrop](https://github.com/awaescher/FluentDragDrop), a library to create stunning drag and drop effects with Windows Forms.</sup>
 
 ## What can it do for me?
 
-FluentTransitions allows smooth UI effects with our good old friend WinForms and GDI+.
+FluentTransitions allows smooth UI transitions with Windows Forms and GDI+. While the animation above shows several effects in combination, you will probably start with simpler things like the transition of a property of a Windows Forms control:
 
-![Ripple effect](./doc/button.gif)
+```csharp
+var maxTop = button1.Parent.Height - button1.Height;
+
+Transition
+    .With(button1, nameof(Top), maxTop)      // target, property, value
+    .Bounce(TimeSpan.FromMilliseconds(500)); // method and duration
+```
+
+![Button drop effect](./doc/button.gif)
+
+### Multi targeting
+
+Transitions can manipulate multiple properties from one or multiple objects simultaneously just by chaining the `.With()` methods:
+
+```csharp
+Transition
+    .With(button1, nameof(Left), 300)
+    .With(button2, nameof(Top), 200)
+    .With(Form1, nameof(Opacity), 0.0)
+    .EaseInEaseOut(TimeSpan.FromSeconds(2));
+```
+
+This code animates the movement of two buttons while it fades out the whole form. All of this is running in parallel within two seconds.
+
+### Chaining
+
+Some effects might require multiple transitions to be executed sequentially. FluentTransitions provides a concept called "Chaining". To use it, simply build your transitions and run them with `Transition.RunChain(...)`:
+
+```csharp
+var t1 = Transition
+    .With(button1, nameof(Left), 300)
+    .With(button2, nameof(Top), 200)
+    .Build(new EaseInEaseOut(500));
+    
+var t2 = Transition
+    .With(Form1, nameof(Opacity), 0.0)
+    .Build(new Accelerate(500));
+    
+Transition.RunChain(t1, t2);
+```
+
+This code animates the movement of two buttons first. Once this is done, it fades out the whole form. Both transitions are completed within one second.
+
+### Completion
+
+Each transition raises an event once it is completed. This can be useful to run code after the UI is done with animating.
+
+```csharp
+var t1 = Transition
+    .With(button1, nameof(Left), 300)
+    .With(button2, nameof(Top), 200)
+    .Build(new EaseInEaseOut(500));
+    
+t1.TransitionCompletedEvent += (sender, args) => this.Close();
+    
+Transition.Run(t1);
+```
+
+> Prefer `Transition.RunChain()` to run animations after a prior animation did complete:
+
+# More Samples
 
 Back in the year 2011, I used these transitions to spice up two login forms for a customer project. Be kind to me, I was young and just wanted to make something fancy. Nevertheless, I think it's pretty special to WinForms.
 
@@ -34,7 +85,6 @@ But FluentTransitinons is more that just smoothly moving and sizing controls, yo
 ![Ripple effect sample](./doc/ripple.gif)
 
 ![Text transition sample](./doc/text.gif)
-
 
 ## Acknowledgements
 
