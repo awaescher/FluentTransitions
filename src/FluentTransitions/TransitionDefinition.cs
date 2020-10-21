@@ -1,6 +1,8 @@
 ﻿using FluentTransitions.Methods;
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace FluentTransitions
 {
@@ -35,10 +37,40 @@ namespace FluentTransitions
 		/// <summary>
 		/// Defines a hook that gets called as soon as the transition completes
 		/// </summary>
-		/// <param name="hookDelegate"></param>
+		/// <param name="hookDelegate">A delegate which gets called as soon as the transition did complete</param>
 		public TransitionDefinition HookOnCompletion(Action hookDelegate)
 		{
 			_completionHook = hookDelegate;
+			return this;
+		}
+
+		/// <summary>
+		/// Defines a hook that gets called as soon as the transition completes
+		/// </summary>
+		/// <param name="controlToInvoke">Any control to be used to invoke the hookDelegate to the UI thread</param>
+		/// <param name="hookDelegate">A delegate which gets called as soon as the transition did complete</param>
+		public TransitionDefinition HookOnCompletionInUiThread(Control controlToInvoke, Action hookDelegate)
+		{
+			if (hookDelegate is object)
+				_completionHook = () => controlToInvoke.BeginInvoke((Action)(() => hookDelegate.Invoke()));
+			else
+				_completionHook = null;
+
+			return this;
+		}
+
+		/// <summary>
+		/// Defines a hook that gets called as soon as the transition completes
+		/// </summary>
+		/// <param name="synchronizationContext">The synchronization context used to invoke the hookDelegate to the UI thread</param>
+		/// <param name="hookDelegate">A delegate which gets called as soon as the transition did complete</param>
+		public TransitionDefinition HookOnCompletionInUiThread(SynchronizationContext synchronizationContext, Action hookDelegate)
+		{
+			if (hookDelegate is object)
+				_completionHook = () => synchronizationContext.Post(_ => hookDelegate.Invoke(), null);
+			else
+				_completionHook = null;
+
 			return this;
 		}
 

@@ -201,7 +201,7 @@
 			this.cmdSwap.Name = "cmdSwap";
 			this.cmdSwap.Size = new System.Drawing.Size(124, 52);
 			this.cmdSwap.TabIndex = 16;
-			this.cmdSwap.Text = "<< Swap";
+			this.cmdSwap.Text = "« Swap";
 			this.cmdSwap.UseVisualStyleBackColor = true;
 			this.cmdSwap.Click += new System.EventHandler(this.cmdSwap_Click);
 			// 
@@ -269,7 +269,7 @@
 			this.cmdMore.Name = "cmdMore";
 			this.cmdMore.Size = new System.Drawing.Size(120, 52);
 			this.cmdMore.TabIndex = 21;
-			this.cmdMore.Text = "More >>";
+			this.cmdMore.Text = "More »";
 			this.cmdMore.UseVisualStyleBackColor = true;
 			this.cmdMore.Click += new System.EventHandler(this.cmdMore_Click);
 			// 

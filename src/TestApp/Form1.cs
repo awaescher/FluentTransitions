@@ -4,6 +4,7 @@ using FluentTransitions;
 using System.Drawing;
 using System.Collections.Generic;
 using FluentTransitions.Methods;
+using System.Threading;
 
 namespace TestApp
 {
@@ -68,8 +69,8 @@ namespace TestApp
 			// first half of the animation, and decelerates during the second half.
 
 			Transition
-				.With(controlOnScreen, "Left", -1 * controlOnScreen.Width)
-				.With(controlOffScreen, "Left", GROUP_BOX_LEFT)
+				.With(controlOnScreen, nameof(Left), -1 * controlOnScreen.Width)
+				.With(controlOffScreen, nameof(Left), GROUP_BOX_LEFT)
 				.EaseInEaseOut(TimeSpan.FromSeconds(1));
 		}
 
@@ -171,10 +172,10 @@ namespace TestApp
 
 			// We create a transition to animate all four properties at the same time...
 			Transition
-				.With(lblTextTransition1, "Text", text1)
-				.With(lblTextTransition1, "ForeColor", color1)
-				.With(lblTextTransition2, "Text", text2)
-				.With(lblTextTransition2, "ForeColor", color2)
+				.With(lblTextTransition1, nameof(Text), text1)
+				.With(lblTextTransition1, nameof(ForeColor), color1)
+				.With(lblTextTransition2, nameof(Text), text2)
+				.With(lblTextTransition2, nameof(ForeColor), color2)
 				.EaseInEaseOut(TimeSpan.FromSeconds(1));
 		}
 
@@ -198,15 +199,15 @@ namespace TestApp
 			// We either show more screen or less screen depending on the current state.
 			// We find out whether we need to make the screen wider or narrower...
 			int formWidth;
-			if (cmdMore.Text == "More >>")
+			if (cmdMore.Text == "More »")
 			{
 				formWidth = 984;
-				cmdMore.Text = "<< Less";
+				cmdMore.Text = "« Less";
 			}
 			else
 			{
 				formWidth = 452;
-				cmdMore.Text = "More >>";
+				cmdMore.Text = "More »";
 			}
 
 			// We animate it with an ease-in-ease-out transition...
@@ -260,16 +261,19 @@ namespace TestApp
 			// to its starting position as the second item in the chain. The second 
 			// transition starts as soon as the first is complete...
 
-			var transition1 = Transition
-				.With(cmdDropAndBounce, "Left", cmdDropAndBounce.Left + 400)
-				.Build(new Linear(TimeSpan.FromSeconds(2)));
+			var originalText = cmdDropAndBounce.Text;
 
-			var transition2 = Transition
-				.With(cmdDropAndBounce, "Top", 19)
-				.With(cmdDropAndBounce, "Left", 6)
-				.Build(new EaseInEaseOut(TimeSpan.FromSeconds(2)));
-
-			Transition.RunChain(transition1, transition2);
+			Transition.RunChain(
+				Transition
+					.With(cmdDropAndBounce, nameof(Left), cmdDropAndBounce.Left + 400)
+					.HookOnCompletionInUiThread(SynchronizationContext.Current, () => cmdDropAndBounce.Text = "Going home ...")
+					.Build(new Linear(TimeSpan.FromSeconds(2))),
+				Transition
+					.With(cmdDropAndBounce, nameof(Top), 19)
+					.With(cmdDropAndBounce, nameof(Left), 6)
+					.HookOnCompletionInUiThread(SynchronizationContext.Current, () => cmdDropAndBounce.Text = originalText)
+					.Build(new Linear(TimeSpan.FromSeconds(2)))
+				);
 		}
 	}
 }
