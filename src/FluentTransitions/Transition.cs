@@ -132,7 +132,7 @@ namespace FluentTransitions
 				throw new InvalidOperationException($"Transition does not handle properties of type: {propertyType}");
 
 			// We can only transition properties that are both getable and setable...
-			if (propertyInfo.CanRead == false || propertyInfo.CanWrite == false)
+			if (!propertyInfo.CanRead || !propertyInfo.CanWrite)
 				throw new InvalidOperationException($"Property is not both getable and setable: {propertyName}");
 
 			var managedType = _mapManagedTypes[propertyType];
@@ -222,7 +222,7 @@ namespace FluentTransitions
 				object value = info.ManagedType.GetIntermediateValue(info.StartValue, info.EndValue, percentage);
 
 				// We set it...
-				var args = new PropertyUpdateArgs(info.Target, info.PropertyInfo, value);
+				var args = new PropertyUpdateEventArgs(info.Target, info.PropertyInfo, value);
 				SetProperty(this, args);
 			}
 
@@ -242,7 +242,7 @@ namespace FluentTransitions
 		/// invokes itself on the GUI thread if the property is being invoked on a GUI 
 		/// object.
 		/// </summary>
-		private void SetProperty(object sender, PropertyUpdateArgs args)
+		private void SetProperty(object sender, PropertyUpdateEventArgs args)
 		{
 			try
 			{
@@ -281,7 +281,7 @@ namespace FluentTransitions
 					// the UI a chance to process the update. So what we do is to do the
 					// asynchronous BeginInvoke, but then wait (with a short timeout) for
 					// it to complete.
-					var asyncResult = invokeTarget.BeginInvoke(new EventHandler<PropertyUpdateArgs>(SetProperty), new object[] { sender, args });
+					var asyncResult = invokeTarget.BeginInvoke(new EventHandler<PropertyUpdateEventArgs>(SetProperty), new object[] { sender, args });
 					asyncResult.AsyncWaitHandle.WaitOne(50);
 				}
 				else
@@ -290,7 +290,7 @@ namespace FluentTransitions
 					args.PropertyInfo.SetValue(args.Target, args.Value, null);
 				}
 			}
-			catch (Exception)
+			catch
 			{
 				// We silently catch any exceptions. These could be things like 
 				// bounds exceptions when setting properties.
@@ -351,9 +351,9 @@ namespace FluentTransitions
 		}
 
 		// Event args used for the event we raise when updating a property...
-		private class PropertyUpdateArgs : EventArgs
+		private class PropertyUpdateEventArgs : EventArgs
 		{
-			public PropertyUpdateArgs(object t, PropertyInfo pi, object v)
+			public PropertyUpdateEventArgs(object t, PropertyInfo pi, object v)
 			{
 				Target = t;
 				PropertyInfo = pi;

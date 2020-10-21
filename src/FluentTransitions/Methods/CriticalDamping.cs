@@ -27,7 +27,7 @@ namespace FluentTransitions.Methods
 		public CriticalDamping(int duration)
 		{
 			if (duration <= 0)
-				throw new ArgumentOutOfRangeException("Transition time must be greater than zero.");
+				throw new ArgumentOutOfRangeException(nameof(duration), "Transition time must be greater than zero.");
 			
 			_duration = duration;
 		}

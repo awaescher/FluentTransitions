@@ -6,7 +6,7 @@ namespace FluentTransitions
 	/// <summary>
 	/// A class holding static utility functions.
 	/// </summary>
-	internal class Utility
+	internal static class Utility
 	{
 		/// <summary>
 		/// Returns the value of the property passed in.
@@ -130,7 +130,7 @@ namespace FluentTransitions
 						target.BeginInvoke(handler, new object[] { sender, args });
 					}
 				}
-				catch (Exception)
+				catch
 				{
 					// The event handler may have been detached while processing the events.
 					// We just ignore this and invoke the remaining handlers.
