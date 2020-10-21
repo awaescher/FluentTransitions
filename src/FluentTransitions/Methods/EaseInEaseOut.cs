@@ -8,18 +8,28 @@ namespace FluentTransitions.Methods
 	/// </summary>
 	public class EaseInEaseOut : IMethod
 	{
-		private readonly double _transitionTime = 0.0;
+		private readonly double _duration = 0.0;
 
 		/// <summary>
-		/// Constructor. You pass in the time that the transition 
-		/// will take (in milliseconds).
+		/// Alters the property values in an ease-in-ease-out transition.
+		/// This accelerates during the first half of the transition, and then decelerates during the second half.
 		/// </summary>
-		public EaseInEaseOut(int transitionTime)
+		/// <param name="duration">The duration until the properties should have reached their destination values</param>
+		public EaseInEaseOut(TimeSpan duration) : this((int)duration.TotalMilliseconds)
 		{
-			if (transitionTime <= 0)
+		}
+
+		/// <summary>
+		/// Alters the property values in an ease-in-ease-out transition.
+		/// This accelerates during the first half of the transition, and then decelerates during the second half.
+		/// </summary>
+		/// <param name="duration">The duration in milliseconds until the properties should have reached their destination values</param>
+		public EaseInEaseOut(int duration)
+		{
+			if (duration <= 0)
 				throw new ArgumentOutOfRangeException("Transition time must be greater than zero.");
 			
-			_transitionTime = transitionTime;
+			_duration = duration;
 		}
 
 		/// <summary>
@@ -32,7 +42,7 @@ namespace FluentTransitions.Methods
 		public void OnTimer(int time, out double percentage, out bool completed)
 		{
 			// We find the percentage time elapsed...
-			double elapsed = time / _transitionTime;
+			double elapsed = time / _duration;
 			percentage = Utility.ConvertLinearToEaseInEaseOut(elapsed);
 
 			if (elapsed >= 1.0)

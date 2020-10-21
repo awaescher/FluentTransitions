@@ -8,18 +8,26 @@ namespace FluentTransitions.Methods
 	/// </summary>
 	public class Deceleration : IMethod
 	{
-		private readonly double _transitionTime = 0.0;
+		private readonly double _duration = 0.0;
 
 		/// <summary>
-		/// Constructor. You pass in the time that the transition 
-		/// will take (in milliseconds).
+		/// Alters the property values starting from a high speed and decelerating to zero by the end of the transition.
 		/// </summary>
-		public Deceleration(int transitionTime)
+		/// <param name="duration">The duration until the properties should have reached their destination values</param>
+		public Deceleration(TimeSpan duration) : this((int)duration.TotalMilliseconds)
 		{
-			if (transitionTime <= 0)
+		}
+
+		/// <summary>
+		/// Alters the property values starting from a high speed and decelerating to zero by the end of the transition.
+		/// </summary>
+		/// <param name="duration">The duration in milliseconds until the properties should have reached their destination values</param>
+		public Deceleration(int duration)
+		{
+			if (duration <= 0)
 				throw new ArgumentOutOfRangeException("Transition time must be greater than zero.");
 			
-			_transitionTime = transitionTime;
+			_duration = duration;
 		}
 
 		/// <summary>
@@ -33,7 +41,7 @@ namespace FluentTransitions.Methods
 		public void OnTimer(int time, out double percentage, out bool completed)
 		{
 			// We find the percentage time elapsed...
-			double elapsed = time / _transitionTime;
+			double elapsed = time / _duration;
 			percentage = elapsed * (2.0 - elapsed);
 			if (elapsed >= 1.0)
 			{

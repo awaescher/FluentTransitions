@@ -4,8 +4,7 @@ using System.Collections.Generic;
 namespace FluentTransitions.Methods
 {
 	/// <summary>
-	/// Allows the creation of user-defined transition methods.
-	/// Specify these as a list of transition elements.
+	/// Allows the creation of user-defined transition methods, specified by a list of individual transition elements.
 	/// 
 	/// Each of these defines: 
 	/// End time, End value, Interpolation method
@@ -43,7 +42,7 @@ namespace FluentTransitions.Methods
 		private IList<TransitionElement> _elements = null;
 
 		// The total transition time...
-		private double _transitionTime = 0.0;
+		private double _duration = 0.0;
 
 		// The element that we are currently in (i.e. the current time within this element)...
 		private int _currentElement = 0;
@@ -56,21 +55,31 @@ namespace FluentTransitions.Methods
 		}
 
 		/// <summary>
-		/// Constructor. You pass in the list of TransitionElements and the total time
-		/// (in milliseconds) for the transition.
+		/// Allows the creation of user-defined transition methods, specified by a list of individual transition elements.
 		/// </summary>
-		public UserDefined(IList<TransitionElement> elements, int transitionTime)
+		/// <param name="elements">The elements to process during the transition</param>
+		/// <param name="duration">The duration until the properties should have reached their destination values</param>
+		public UserDefined(IList<TransitionElement> elements, TimeSpan duration) : this(elements, (int)duration.TotalMilliseconds)
 		{
-			Setup(elements, transitionTime);
+		}
+
+		/// <summary>
+		/// Allows the creation of user-defined transition methods, specified by a list of individual transition elements.
+		/// </summary>
+		/// <param name="elements">The elements to process during the transition</param>
+		/// <param name="duration">The duration in milliseconds until the properties should have reached their destination values</param>
+		public UserDefined(IList<TransitionElement> elements, int duration)
+		{
+			Setup(elements, duration);
 		}
 
 		/// <summary>
 		/// Sets up the transitions. 
 		/// </summary>
-		public void Setup(IList<TransitionElement> elements, int transitionTime)
+		public void Setup(IList<TransitionElement> elements, int duration)
 		{
 			_elements = elements;
-			_transitionTime = transitionTime;
+			_duration = duration;
 
 			// We check that the elements list has some members...
 			if (elements?.Count == 0)
@@ -82,7 +91,7 @@ namespace FluentTransitions.Methods
 		/// </summary>
 		public void OnTimer(int time, out double percentage, out bool completed)
 		{
-			double transitionTimeFraction = time / _transitionTime;
+			double transitionTimeFraction = time / _duration;
 
 			// We find the information for the element that we are currently processing...
 			GetElementInfo(transitionTimeFraction, out double elementStartTime, out double elementEndTime, out double elementStartValue, out double elementEndValue, out InterpolationMethod interpolationMethod);
@@ -122,7 +131,7 @@ namespace FluentTransitions.Methods
 			percentage = Utility.Interpolate(elementStartValue, elementEndValue, elementDistance);
 
 			// Has the transition completed?
-			if (time >= _transitionTime)
+			if (time >= _duration)
 			{
 				// The transition has completed, so we make sure that
 				// it is at its final value...

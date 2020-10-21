@@ -120,8 +120,7 @@ namespace FluentTransitions
 		}
 
 		/// <summary>
-		/// Allows the creation of user-defined transition methods.
-		/// Specify these as a list of transition elements.
+		/// Allows the creation of user-defined transition methods, specified by a list of individual transition elements.
 		/// 
 		/// Each of these defines: 
 		/// End time, End value, Interpolation method
