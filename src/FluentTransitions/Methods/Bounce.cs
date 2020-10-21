@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace FluentTransitions.Methods
 {
@@ -10,9 +11,20 @@ namespace FluentTransitions.Methods
 	public class Bounce : UserDefined
 	{
 		/// <summary>
-		/// Constructor. You pass in the total time taken for the bounce.
+		/// Bounces the property values to their destination values and back to the original ones.
+		/// They are accelerated to the destination and then decelerated back as if being dropped with gravity and bouncing back against gravity.
 		/// </summary>
-		public Bounce(int transitionTime)
+		/// <param name="duration">The duration until the properties should have reached their destination values</param>
+		public Bounce(TimeSpan duration) : this((int)duration.TotalMilliseconds)
+		{
+		}
+
+		/// <summary>
+		/// Bounces the property values to their destination values and back to the original ones.
+		/// They are accelerated to the destination and then decelerated back as if being dropped with gravity and bouncing back against gravity.
+		/// </summary>
+		/// <param name="duration">The duration in milliseconds until the properties should have reached their destination values</param>
+		public Bounce(int duration)
 		{
 			// We create a custom "user-defined" transition to do the work...
 			var elements = new List<TransitionElement>
@@ -20,7 +32,7 @@ namespace FluentTransitions.Methods
 				new TransitionElement(50, 100, InterpolationMethod.Accleration),
 				new TransitionElement(100, 0, InterpolationMethod.Deceleration)
 			};
-			base.Setup(elements, transitionTime);
+			base.Setup(elements, duration);
 		}
 	}
 }

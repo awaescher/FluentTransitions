@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace FluentTransitions.Methods
 {
@@ -10,9 +11,20 @@ namespace FluentTransitions.Methods
 	public class Flash : UserDefined
 	{
 		/// <summary>
-		/// You specify the number of bounces and the time taken for each bounce.
+		/// Flashes the property values a specified number of times, ending up by reverting them to their initial values.
 		/// </summary>
-		public Flash(int numberOfFlashes, int flashTime)
+		/// <param name="numberOfFlashes">The number of flashes to animate</param>
+		/// <param name="durationOfEachFlash">The duration of each flash</param>
+		public Flash(int numberOfFlashes, TimeSpan durationOfEachFlash) : this(numberOfFlashes, (int)durationOfEachFlash.TotalMilliseconds)
+		{ 
+		}
+
+		/// <summary>
+		/// Flashes the property values a specified number of times, ending up by reverting them to their initial values.
+		/// </summary>
+		/// <param name="numberOfFlashes">The number of flashes to animate</param>
+		/// <param name="durationOfEachFlash">The duration of each flash in milliseconds</param>
+		public Flash(int numberOfFlashes, int durationOfEachFlash)
 		{
 			// This class is derived from the user-defined transition type.
 			// Here we set up a custom "user-defined" transition for the 
@@ -32,7 +44,7 @@ namespace FluentTransitions.Methods
 				elements.Add(new TransitionElement(flashEndTime, 0, InterpolationMethod.EaseInEaseOut));
 			}
 
-			base.Setup(elements, flashTime * numberOfFlashes);
+			base.Setup(elements, durationOfEachFlash * numberOfFlashes);
 		}
 	}
 }

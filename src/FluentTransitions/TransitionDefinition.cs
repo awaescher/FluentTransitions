@@ -1,6 +1,8 @@
 ﻿using FluentTransitions.Methods;
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace FluentTransitions
 {
@@ -10,6 +12,7 @@ namespace FluentTransitions
 	public class TransitionDefinition
 	{
 		private readonly List<TargetPropertyDestination> _targetPropertyDestinations = new List<TargetPropertyDestination>();
+		private Action _completionHook;
 
 		/// <summary>
 		/// Includes a target object and interpolates its property value to the destination value
@@ -26,6 +29,47 @@ namespace FluentTransitions
 				PropertyName = propertyName,
 				DestinationValue = destinationValue
 			});
+
+			return this;
+		}
+
+
+		/// <summary>
+		/// Defines a hook that gets called as soon as the transition completes
+		/// </summary>
+		/// <param name="hookDelegate">A delegate which gets called as soon as the transition did complete</param>
+		public TransitionDefinition HookOnCompletion(Action hookDelegate)
+		{
+			_completionHook = hookDelegate;
+			return this;
+		}
+
+		/// <summary>
+		/// Defines a hook that gets called as soon as the transition completes
+		/// </summary>
+		/// <param name="controlToInvoke">Any control to be used to invoke the hookDelegate to the UI thread</param>
+		/// <param name="hookDelegate">A delegate which gets called as soon as the transition did complete</param>
+		public TransitionDefinition HookOnCompletionInUiThread(Control controlToInvoke, Action hookDelegate)
+		{
+			if (hookDelegate is object)
+				_completionHook = () => controlToInvoke.BeginInvoke((Action)(() => hookDelegate.Invoke()));
+			else
+				_completionHook = null;
+
+			return this;
+		}
+
+		/// <summary>
+		/// Defines a hook that gets called as soon as the transition completes
+		/// </summary>
+		/// <param name="synchronizationContext">The synchronization context used to invoke the hookDelegate to the UI thread</param>
+		/// <param name="hookDelegate">A delegate which gets called as soon as the transition did complete</param>
+		public TransitionDefinition HookOnCompletionInUiThread(SynchronizationContext synchronizationContext, Action hookDelegate)
+		{
+			if (hookDelegate is object)
+				_completionHook = () => synchronizationContext.Post(_ => hookDelegate.Invoke(), null);
+			else
+				_completionHook = null;
 
 			return this;
 		}
@@ -108,8 +152,7 @@ namespace FluentTransitions
 		}
 
 		/// <summary>
-		/// Allows the creation of user-defined transition methods.
-		/// Specify these as a list of transition elements.
+		/// Allows the creation of user-defined transition methods, specified by a list of individual transition elements.
 		/// 
 		/// Each of these defines: 
 		/// End time, End value, Interpolation method
@@ -167,6 +210,17 @@ namespace FluentTransitions
 
 			foreach (var item in _targetPropertyDestinations)
 				transition.Add(item.Target, item.PropertyName, item.DestinationValue);
+
+			if (_completionHook is object)
+			{
+				void SelfRemovingCompletionHandler(object s, EventArgs e)
+				{
+					transition.TransitionCompleted -= SelfRemovingCompletionHandler;
+					_completionHook.Invoke();
+				}
+
+				transition.TransitionCompleted += SelfRemovingCompletionHandler;
+			}
 
 			return transition;
 		}

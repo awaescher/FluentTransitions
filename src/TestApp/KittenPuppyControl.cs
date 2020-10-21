@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using FluentTransitions;
-using FluentTransitions.Methods;
 
 namespace TestApp
 {
@@ -47,10 +46,10 @@ namespace TestApp
 			// We perform the transition which moves the active image off the
 			// screen, and the inactive one onto the screen...
 			Transition
-				.With(_inactivePicture, "Left", 0)
-				.With(_inactivePicture, "Top", 0)
-				.With(_activePicture, "Left", destinationLeft)
-				.With(_activePicture, "Top", destinationTop)
+				.With(_inactivePicture, nameof(Left), 0)
+				.With(_inactivePicture, nameof(Top), 0)
+				.With(_activePicture, nameof(Left), destinationLeft)
+				.With(_activePicture, nameof(Top), destinationTop)
 				.EaseInEaseOut(TimeSpan.FromSeconds(1));
 
 			// We swap over which image is active and inactive for next time

@@ -41,19 +41,19 @@ This code animates the movement of two buttons while it fades out the whole form
 Some effects might require multiple transitions to be executed sequentially. FluentTransitions provides a concept called "Chaining". To use it, simply build your transitions and run them with `Transition.RunChain(...)`:
 
 ```csharp
-var t1 = Transition
-    .With(button1, nameof(Left), 300)
-    .With(button2, nameof(Top), 200)
-    .Build(new EaseInEaseOut(500));
-    
-var t2 = Transition
-    .With(Form1, nameof(Opacity), 0.0)
-    .Build(new Accelerate(500));
-    
-Transition.RunChain(t1, t2);
+Transition.RunChain
+(
+    Transition
+        .With(button1, nameof(Left), 300)
+        .With(button2, nameof(Top), 200)
+        .Build(new Linear(TimeSpan.FromSeconds(1))),
+    Transition
+        .With(Form1, nameof(Opacity), 0.0)
+        .Build(new Linear(TimeSpan.FromSeconds(1)))
+);
 ```
 
-This code animates the movement of two buttons first. Once this is done, it fades out the whole form. Both transitions are completed within one second.
+This code animates the movement of two buttons first. Once this is done, it fades out the whole form. Both transitions are completed within two seconds.
 
 ### Completion
 

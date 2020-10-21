@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace FluentTransitions.Methods
 {
@@ -10,9 +11,20 @@ namespace FluentTransitions.Methods
 	public class ThrowAndCatch : UserDefined
 	{
 		/// <summary>
-		/// Constructor. You pass in the total time taken for the bounce.
+		/// Bounces the property values to their destination values and back to the original ones.
+		/// They are decelerated to the destination and then acclerated back as if being thrown against gravity and then descending back with gravity.
 		/// </summary>
-		public ThrowAndCatch(int transitionTime)
+		/// <param name="duration">The duration until the properties should have reached their destination values</param>
+		public ThrowAndCatch(TimeSpan duration) : this((int)duration.TotalMilliseconds)
+		{
+		}
+
+		/// <summary>
+		/// Bounces the property values to their destination values and back to the original ones.
+		/// They are decelerated to the destination and then acclerated back as if being thrown against gravity and then descending back with gravity.
+		/// </summary>
+		/// <param name="duration">The duration in milliseconds until the properties should have reached their destination values</param>
+		public ThrowAndCatch(int duration)
 		{
 			// We create a custom "user-defined" transition to do the work...
 			var elements = new List<TransitionElement>
@@ -20,7 +32,7 @@ namespace FluentTransitions.Methods
 				new TransitionElement(50, 100, InterpolationMethod.Deceleration),
 				new TransitionElement(100, 0, InterpolationMethod.Accleration)
 			};
-			base.Setup(elements, transitionTime);
+			base.Setup(elements, duration);
 		}
 	}
 }

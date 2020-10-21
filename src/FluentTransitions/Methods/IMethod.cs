@@ -1,5 +1,8 @@
 ﻿namespace FluentTransitions
 {
+	/// <summary>
+	/// Interface for all transition methods
+	/// </summary>
 	public interface IMethod
 	{
 		/// <summary>
@@ -17,6 +20,9 @@
 		/// You should return (in an out parameter) whether the transition has completed.
 		/// (This may not be at the same time as the percentage has moved to 100%.)
 		/// </summary>
+		/// <param name="time">The time that has passed</param>
+		/// <param name="percentage">Returns the percentage how far the transition has come</param>
+		/// <param name="completed">Returns whether the transition has completed or not</param>
 		void OnTimer(int time, out double percentage, out bool completed);
 	}
 }

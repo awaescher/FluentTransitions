@@ -41,7 +41,7 @@ namespace FluentTransitions
 		/// <summary>
 		/// Event raised when the transition hass completed.
 		/// </summary>
-		public event EventHandler<Args> TransitionCompletedEvent;
+		public event EventHandler<EventArgs> TransitionCompleted;
 
 		// Helps us find the time interval from the time the transition starts to each timer tick...
 		private readonly Stopwatch _stopwatch = new Stopwatch();
@@ -90,7 +90,7 @@ namespace FluentTransitions
 		/// <summary>
 		/// Creates and immediately runs a transition on the property passed in.
 		/// </summary>
-		public static void Run(object target, string propertyName, object destinationValue, IMethod transitionMethod)
+		internal static void Run(object target, string propertyName, object destinationValue, IMethod transitionMethod)
 		{
 			var transition = new Transition(transitionMethod);
 			transition.Add(target, propertyName, destinationValue);
@@ -101,7 +101,7 @@ namespace FluentTransitions
 		/// Sets the property passed in to the initial value passed in, then creates and 
 		/// immediately runs a transition on it.
 		/// </summary>
-		public static void Run(object target, string propertyName, object initialValue, object destinationValue, IMethod transitionMethod)
+		internal static void Run(object target, string propertyName, object initialValue, object destinationValue, IMethod transitionMethod)
 		{
 			Utility.SetValue(target, propertyName, initialValue);
 			Run(target, propertyName, destinationValue, transitionMethod);
@@ -132,7 +132,7 @@ namespace FluentTransitions
 				throw new InvalidOperationException($"Transition does not handle properties of type: {propertyType}");
 
 			// We can only transition properties that are both getable and setable...
-			if (propertyInfo.CanRead == false || propertyInfo.CanWrite == false)
+			if (!propertyInfo.CanRead || !propertyInfo.CanWrite)
 				throw new InvalidOperationException($"Property is not both getable and setable: {propertyName}");
 
 			var managedType = _mapManagedTypes[propertyType];
@@ -222,7 +222,7 @@ namespace FluentTransitions
 				object value = info.ManagedType.GetIntermediateValue(info.StartValue, info.EndValue, percentage);
 
 				// We set it...
-				var args = new PropertyUpdateArgs(info.Target, info.PropertyInfo, value);
+				var args = new PropertyUpdateEventArgs(info.Target, info.PropertyInfo, value);
 				SetProperty(this, args);
 			}
 
@@ -233,7 +233,7 @@ namespace FluentTransitions
 				_stopwatch.Stop();
 
 				// We raise an event to notify any observers that the transition has completed...
-				Utility.RaiseEvent(TransitionCompletedEvent, this, new Args());
+				Utility.RaiseEvent(TransitionCompleted, this, EventArgs.Empty);
 			}
 		}
 
@@ -242,7 +242,7 @@ namespace FluentTransitions
 		/// invokes itself on the GUI thread if the property is being invoked on a GUI 
 		/// object.
 		/// </summary>
-		private void SetProperty(object sender, PropertyUpdateArgs args)
+		private void SetProperty(object sender, PropertyUpdateEventArgs args)
 		{
 			try
 			{
@@ -281,7 +281,7 @@ namespace FluentTransitions
 					// the UI a chance to process the update. So what we do is to do the
 					// asynchronous BeginInvoke, but then wait (with a short timeout) for
 					// it to complete.
-					var asyncResult = invokeTarget.BeginInvoke(new EventHandler<PropertyUpdateArgs>(SetProperty), new object[] { sender, args });
+					var asyncResult = invokeTarget.BeginInvoke(new EventHandler<PropertyUpdateEventArgs>(SetProperty), new object[] { sender, args });
 					asyncResult.AsyncWaitHandle.WaitOne(50);
 				}
 				else
@@ -290,7 +290,7 @@ namespace FluentTransitions
 					args.PropertyInfo.SetValue(args.Target, args.Value, null);
 				}
 			}
-			catch (Exception)
+			catch
 			{
 				// We silently catch any exceptions. These could be things like 
 				// bounds exceptions when setting properties.
@@ -350,17 +350,10 @@ namespace FluentTransitions
 			}
 		}
 
-		/// <summary>
-		/// Args passed with the TransitionCompletedEvent.
-		/// </summary>
-		public class Args : EventArgs
-		{
-		}
-
 		// Event args used for the event we raise when updating a property...
-		private class PropertyUpdateArgs : EventArgs
+		private class PropertyUpdateEventArgs : EventArgs
 		{
-			public PropertyUpdateArgs(object t, PropertyInfo pi, object v)
+			public PropertyUpdateEventArgs(object t, PropertyInfo pi, object v)
 			{
 				Target = t;
 				PropertyInfo = pi;
