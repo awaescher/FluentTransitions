@@ -63,14 +63,13 @@ Each transition raises an event once it is completed. This can be useful to run 
 var t1 = Transition
     .With(button1, nameof(Left), 300)
     .With(button2, nameof(Top), 200)
-    .Build(new EaseInEaseOut(500));
-    
-t1.TransitionCompletedEvent += (sender, args) => this.Close();
+    .HookOnCompletionInUiThread(SynchronizationContext.Current, () => this.Close())
+    .Build(new EaseInEaseOut(TimeSpan.FromSeconds(1)));
     
 Transition.Run(t1);
 ```
 
-> Prefer `Transition.RunChain()` to run animations after a prior animation did complete:
+> Prefer `Transition.RunChain()` to run animations sequentially.
 
 # More Samples
 
