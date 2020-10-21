@@ -90,7 +90,7 @@ namespace TestApp
 
 			Transition
 				.With(cmdBounceMe, nameof(Top), destination)
-				.Bounce(TimeSpan.FromSeconds(0.5));
+				.Bounce(TimeSpan.FromSeconds(1.5));
 		}
 
 		/// <summary>
@@ -272,7 +272,7 @@ namespace TestApp
 					.With(cmdDropAndBounce, nameof(Top), 19)
 					.With(cmdDropAndBounce, nameof(Left), 6)
 					.HookOnCompletionInUiThread(SynchronizationContext.Current, () => cmdDropAndBounce.Text = originalText)
-					.Build(new Linear(TimeSpan.FromSeconds(2)))
+					.Build(new Linear(TimeSpan.FromSeconds(1)))
 				);
 		}
 	}
