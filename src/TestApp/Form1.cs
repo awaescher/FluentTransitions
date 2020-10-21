@@ -86,7 +86,10 @@ namespace TestApp
 			// if against gravity).
 
 			int destination = gbBounce.Height - cmdBounceMe.Height;
-			Transition.Run(cmdBounceMe, "Top", destination, new Bounce(500));
+
+			Transition
+				.With(cmdBounceMe, nameof(Top), destination)
+				.Bounce(TimeSpan.FromSeconds(0.5));
 		}
 
 		/// <summary>
@@ -101,7 +104,9 @@ namespace TestApp
 			// decelerates to zero (as if against gravity) at the destination value. It 
 			// then accelerates the value (as if with gravity) back to the original value.
 
-			Transition.Run(cmdThrowAndCatch, "Top", 12, new ThrowAndCatch(1500));
+			Transition
+				.With(cmdThrowAndCatch, nameof(Top), 12)
+				.ThrowAndCatch(TimeSpan.FromSeconds(1.5));
 		}
 
 		/// <summary>
@@ -112,7 +117,9 @@ namespace TestApp
 			// The Flash transition animates the property to the destination value
 			// and back again. You specify how many flashes to show and the length
 			// of each flash...
-			Transition.Run(cmdFlashMe, "BackColor", Color.Pink, new Flash(2, 300));
+			Transition
+				.With(cmdFlashMe, nameof(BackColor), Color.Pink)
+				.Flash(2, TimeSpan.FromSeconds(0.3));
 		}
 
 		/// <summary>
@@ -178,7 +185,9 @@ namespace TestApp
 		{
 			// We alternate the form's background color...
 			var destination = (BackColor == BACKCOLOR_GRAY) ? BACKCOLOR_WHITE : BACKCOLOR_GRAY;
-			Transition.Run(this, "BackColor", destination, new Linear(1000));
+			Transition
+				.With(this, nameof(BackColor), destination)
+				.Linear(TimeSpan.FromSeconds(1));
 		}
 
 		/// <summary>
@@ -201,7 +210,9 @@ namespace TestApp
 			}
 
 			// We animate it with an ease-in-ease-out transition...
-			Transition.Run(this, "Width", formWidth, new EaseInEaseOut(1000));
+			Transition
+				.With(this, nameof(Width), formWidth)
+				.EaseInEaseOut(TimeSpan.FromSeconds(1));
 		}
 
 		/// <summary>
@@ -235,7 +246,10 @@ namespace TestApp
 			};
 
 			int destination = gbDropAndBounce.Height - cmdDropAndBounce.Height - 10;
-			Transition.Run(cmdDropAndBounce, "Top", destination, new UserDefined(elements, 2000));
+
+			Transition
+				.With(cmdDropAndBounce, nameof(Top), destination)
+				.UserDefined(elements, TimeSpan.FromSeconds(2));
 
 			// The transition above just animates the vertical bounce of the button, but not
 			// the left-to-right movement. This can't use the same transition, as otherwise the

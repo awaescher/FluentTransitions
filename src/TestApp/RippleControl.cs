@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using FluentTransitions;
-using FluentTransitions.Methods;
 
 namespace TestApp
 {
@@ -37,7 +36,11 @@ namespace TestApp
 			// We run a transition on each of the labels shown on the control.
 			// This means that we will be running 100 simulataneous transitions...
 			foreach (var info in _cellInfos)
-				Transition.Run(info.Control, "BackColor", Color.Pink, new Flash(1, info.TransitionInterval));
+			{
+				Transition
+					.With(info.Control, nameof(BackColor), Color.Pink)
+					.Flash(1, TimeSpan.FromMilliseconds(info.TransitionInterval));
+			}
 		}
 
 		/// <summary>

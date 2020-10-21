@@ -90,7 +90,7 @@ namespace FluentTransitions
 		/// <summary>
 		/// Creates and immediately runs a transition on the property passed in.
 		/// </summary>
-		public static void Run(object target, string propertyName, object destinationValue, IMethod transitionMethod)
+		internal static void Run(object target, string propertyName, object destinationValue, IMethod transitionMethod)
 		{
 			var transition = new Transition(transitionMethod);
 			transition.Add(target, propertyName, destinationValue);
@@ -101,7 +101,7 @@ namespace FluentTransitions
 		/// Sets the property passed in to the initial value passed in, then creates and 
 		/// immediately runs a transition on it.
 		/// </summary>
-		public static void Run(object target, string propertyName, object initialValue, object destinationValue, IMethod transitionMethod)
+		internal static void Run(object target, string propertyName, object initialValue, object destinationValue, IMethod transitionMethod)
 		{
 			Utility.SetValue(target, propertyName, initialValue);
 			Run(target, propertyName, destinationValue, transitionMethod);
