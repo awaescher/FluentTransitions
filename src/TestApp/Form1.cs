@@ -248,12 +248,12 @@ namespace TestApp
 
 			var transition1 = Transition
 				.With(cmdDropAndBounce, "Left", cmdDropAndBounce.Left + 400)
-				.Build(new Linear(2000));
+				.Build(new Linear(TimeSpan.FromSeconds(2)));
 
 			var transition2 = Transition
 				.With(cmdDropAndBounce, "Top", 19)
 				.With(cmdDropAndBounce, "Left", 6)
-				.Build(new EaseInEaseOut(2000));
+				.Build(new EaseInEaseOut(TimeSpan.FromSeconds(2)));
 
 			Transition.RunChain(transition1, transition2);
 		}

@@ -44,16 +44,16 @@ Some effects might require multiple transitions to be executed sequentially. Flu
 var t1 = Transition
     .With(button1, nameof(Left), 300)
     .With(button2, nameof(Top), 200)
-    .Build(new EaseInEaseOut(500));
+    .Build(new EaseInEaseOut(TimeSpan.FromSeconds(1)));
     
 var t2 = Transition
     .With(Form1, nameof(Opacity), 0.0)
-    .Build(new Accelerate(500));
+    .Build(new Accelerate(TimeSpan.FromSeconds(1)));
     
 Transition.RunChain(t1, t2);
 ```
 
-This code animates the movement of two buttons first. Once this is done, it fades out the whole form. Both transitions are completed within one second.
+This code animates the movement of two buttons first. Once this is done, it fades out the whole form. Both transitions are completed within two seconds.
 
 ### Completion
 
