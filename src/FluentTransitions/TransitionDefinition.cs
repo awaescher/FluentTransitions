@@ -10,6 +10,7 @@ namespace FluentTransitions
 	public class TransitionDefinition
 	{
 		private readonly List<TargetPropertyDestination> _targetPropertyDestinations = new List<TargetPropertyDestination>();
+		private Action _completionHook;
 
 		/// <summary>
 		/// Includes a target object and interpolates its property value to the destination value
@@ -27,6 +28,17 @@ namespace FluentTransitions
 				DestinationValue = destinationValue
 			});
 
+			return this;
+		}
+
+
+		/// <summary>
+		/// Defines a hook that gets called as soon as the transition completes
+		/// </summary>
+		/// <param name="hookDelegate"></param>
+		public TransitionDefinition HookOnCompletion(Action hookDelegate)
+		{
+			_completionHook = hookDelegate;
 			return this;
 		}
 
@@ -167,6 +179,17 @@ namespace FluentTransitions
 
 			foreach (var item in _targetPropertyDestinations)
 				transition.Add(item.Target, item.PropertyName, item.DestinationValue);
+
+			if (_completionHook is object)
+			{
+				void SelfRemovingCompletionHandler(object s, EventArgs e)
+				{
+					transition.TransitionCompleted -= SelfRemovingCompletionHandler;
+					_completionHook.Invoke();
+				}
+
+				transition.TransitionCompleted += SelfRemovingCompletionHandler;
+			}
 
 			return transition;
 		}

@@ -41,7 +41,7 @@ namespace FluentTransitions
 		/// <summary>
 		/// Event raised when the transition hass completed.
 		/// </summary>
-		public event EventHandler<Args> TransitionCompletedEvent;
+		public event EventHandler<EventArgs> TransitionCompleted;
 
 		// Helps us find the time interval from the time the transition starts to each timer tick...
 		private readonly Stopwatch _stopwatch = new Stopwatch();
@@ -233,7 +233,7 @@ namespace FluentTransitions
 				_stopwatch.Stop();
 
 				// We raise an event to notify any observers that the transition has completed...
-				Utility.RaiseEvent(TransitionCompletedEvent, this, new Args());
+				Utility.RaiseEvent(TransitionCompleted, this, EventArgs.Empty);
 			}
 		}
 
@@ -348,13 +348,6 @@ namespace FluentTransitions
 					ManagedType = ManagedType
 				};
 			}
-		}
-
-		/// <summary>
-		/// Args passed with the TransitionCompletedEvent.
-		/// </summary>
-		public class Args : EventArgs
-		{
 		}
 
 		// Event args used for the event we raise when updating a property...

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Timers;
 
 namespace FluentTransitions
@@ -71,7 +72,7 @@ namespace FluentTransitions
 				// We add the transition to the collection we manage, and 
 				// observe it so that we know when it has completed...
 				_transitions[transition] = true;
-				transition.TransitionCompletedEvent += OnTransitionCompleted;
+				transition.TransitionCompleted += OnTransitionCompleted;
 			}
 		}
 
@@ -156,11 +157,11 @@ namespace FluentTransitions
 		/// <summary>
 		/// Called when a transition has completed. 
 		/// </summary>
-		private void OnTransitionCompleted(object sender, Transition.Args e)
+		private void OnTransitionCompleted(object sender, EventArgs e)
 		{
 			// We stop observing the transition...
 			var transition = (Transition)sender;
-			transition.TransitionCompletedEvent -= OnTransitionCompleted;
+			transition.TransitionCompleted -= OnTransitionCompleted;
 
 			// We remove the transition from the collection we're managing...
 			lock (_lock)
