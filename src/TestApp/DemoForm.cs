@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using FluentTransitions;
 using System.Drawing;
@@ -27,6 +28,9 @@ namespace TestApp
 		private const string STRING_SHORT2 = "Come with me friday";
 		private const string STRING_LONG2 = "don't say maybe!";
 
+		private bool _moving = false;
+		private int _initialEasingButtonLeft;
+
 		/// <summary>
 		/// Constructor.
 		/// </summary>
@@ -34,7 +38,7 @@ namespace TestApp
 		{
 			InitializeComponent();
 
-			Width = MinimizedFormWidth;
+			Width = CollapsedFormWidth;
 		}
 
 		protected override void OnShown(EventArgs e)
@@ -42,12 +46,6 @@ namespace TestApp
 			base.OnShown(e);
 
 			_initialEasingButtonLeft = buttonAccelerate.Left;
-		}
-
-		protected override void OnShown(EventArgs e)
-		{
-			base.OnShown(e);
-
 			Center();
 		}
 
@@ -56,11 +54,6 @@ namespace TestApp
 			base.OnResizeEnd(e);
 
 			Center();
-
-			if (Width <= MinimizedFormWidth)
-				cmdMore.Text = "More »";
-			else
-				cmdMore.Text = "« Less";
 		}
 
 		private void Center()
@@ -74,7 +67,6 @@ namespace TestApp
 			{
 				BeginInvoke(new MethodInvoker(() =>
 				{
-
 					var area = Screen.FromControl(this).WorkingArea;
 					var targetX = (area.Width / 2) - (Width / 2);
 					var targetY = (area.Height / 2) - (Height / 2);
@@ -82,15 +74,18 @@ namespace TestApp
 					Transition
 						.With(this, nameof(Left), targetX)
 						.With(this, nameof(Top), targetY)
-						.HookOnCompletion(() => _moving = false)
+						.HookOnCompletionInUiThread(this, () =>
+						{
+							_moving = false;
+							if (Width <= CollapsedFormWidth)
+								cmdMore.Text = "More »";
+							else
+								cmdMore.Text = "« Less";
+						})
 						.Spring(TimeSpan.FromSeconds(0.75));
 				}));
 			});
 		}
-
-		private bool _moving = false;
-		private int _initialEasingButtonLeft;
-
 
 		/// <summary>
 		/// Called when the "Throw and Catch" button is pressed.
@@ -185,29 +180,21 @@ namespace TestApp
 			// We either show more screen or less screen depending on the current state.
 			// We find out whether we need to make the screen wider or narrower...
 			int formWidth;
-			if (Width > MinimizedFormWidth)
-			{
-				formWidth = MinimizedFormWidth;
-				cmdMore.Text = "« Less";
-			}
+			if (Width > CollapsedFormWidth)
+				formWidth = CollapsedFormWidth;
 			else
-			{
-				formWidth = groupBox1.Right + gpEasing.Left + gpEasing.Left;
-				cmdMore.Text = "More »";
-			}
+				formWidth = ExpandedFormWidth;
 			_moving = true;
 			// We animate it with an ease-in-ease-out transition...
 			Transition
 				.With(this, nameof(Width), formWidth)
-				.HookOnCompletion(() => 
+				.HookOnCompletion(() =>
 				{
 					_moving = false;
 					Center();
 				})
 				.Spring(TimeSpan.FromSeconds(1));
 		}
-
-		private int MinimizedFormWidth => gpEasing.Right + gpEasing.Left + ((Width - ClientSize.Width) / 1);
 
 		private void txtPassword_KeyDown(object sender, KeyEventArgs e)
 		{
@@ -221,13 +208,15 @@ namespace TestApp
 
 		private void buttonDemo_Click(object sender, EventArgs e)
 		{
-			if (buttonAccelerate.Left == _initialEasingButtonLeft)
-				Ease();
-			else
-				EaseBack();
-		}
+			var buttons = new[] { buttonAccelerate, buttonBounce, buttonCriticalDamp, buttonDecelerate, buttonEaseInEaseOut, buttonFlash, buttonLinear,
+				buttonThrowAndCatch, buttonBackEaseOut, buttonBounceEaseOut, buttonCircEaseOut, buttonCubicEaseOut, buttonElasticEaseOut, buttonExpoEaseOut,
+				buttonQuadEaseOut, buttonQuartEaseOut, buttonQuintEaseOut, buttonSineEaseOut };
 
-		private TimeSpan EaseDuration { get; } = TimeSpan.FromSeconds(1);
+			if (buttons.Any(b => b.Left != _initialEasingButtonLeft))
+				EaseBack();
+			else
+				Ease();
+		}
 
 		private void Ease()
 		{
@@ -403,5 +392,11 @@ namespace TestApp
 				.With(buttonSineEaseOut, nameof(Left), lblTargetLine.Left)
 				.EaseWithFunction(EasingFunctions.SineEaseOut, EaseDuration);
 		}
+
+		private TimeSpan EaseDuration { get; } = TimeSpan.FromSeconds(1);
+
+		private int CollapsedFormWidth => gpEasing.Right + gpEasing.Left + ((Width - ClientSize.Width) / 2);
+
+		private int ExpandedFormWidth => groupBox1.Right + gpEasing.Left + ((Width - ClientSize.Width) / 2);
 	}
 }

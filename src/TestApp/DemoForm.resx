@@ -117,4 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label5.Text" xml:space="preserve">
+    <value>For this demo, only the EaseOut functions are shown.
+However, each easing function is available as EaseIn, EaseOut, EaseInOut and EaseOutIn.
+
+To use Mauro's built-in easing functions, simpy use EaseWithFunction():
+
+Transition
+    .With(...)
+    .EaseWithFunction(EasingFunctions.YOURCHOICE, duration);</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>These are transitions implemented with easing functions. Easing functions are mathematical functions
+defining "how things change over time".
+
+Mauro Sampietro published an article on easing functions on CodeProject in 2014.
+
+FluentTransitions fully supports easing functions starting with version 2.0 and provides 
+Mauro's easing implementations as built-in functions (see below). It is also possible to use custom easings.</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>These are the animations of the original project Richard S. Shepherd uploaded to Google Code back in 2009.
+After using this project for a long time, I (Andreas Wäscher) decided to modernize and migrate it to .NET Standard 2.0.</value>
+  </data>
 </root>

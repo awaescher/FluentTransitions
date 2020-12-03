@@ -192,6 +192,15 @@ namespace FluentTransitions
 		}
 
 		/// <summary>
+		/// Interpolates values with EasingFunctions.BackEaseOut to mimic the behavior of a rubber band stopping a movement and pulling it back.
+		/// </summary>
+		/// <param name="duration">The duration until the properties should have reached their destination values</param>
+		public void Rubberband(TimeSpan duration)
+		{
+			BuildAndRun(new Rubberband(duration));
+		}
+
+		/// <summary>
 		/// Interpolates values with EasingFunctions.ElasticEaseOut to mimic the behavior of a loaded spring.
 		/// </summary>
 		/// <param name="duration">The duration until the properties should have reached their destination values</param>
