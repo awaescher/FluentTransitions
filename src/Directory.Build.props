@@ -1,7 +1,7 @@
 ﻿<Project>
   <PropertyGroup>
-    <Authors>Richard S. Shepherd, Andreas Wäscher</Authors>
-    <Owners>Richard S. Shepherd, Andreas Wäscher</Owners>
+    <Authors>Andreas Wäscher</Authors>
+    <Owners>Andreas Wäscher</Owners>
     <PackageIcon>FluentTransitions.png</PackageIcon>
     <RepositoryUrl>https://github.com/awaescher/FluentTransitions</RepositoryUrl>
     <RepositoryType>git</RepositoryType>

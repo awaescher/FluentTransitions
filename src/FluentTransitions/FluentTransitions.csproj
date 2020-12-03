@@ -3,10 +3,11 @@
 		<OutputType>Library</OutputType>
     <TargetFrameworks>net45;netcoreapp3.1</TargetFrameworks>
     <UseWindowsForms>true</UseWindowsForms>
-		<Description>FluentTransitions lets you create animated transitions of any property of user-interface elements in .NET. It provides an easy way to perform UI animations in a similar way to Apple's Core Animation library for iOS, iPadOS and macOS.
+		<Description>FluentTransitions lets you create animated transitions of any property of user-interface elements in .NET.
+It provides an easy way to perform UI animations in a similar way to Apple's Core Animation library for iOS, iPadOS and macOS.
 
 The app icon was made by Freepik from www.flaticon.com and is licensed by Creative Commons BY 3.0.</Description>
 		<PackageTags>Fluent;Transitions;Windows;Forms;WinForms;UI</PackageTags>
-		<Copyright>Richard S. Shepherd, Andreas Wäscher</Copyright>
+		<Copyright>Andreas Wäscher, Richard S. Shepherd, Mauro Sampietro</Copyright>
   </PropertyGroup>
 </Project>
