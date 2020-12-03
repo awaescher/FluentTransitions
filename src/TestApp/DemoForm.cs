@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using FluentTransitions;
 using System.Drawing;
 using System.Threading.Tasks;
+using FluentTransitions.Methods;
 
 namespace TestApp
 {
@@ -218,63 +219,39 @@ namespace TestApp
 			}
 		}
 
-		private void button1_Click(object sender, EventArgs e)
+		private void buttonDemo_Click(object sender, EventArgs e)
 		{
 			if (buttonAccelerate.Left == _initialEasingButtonLeft)
 				Ease();
 			else
 				EaseBack();
-
-			//Task.Run(async () => 
-			//{
-			//	await Task.Delay(TimeSpan.FromSeconds(3));
-			//	BeginInvoke((Action)(() => 
-			//	{
-			//		EaseBack();
-			//	}));
-			//});
 		}
+
+		private TimeSpan EaseDuration { get; } = TimeSpan.FromSeconds(1);
 
 		private void Ease()
 		{
-			var targetLeft = label2.Left;
-			var duration = TimeSpan.FromSeconds(1);
+			buttonAccelerate_Click(null, null);
+			buttonBounce_Click(null, null);
+			buttonCriticalDamp_Click(null, null);
+			buttonDecelerate_Click(null, null);
+			buttonEaseInEaseOut_Click(null, null);
+			buttonFlash_Click(null, null);
+			buttonLinear_Click(null, null);
+			buttonThrowAndCatch_Click(null, null);
 
-			Transition
-				.With(buttonAccelerate, nameof(Left), targetLeft)
-				.Accelerate(duration);
+			// easing functions 
 
-			Transition
-				.With(buttonBounce, nameof(Left), targetLeft)
-				.Bounce(duration);
-
-			Transition
-				.With(buttonCriticalDamp, nameof(Left), targetLeft)
-				.CriticalDamp(duration);
-
-			Transition
-				.With(buttonDecelerate, nameof(Left), targetLeft)
-				.Decelerate(duration);
-
-			Transition
-				.With(buttonEaseInEaseOut, nameof(Left), targetLeft)
-				.EaseInEaseOut(duration);
-
-			Transition
-				.With(buttonFlash, nameof(Left), targetLeft)
-				.Flash(5, TimeSpan.FromMilliseconds(duration.TotalMilliseconds / 5));
-
-			Transition
-				.With(buttonLinear, nameof(Left), targetLeft)
-				.Linear(duration);
-
-			Transition
-				.With(buttonSpring, nameof(Left), targetLeft)
-				.Spring(duration);
-
-			Transition
-				.With(buttonThrowAndCatch, nameof(Left), targetLeft)
-				.ThrowAndCatch(duration);
+			buttonBackEaseOut_Click(null, null);
+			buttonBounceEaseOut_Click(null, null);
+			buttonCircEaseOut_Click(null, null);
+			buttonCubicEaseOut_Click(null, null);
+			buttonElasticEaseOut_Click(null, null);
+			buttonExpoEaseOut_Click(null, null);
+			buttonQuadEaseOut_Click(null, null);
+			buttonQuartEaseOut_Click(null, null);
+			buttonQuintEaseOut_Click(null, null);
+			buttonSineEaseOut_Click(null, null);
 		}
 
 		private void EaseBack()
@@ -287,10 +264,144 @@ namespace TestApp
 				.With(buttonEaseInEaseOut, nameof(Left), _initialEasingButtonLeft)
 				.With(buttonFlash, nameof(Left), _initialEasingButtonLeft)
 				.With(buttonLinear, nameof(Left), _initialEasingButtonLeft)
-				.With(buttonSpring, nameof(Left), _initialEasingButtonLeft)
 				.With(buttonThrowAndCatch, nameof(Left), _initialEasingButtonLeft)
-				.EaseInEaseOut(TimeSpan.FromSeconds(1));
+				.With(buttonBackEaseOut, nameof(Left), _initialEasingButtonLeft)
+				.With(buttonBounceEaseOut, nameof(Left), _initialEasingButtonLeft)
+				.With(buttonCircEaseOut, nameof(Left), _initialEasingButtonLeft)
+				.With(buttonCubicEaseOut, nameof(Left), _initialEasingButtonLeft)
+				.With(buttonElasticEaseOut, nameof(Left), _initialEasingButtonLeft)
+				.With(buttonExpoEaseOut, nameof(Left), _initialEasingButtonLeft)
+				.With(buttonQuadEaseOut, nameof(Left), _initialEasingButtonLeft)
+				.With(buttonQuartEaseOut, nameof(Left), _initialEasingButtonLeft)
+				.With(buttonQuintEaseOut, nameof(Left), _initialEasingButtonLeft)
+				.With(buttonSineEaseOut, nameof(Left), _initialEasingButtonLeft)
+				.EaseInEaseOut(EaseDuration);
 		}
 
+		private void buttonAccelerate_Click(object sender, EventArgs e)
+		{
+			Transition
+				.With(buttonAccelerate, nameof(Left), lblTargetLine.Left)
+				.Accelerate(EaseDuration);
+		}
+
+		private void buttonBounce_Click(object sender, EventArgs e)
+		{
+			Transition
+				.With(buttonBounce, nameof(Left), lblTargetLine.Left)
+				.Bounce(EaseDuration);
+		}
+
+		private void buttonCriticalDamp_Click(object sender, EventArgs e)
+		{
+			Transition
+				.With(buttonCriticalDamp, nameof(Left), lblTargetLine.Left)
+				.CriticalDamp(EaseDuration);
+		}
+
+		private void buttonDecelerate_Click(object sender, EventArgs e)
+		{
+			Transition
+				.With(buttonDecelerate, nameof(Left), lblTargetLine.Left)
+				.Decelerate(EaseDuration);
+		}
+
+		private void buttonEaseInEaseOut_Click(object sender, EventArgs e)
+		{
+			Transition
+				.With(buttonEaseInEaseOut, nameof(Left), lblTargetLine.Left)
+				.EaseInEaseOut(EaseDuration);
+		}
+
+		private void buttonFlash_Click(object sender, EventArgs e)
+		{
+			Transition
+				.With(buttonFlash, nameof(Left), lblTargetLine.Left)
+				.Flash(2, TimeSpan.FromMilliseconds(EaseDuration.TotalMilliseconds / 5));
+		}
+
+		private void buttonLinear_Click(object sender, EventArgs e)
+		{
+			Transition
+				.With(buttonLinear, nameof(Left), lblTargetLine.Left)
+				.Linear(EaseDuration);
+		}
+
+		private void buttonThrowAndCatch_Click(object sender, EventArgs e)
+		{
+			Transition
+			.With(buttonThrowAndCatch, nameof(Left), lblTargetLine.Left)
+			.ThrowAndCatch(EaseDuration);
+		}
+
+		private void buttonBackEaseOut_Click(object sender, EventArgs e)
+		{
+			Transition
+				.With(buttonBackEaseOut, nameof(Left), lblTargetLine.Left)
+				.EaseWithFunction(EasingFunctions.BackEaseOut, EaseDuration);
+		}
+
+		private void buttonBounceEaseOut_Click(object sender, EventArgs e)
+		{
+			Transition
+				.With(buttonBounceEaseOut, nameof(Left), lblTargetLine.Left)
+				.EaseWithFunction(EasingFunctions.BounceEaseOut, EaseDuration);
+		}
+
+		private void buttonCircEaseOut_Click(object sender, EventArgs e)
+		{
+			Transition
+				.With(buttonCircEaseOut, nameof(Left), lblTargetLine.Left)
+				.EaseWithFunction(EasingFunctions.CircEaseOut, EaseDuration);
+		}
+
+		private void buttonCubicEaseOut_Click(object sender, EventArgs e)
+		{
+			Transition
+				.With(buttonCubicEaseOut, nameof(Left), lblTargetLine.Left)
+				.EaseWithFunction(EasingFunctions.CubicEaseOut, EaseDuration);
+		}
+
+		private void buttonElasticEaseOut_Click(object sender, EventArgs e)
+		{
+			Transition
+				.With(buttonElasticEaseOut, nameof(Left), lblTargetLine.Left)
+				.EaseWithFunction(EasingFunctions.ElasticEaseOut, EaseDuration);
+		}
+
+		private void buttonExpoEaseOut_Click(object sender, EventArgs e)
+		{
+			Transition
+				.With(buttonExpoEaseOut, nameof(Left), lblTargetLine.Left)
+				.EaseWithFunction(EasingFunctions.ExpoEaseOut, EaseDuration);
+		}
+
+		private void buttonQuadEaseOut_Click(object sender, EventArgs e)
+		{
+			Transition
+				.With(buttonQuadEaseOut, nameof(Left), lblTargetLine.Left)
+				.EaseWithFunction(EasingFunctions.QuadEaseOut, EaseDuration);
+		}
+
+		private void buttonQuartEaseOut_Click(object sender, EventArgs e)
+		{
+			Transition
+				.With(buttonQuartEaseOut, nameof(Left), lblTargetLine.Left)
+				.EaseWithFunction(EasingFunctions.QuartEaseOut, EaseDuration);
+		}
+
+		private void buttonQuintEaseOut_Click(object sender, EventArgs e)
+		{
+			Transition
+				.With(buttonQuintEaseOut, nameof(Left), lblTargetLine.Left)
+				.EaseWithFunction(EasingFunctions.QuintEaseOut, EaseDuration);
+		}
+
+		private void buttonSineEaseOut_Click(object sender, EventArgs e)
+		{
+			Transition
+				.With(buttonSineEaseOut, nameof(Left), lblTargetLine.Left)
+				.EaseWithFunction(EasingFunctions.SineEaseOut, EaseDuration);
+		}
 	}
 }

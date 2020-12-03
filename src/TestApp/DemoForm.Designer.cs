@@ -42,19 +42,28 @@
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.txtPassword = new System.Windows.Forms.TextBox();
-			this.buttonEasing = new System.Windows.Forms.Button();
+			this.buttonDemo = new System.Windows.Forms.Button();
 			this.gpEasing = new System.Windows.Forms.GroupBox();
-			this.label2 = new System.Windows.Forms.Label();
+			this.lblTargetLine = new System.Windows.Forms.Label();
 			this.buttonThrowAndCatch = new System.Windows.Forms.Button();
-			this.buttonSpring = new System.Windows.Forms.Button();
 			this.buttonLinear = new System.Windows.Forms.Button();
 			this.buttonFlash = new System.Windows.Forms.Button();
 			this.buttonEaseInEaseOut = new System.Windows.Forms.Button();
 			this.buttonDecelerate = new System.Windows.Forms.Button();
 			this.buttonCriticalDamp = new System.Windows.Forms.Button();
-			this.buttonAccelerate = new System.Windows.Forms.Button();
-			this.buttonSprings = new System.Windows.Forms.Button();
 			this.buttonBounce = new System.Windows.Forms.Button();
+			this.buttonAccelerate = new System.Windows.Forms.Button();
+			this.buttonBackEaseOut = new System.Windows.Forms.Button();
+			this.buttonSprings = new System.Windows.Forms.Button();
+			this.buttonBounceEaseOut = new System.Windows.Forms.Button();
+			this.buttonCircEaseOut = new System.Windows.Forms.Button();
+			this.buttonCubicEaseOut = new System.Windows.Forms.Button();
+			this.buttonElasticEaseOut = new System.Windows.Forms.Button();
+			this.buttonExpoEaseOut = new System.Windows.Forms.Button();
+			this.buttonQuadEaseOut = new System.Windows.Forms.Button();
+			this.buttonQuartEaseOut = new System.Windows.Forms.Button();
+			this.buttonQuintEaseOut = new System.Windows.Forms.Button();
+			this.buttonSineEaseOut = new System.Windows.Forms.Button();
 			this.ctrlPictures = new TestApp.KittenPuppyControl();
 			this.ctrlRipple = new TestApp.RippleControl();
 			this.groupBox1.SuspendLayout();
@@ -78,7 +87,7 @@
 			// cmdThrowAndCatch
 			// 
 			this.cmdThrowAndCatch.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-			this.cmdThrowAndCatch.Location = new System.Drawing.Point(6, 544);
+			this.cmdThrowAndCatch.Location = new System.Drawing.Point(6, 592);
 			this.cmdThrowAndCatch.Name = "cmdThrowAndCatch";
 			this.cmdThrowAndCatch.Size = new System.Drawing.Size(199, 34);
 			this.cmdThrowAndCatch.TabIndex = 11;
@@ -137,7 +146,7 @@
 			this.gbThrowAndCatch.Controls.Add(this.cmdThrowAndCatch);
 			this.gbThrowAndCatch.Location = new System.Drawing.Point(-211, 50);
 			this.gbThrowAndCatch.Name = "gbThrowAndCatch";
-			this.gbThrowAndCatch.Size = new System.Drawing.Size(211, 584);
+			this.gbThrowAndCatch.Size = new System.Drawing.Size(211, 632);
 			this.gbThrowAndCatch.TabIndex = 15;
 			this.gbThrowAndCatch.TabStop = false;
 			this.gbThrowAndCatch.Text = "Throw and Catch";
@@ -150,7 +159,7 @@
 			this.gbRipple.Controls.Add(this.ctrlRipple);
 			this.gbRipple.Location = new System.Drawing.Point(587, 418);
 			this.gbRipple.Name = "gbRipple";
-			this.gbRipple.Size = new System.Drawing.Size(211, 211);
+			this.gbRipple.Size = new System.Drawing.Size(211, 259);
 			this.gbRipple.TabIndex = 18;
 			this.gbRipple.TabStop = false;
 			this.gbRipple.Text = "Ripple";
@@ -216,21 +225,21 @@
 			this.txtPassword.TabIndex = 0;
 			this.txtPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPassword_KeyDown);
 			// 
-			// buttonEasing
+			// buttonDemo
 			// 
-			this.buttonEasing.Location = new System.Drawing.Point(12, 16);
-			this.buttonEasing.Name = "buttonEasing";
-			this.buttonEasing.Size = new System.Drawing.Size(75, 34);
-			this.buttonEasing.TabIndex = 24;
-			this.buttonEasing.Text = "Demo";
-			this.buttonEasing.UseVisualStyleBackColor = true;
-			this.buttonEasing.Click += new System.EventHandler(this.button1_Click);
+			this.buttonDemo.Location = new System.Drawing.Point(12, 16);
+			this.buttonDemo.Name = "buttonDemo";
+			this.buttonDemo.Size = new System.Drawing.Size(130, 34);
+			this.buttonDemo.TabIndex = 24;
+			this.buttonDemo.Text = "Animate all && get back";
+			this.buttonDemo.UseVisualStyleBackColor = true;
+			this.buttonDemo.Click += new System.EventHandler(this.buttonDemo_Click);
 			// 
 			// gpEasing
 			// 
 			this.gpEasing.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-			this.gpEasing.Controls.Add(this.label2);
+			this.gpEasing.Controls.Add(this.lblTargetLine);
 			this.gpEasing.Controls.Add(this.buttonThrowAndCatch);
 			this.gpEasing.Controls.Add(this.buttonLinear);
 			this.gpEasing.Controls.Add(this.buttonFlash);
@@ -239,68 +248,72 @@
 			this.gpEasing.Controls.Add(this.buttonCriticalDamp);
 			this.gpEasing.Controls.Add(this.buttonBounce);
 			this.gpEasing.Controls.Add(this.buttonAccelerate);
-			this.gpEasing.Controls.Add(this.buttonSpring);
+			this.gpEasing.Controls.Add(this.buttonSineEaseOut);
+			this.gpEasing.Controls.Add(this.buttonQuintEaseOut);
+			this.gpEasing.Controls.Add(this.buttonQuartEaseOut);
+			this.gpEasing.Controls.Add(this.buttonQuadEaseOut);
+			this.gpEasing.Controls.Add(this.buttonExpoEaseOut);
+			this.gpEasing.Controls.Add(this.buttonElasticEaseOut);
+			this.gpEasing.Controls.Add(this.buttonCubicEaseOut);
+			this.gpEasing.Controls.Add(this.buttonCircEaseOut);
+			this.gpEasing.Controls.Add(this.buttonBounceEaseOut);
+			this.gpEasing.Controls.Add(this.buttonBackEaseOut);
 			this.gpEasing.Location = new System.Drawing.Point(12, 56);
 			this.gpEasing.Name = "gpEasing";
-			this.gpEasing.Size = new System.Drawing.Size(559, 573);
+			this.gpEasing.Size = new System.Drawing.Size(559, 621);
 			this.gpEasing.TabIndex = 24;
 			this.gpEasing.TabStop = false;
 			this.gpEasing.Text = "Easings";
 			// 
-			// label2
+			// lblTargetLine
 			// 
-			this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.lblTargetLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-			this.label2.BackColor = System.Drawing.Color.DarkGray;
-			this.label2.Location = new System.Drawing.Point(412, 16);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(1, 540);
-			this.label2.TabIndex = 26;
+			this.lblTargetLine.BackColor = System.Drawing.Color.DarkGray;
+			this.lblTargetLine.Location = new System.Drawing.Point(412, 16);
+			this.lblTargetLine.Name = "lblTargetLine";
+			this.lblTargetLine.Size = new System.Drawing.Size(1, 588);
+			this.lblTargetLine.TabIndex = 26;
 			// 
 			// buttonThrowAndCatch
 			// 
-			this.buttonThrowAndCatch.Location = new System.Drawing.Point(15, 289);
+			this.buttonThrowAndCatch.Location = new System.Drawing.Point(15, 263);
 			this.buttonThrowAndCatch.Name = "buttonThrowAndCatch";
 			this.buttonThrowAndCatch.Size = new System.Drawing.Size(115, 23);
 			this.buttonThrowAndCatch.TabIndex = 25;
 			this.buttonThrowAndCatch.Text = "ThrowAndCatch";
 			this.buttonThrowAndCatch.UseVisualStyleBackColor = true;
-			// 
-			// buttonSpring
-			// 
-			this.buttonSpring.Location = new System.Drawing.Point(15, 260);
-			this.buttonSpring.Name = "buttonSpring";
-			this.buttonSpring.Size = new System.Drawing.Size(115, 23);
-			this.buttonSpring.TabIndex = 25;
-			this.buttonSpring.Text = "Spring";
-			this.buttonSpring.UseVisualStyleBackColor = true;
+			this.buttonThrowAndCatch.Click += new System.EventHandler(this.buttonThrowAndCatch_Click);
 			// 
 			// buttonLinear
 			// 
-			this.buttonLinear.Location = new System.Drawing.Point(15, 231);
+			this.buttonLinear.Location = new System.Drawing.Point(15, 234);
 			this.buttonLinear.Name = "buttonLinear";
 			this.buttonLinear.Size = new System.Drawing.Size(115, 23);
 			this.buttonLinear.TabIndex = 25;
 			this.buttonLinear.Text = "Linear";
 			this.buttonLinear.UseVisualStyleBackColor = true;
+			this.buttonLinear.Click += new System.EventHandler(this.buttonLinear_Click);
 			// 
 			// buttonFlash
 			// 
-			this.buttonFlash.Location = new System.Drawing.Point(15, 202);
+			this.buttonFlash.Location = new System.Drawing.Point(15, 205);
 			this.buttonFlash.Name = "buttonFlash";
 			this.buttonFlash.Size = new System.Drawing.Size(115, 23);
 			this.buttonFlash.TabIndex = 25;
 			this.buttonFlash.Text = "Flash";
 			this.buttonFlash.UseVisualStyleBackColor = true;
+			this.buttonFlash.Click += new System.EventHandler(this.buttonFlash_Click);
 			// 
 			// buttonEaseInEaseOut
 			// 
-			this.buttonEaseInEaseOut.Location = new System.Drawing.Point(15, 173);
+			this.buttonEaseInEaseOut.Location = new System.Drawing.Point(15, 176);
 			this.buttonEaseInEaseOut.Name = "buttonEaseInEaseOut";
 			this.buttonEaseInEaseOut.Size = new System.Drawing.Size(115, 23);
 			this.buttonEaseInEaseOut.TabIndex = 25;
 			this.buttonEaseInEaseOut.Text = "EaseInEaseOut";
 			this.buttonEaseInEaseOut.UseVisualStyleBackColor = true;
+			this.buttonEaseInEaseOut.Click += new System.EventHandler(this.buttonEaseInEaseOut_Click);
 			// 
 			// buttonDecelerate
 			// 
@@ -310,6 +323,7 @@
 			this.buttonDecelerate.TabIndex = 25;
 			this.buttonDecelerate.Text = "Decelerate";
 			this.buttonDecelerate.UseVisualStyleBackColor = true;
+			this.buttonDecelerate.Click += new System.EventHandler(this.buttonDecelerate_Click);
 			// 
 			// buttonCriticalDamp
 			// 
@@ -319,22 +333,7 @@
 			this.buttonCriticalDamp.TabIndex = 25;
 			this.buttonCriticalDamp.Text = "CriticalDamp";
 			this.buttonCriticalDamp.UseVisualStyleBackColor = true;
-			// 
-			// buttonAccelerate
-			// 
-			this.buttonAccelerate.Location = new System.Drawing.Point(15, 60);
-			this.buttonAccelerate.Name = "buttonAccelerate";
-			this.buttonAccelerate.Size = new System.Drawing.Size(115, 23);
-			this.buttonAccelerate.TabIndex = 25;
-			this.buttonAccelerate.Text = "Accelerate";
-			this.buttonAccelerate.UseVisualStyleBackColor = true;
-			// 
-			// buttonSprings
-			// 
-			this.buttonSprings.Location = new System.Drawing.Point(0, 0);
-			this.buttonSprings.Name = "buttonSprings";
-			this.buttonSprings.Size = new System.Drawing.Size(75, 23);
-			this.buttonSprings.TabIndex = 0;
+			this.buttonCriticalDamp.Click += new System.EventHandler(this.buttonCriticalDamp_Click);
 			// 
 			// buttonBounce
 			// 
@@ -344,6 +343,124 @@
 			this.buttonBounce.TabIndex = 25;
 			this.buttonBounce.Text = "Bounce";
 			this.buttonBounce.UseVisualStyleBackColor = true;
+			this.buttonBounce.Click += new System.EventHandler(this.buttonBounce_Click);
+			// 
+			// buttonAccelerate
+			// 
+			this.buttonAccelerate.Location = new System.Drawing.Point(15, 60);
+			this.buttonAccelerate.Name = "buttonAccelerate";
+			this.buttonAccelerate.Size = new System.Drawing.Size(115, 23);
+			this.buttonAccelerate.TabIndex = 25;
+			this.buttonAccelerate.Text = "Accelerate";
+			this.buttonAccelerate.UseVisualStyleBackColor = true;
+			this.buttonAccelerate.Click += new System.EventHandler(this.buttonAccelerate_Click);
+			// 
+			// buttonBackEaseOut
+			// 
+			this.buttonBackEaseOut.Location = new System.Drawing.Point(15, 310);
+			this.buttonBackEaseOut.Name = "buttonBackEaseOut";
+			this.buttonBackEaseOut.Size = new System.Drawing.Size(115, 23);
+			this.buttonBackEaseOut.TabIndex = 25;
+			this.buttonBackEaseOut.Text = "BackEaseOut";
+			this.buttonBackEaseOut.UseVisualStyleBackColor = true;
+			this.buttonBackEaseOut.Click += new System.EventHandler(this.buttonBackEaseOut_Click);
+			// 
+			// buttonSprings
+			// 
+			this.buttonSprings.Location = new System.Drawing.Point(0, 0);
+			this.buttonSprings.Name = "buttonSprings";
+			this.buttonSprings.Size = new System.Drawing.Size(75, 23);
+			this.buttonSprings.TabIndex = 0;
+			// 
+			// buttonBounceEaseOut
+			// 
+			this.buttonBounceEaseOut.Location = new System.Drawing.Point(15, 339);
+			this.buttonBounceEaseOut.Name = "buttonBounceEaseOut";
+			this.buttonBounceEaseOut.Size = new System.Drawing.Size(115, 23);
+			this.buttonBounceEaseOut.TabIndex = 25;
+			this.buttonBounceEaseOut.Text = "BounceEaseOut";
+			this.buttonBounceEaseOut.UseVisualStyleBackColor = true;
+			this.buttonBounceEaseOut.Click += new System.EventHandler(this.buttonBounceEaseOut_Click);
+			// 
+			// buttonCircEaseOut
+			// 
+			this.buttonCircEaseOut.Location = new System.Drawing.Point(15, 368);
+			this.buttonCircEaseOut.Name = "buttonCircEaseOut";
+			this.buttonCircEaseOut.Size = new System.Drawing.Size(115, 23);
+			this.buttonCircEaseOut.TabIndex = 25;
+			this.buttonCircEaseOut.Text = "CircEaseOut";
+			this.buttonCircEaseOut.UseVisualStyleBackColor = true;
+			this.buttonCircEaseOut.Click += new System.EventHandler(this.buttonCircEaseOut_Click);
+			// 
+			// buttonCubicEaseOut
+			// 
+			this.buttonCubicEaseOut.Location = new System.Drawing.Point(15, 397);
+			this.buttonCubicEaseOut.Name = "buttonCubicEaseOut";
+			this.buttonCubicEaseOut.Size = new System.Drawing.Size(115, 23);
+			this.buttonCubicEaseOut.TabIndex = 25;
+			this.buttonCubicEaseOut.Text = "CubicEaseOut";
+			this.buttonCubicEaseOut.UseVisualStyleBackColor = true;
+			this.buttonCubicEaseOut.Click += new System.EventHandler(this.buttonCubicEaseOut_Click);
+			// 
+			// buttonElasticEaseOut
+			// 
+			this.buttonElasticEaseOut.Location = new System.Drawing.Point(15, 426);
+			this.buttonElasticEaseOut.Name = "buttonElasticEaseOut";
+			this.buttonElasticEaseOut.Size = new System.Drawing.Size(115, 23);
+			this.buttonElasticEaseOut.TabIndex = 25;
+			this.buttonElasticEaseOut.Text = "ElasticEaseOut";
+			this.buttonElasticEaseOut.UseVisualStyleBackColor = true;
+			this.buttonElasticEaseOut.Click += new System.EventHandler(this.buttonElasticEaseOut_Click);
+			// 
+			// buttonExpoEaseOut
+			// 
+			this.buttonExpoEaseOut.Location = new System.Drawing.Point(15, 455);
+			this.buttonExpoEaseOut.Name = "buttonExpoEaseOut";
+			this.buttonExpoEaseOut.Size = new System.Drawing.Size(115, 23);
+			this.buttonExpoEaseOut.TabIndex = 25;
+			this.buttonExpoEaseOut.Text = "ExpoEaseOut";
+			this.buttonExpoEaseOut.UseVisualStyleBackColor = true;
+			this.buttonExpoEaseOut.Click += new System.EventHandler(this.buttonExpoEaseOut_Click);
+			// 
+			// buttonQuadEaseOut
+			// 
+			this.buttonQuadEaseOut.Location = new System.Drawing.Point(15, 484);
+			this.buttonQuadEaseOut.Name = "buttonQuadEaseOut";
+			this.buttonQuadEaseOut.Size = new System.Drawing.Size(115, 23);
+			this.buttonQuadEaseOut.TabIndex = 25;
+			this.buttonQuadEaseOut.Text = "QuadEaseOut";
+			this.buttonQuadEaseOut.UseVisualStyleBackColor = true;
+			this.buttonQuadEaseOut.Click += new System.EventHandler(this.buttonQuadEaseOut_Click);
+			// 
+			// buttonQuartEaseOut
+			// 
+			this.buttonQuartEaseOut.Location = new System.Drawing.Point(15, 513);
+			this.buttonQuartEaseOut.Name = "buttonQuartEaseOut";
+			this.buttonQuartEaseOut.Size = new System.Drawing.Size(115, 23);
+			this.buttonQuartEaseOut.TabIndex = 25;
+			this.buttonQuartEaseOut.Text = "QuartEaseOut";
+			this.buttonQuartEaseOut.UseVisualStyleBackColor = true;
+			this.buttonQuartEaseOut.Click += new System.EventHandler(this.buttonQuartEaseOut_Click);
+			// 
+			// buttonQuintEaseOut
+			// 
+			this.buttonQuintEaseOut.Location = new System.Drawing.Point(15, 542);
+			this.buttonQuintEaseOut.Name = "buttonQuintEaseOut";
+			this.buttonQuintEaseOut.Size = new System.Drawing.Size(115, 23);
+			this.buttonQuintEaseOut.TabIndex = 25;
+			this.buttonQuintEaseOut.Text = "QuintEaseOut";
+			this.buttonQuintEaseOut.UseVisualStyleBackColor = true;
+			this.buttonQuintEaseOut.Click += new System.EventHandler(this.buttonQuintEaseOut_Click);
+			// 
+			// buttonSineEaseOut
+			// 
+			this.buttonSineEaseOut.Location = new System.Drawing.Point(15, 571);
+			this.buttonSineEaseOut.Name = "buttonSineEaseOut";
+			this.buttonSineEaseOut.Size = new System.Drawing.Size(115, 23);
+			this.buttonSineEaseOut.TabIndex = 25;
+			this.buttonSineEaseOut.Text = "SineEaseOut";
+			this.buttonSineEaseOut.UseVisualStyleBackColor = true;
+			this.buttonSineEaseOut.Click += new System.EventHandler(this.buttonSineEaseOut_Click);
 			// 
 			// ctrlPictures
 			// 
@@ -366,7 +483,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(918, 640);
+			this.ClientSize = new System.Drawing.Size(918, 688);
 			this.Controls.Add(this.gpEasing);
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.groupBox2);
@@ -374,7 +491,7 @@
 			this.Controls.Add(this.gbRipple);
 			this.Controls.Add(this.gbThrowAndCatch);
 			this.Controls.Add(this.groupBox1);
-			this.Controls.Add(this.buttonEasing);
+			this.Controls.Add(this.buttonDemo);
 			this.Name = "DemoForm";
 			this.Text = "Transitions TestApp";
 			this.groupBox1.ResumeLayout(false);
@@ -406,10 +523,10 @@
 		private System.Windows.Forms.GroupBox groupBox3;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.TextBox txtPassword;
-		private System.Windows.Forms.Button buttonEasing;
+		private System.Windows.Forms.Button buttonDemo;
 		private System.Windows.Forms.GroupBox gpEasing;
-		private System.Windows.Forms.Button buttonSpring;
-		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Button buttonBackEaseOut;
+		private System.Windows.Forms.Label lblTargetLine;
 		private System.Windows.Forms.Button buttonSprings;
 		private System.Windows.Forms.Button buttonLinear;
 		private System.Windows.Forms.Button buttonFlash;
@@ -419,6 +536,15 @@
 		private System.Windows.Forms.Button buttonAccelerate;
 		private System.Windows.Forms.Button buttonThrowAndCatch;
 		private System.Windows.Forms.Button buttonBounce;
+		private System.Windows.Forms.Button buttonExpoEaseOut;
+		private System.Windows.Forms.Button buttonElasticEaseOut;
+		private System.Windows.Forms.Button buttonCubicEaseOut;
+		private System.Windows.Forms.Button buttonCircEaseOut;
+		private System.Windows.Forms.Button buttonBounceEaseOut;
+		private System.Windows.Forms.Button buttonQuintEaseOut;
+		private System.Windows.Forms.Button buttonQuartEaseOut;
+		private System.Windows.Forms.Button buttonQuadEaseOut;
+		private System.Windows.Forms.Button buttonSineEaseOut;
 	}
 }
 
