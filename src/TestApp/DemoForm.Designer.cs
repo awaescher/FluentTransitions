@@ -37,11 +37,9 @@
 			this.cmdTextTransition = new System.Windows.Forms.Button();
 			this.gbThrowAndCatch = new System.Windows.Forms.GroupBox();
 			this.gbRipple = new System.Windows.Forms.GroupBox();
-			this.ctrlRipple = new TestApp.RippleControl();
 			this.cmdMore = new System.Windows.Forms.Button();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.cmdSwapPictures = new System.Windows.Forms.Button();
-			this.ctrlPictures = new TestApp.KittenPuppyControl();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.txtPassword = new System.Windows.Forms.TextBox();
@@ -75,6 +73,8 @@
 			this.label7 = new System.Windows.Forms.Label();
 			this.lblTargetLine = new System.Windows.Forms.Label();
 			this.buttonSprings = new System.Windows.Forms.Button();
+			this.ctrlPictures = new TestApp.KittenPuppyControl();
+			this.ctrlRipple = new TestApp.RippleControl();
 			this.groupBox1.SuspendLayout();
 			this.gbThrowAndCatch.SuspendLayout();
 			this.gbRipple.SuspendLayout();
@@ -111,7 +111,7 @@
 			this.groupBox1.Controls.Add(this.lblTextTransition2);
 			this.groupBox1.Controls.Add(this.lblTextTransition1);
 			this.groupBox1.Controls.Add(this.cmdTextTransition);
-			this.groupBox1.Location = new System.Drawing.Point(949, 478);
+			this.groupBox1.Location = new System.Drawing.Point(1020, 478);
 			this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -175,7 +175,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
 			this.gbRipple.Controls.Add(this.cmdRipple);
 			this.gbRipple.Controls.Add(this.ctrlRipple);
-			this.gbRipple.Location = new System.Drawing.Point(949, 643);
+			this.gbRipple.Location = new System.Drawing.Point(1020, 643);
 			this.gbRipple.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.gbRipple.Name = "gbRipple";
 			this.gbRipple.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -183,14 +183,6 @@
 			this.gbRipple.TabIndex = 18;
 			this.gbRipple.TabStop = false;
 			this.gbRipple.Text = "Ripple";
-			// 
-			// ctrlRipple
-			// 
-			this.ctrlRipple.Location = new System.Drawing.Point(9, 95);
-			this.ctrlRipple.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
-			this.ctrlRipple.Name = "ctrlRipple";
-			this.ctrlRipple.Size = new System.Drawing.Size(290, 215);
-			this.ctrlRipple.TabIndex = 8;
 			// 
 			// cmdMore
 			// 
@@ -208,7 +200,7 @@
 			// 
 			this.groupBox2.Controls.Add(this.cmdSwapPictures);
 			this.groupBox2.Controls.Add(this.ctrlPictures);
-			this.groupBox2.Location = new System.Drawing.Point(949, 278);
+			this.groupBox2.Location = new System.Drawing.Point(1020, 278);
 			this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -228,19 +220,11 @@
 			this.cmdSwapPictures.UseVisualStyleBackColor = true;
 			this.cmdSwapPictures.Click += new System.EventHandler(this.cmdSwapPictures_Click);
 			// 
-			// ctrlPictures
-			// 
-			this.ctrlPictures.Location = new System.Drawing.Point(142, 29);
-			this.ctrlPictures.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
-			this.ctrlPictures.Name = "ctrlPictures";
-			this.ctrlPictures.Size = new System.Drawing.Size(154, 138);
-			this.ctrlPictures.TabIndex = 0;
-			// 
 			// groupBox3
 			// 
 			this.groupBox3.Controls.Add(this.label1);
 			this.groupBox3.Controls.Add(this.txtPassword);
-			this.groupBox3.Location = new System.Drawing.Point(949, 86);
+			this.groupBox3.Location = new System.Drawing.Point(1020, 86);
 			this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.groupBox3.Name = "groupBox3";
 			this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -315,7 +299,7 @@
 			this.gpEasing.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.gpEasing.Name = "gpEasing";
 			this.gpEasing.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.gpEasing.Size = new System.Drawing.Size(923, 1270);
+			this.gpEasing.Size = new System.Drawing.Size(994, 1270);
 			this.gpEasing.TabIndex = 24;
 			this.gpEasing.TabStop = false;
 			this.gpEasing.Text = "Animation showcase";
@@ -586,7 +570,7 @@
 			this.label2.Location = new System.Drawing.Point(40, 46);
 			this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(838, 40);
+			this.label2.Size = new System.Drawing.Size(936, 40);
 			this.label2.TabIndex = 2;
 			this.label2.Text = resources.GetString("label2.Text");
 			// 
@@ -618,6 +602,22 @@
 			this.buttonSprings.Name = "buttonSprings";
 			this.buttonSprings.Size = new System.Drawing.Size(75, 23);
 			this.buttonSprings.TabIndex = 0;
+			// 
+			// ctrlPictures
+			// 
+			this.ctrlPictures.Location = new System.Drawing.Point(142, 29);
+			this.ctrlPictures.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+			this.ctrlPictures.Name = "ctrlPictures";
+			this.ctrlPictures.Size = new System.Drawing.Size(154, 138);
+			this.ctrlPictures.TabIndex = 0;
+			// 
+			// ctrlRipple
+			// 
+			this.ctrlRipple.Location = new System.Drawing.Point(9, 95);
+			this.ctrlRipple.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+			this.ctrlRipple.Name = "ctrlRipple";
+			this.ctrlRipple.Size = new System.Drawing.Size(290, 215);
+			this.ctrlRipple.TabIndex = 8;
 			// 
 			// DemoForm
 			// 

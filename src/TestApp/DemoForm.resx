@@ -138,6 +138,6 @@ Mauro's easing implementations as built-in functions (see below). It is also pos
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>These are the animations of the original project Richard S. Shepherd uploaded to Google Code back in 2009.
-After using this project for a long time, I (Andreas Wäscher) decided to modernize and migrate it to .NET Standard 2.0.</value>
+After using this project for a long time, I (Andreas Wäscher) decided to modernize the code and migrate it to modern .NET platforms.</value>
   </data>
 </root>
