@@ -37,16 +37,16 @@ namespace TestApp
 			InitializeComponent();
 		}
 
-		protected override void OnLocationChanged(EventArgs e)
+		protected override void OnShown(EventArgs e)
 		{
-			base.OnLocationChanged(e);
+			base.OnShown(e);
 
 			Center();
 		}
 
-		protected override void OnSizeChanged(EventArgs e)
+		protected override void OnResizeEnd(EventArgs e)
 		{
-			base.OnSizeChanged(e);
+			base.OnResizeEnd(e);
 
 			Center();
 		}
@@ -55,12 +55,12 @@ namespace TestApp
 		{
 			if (_moving)
 				return;
-			
+
 			_moving = true;
 
 			Task.Delay(10).ContinueWith(_ =>
 			{
-				BeginInvoke(new MethodInvoker(() => 
+				BeginInvoke(new MethodInvoker(() =>
 				{
 
 					var area = Screen.FromControl(this).WorkingArea;
