@@ -49,6 +49,9 @@
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.cmdSwapPictures = new System.Windows.Forms.Button();
 			this.ctrlPictures = new TestApp.KittenPuppyControl();
+			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.txtPassword = new System.Windows.Forms.TextBox();
+			this.label1 = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
 			this.gbBounce.SuspendLayout();
 			this.gbThrowAndCatch.SuspendLayout();
@@ -56,16 +59,16 @@
 			this.gbFlash.SuspendLayout();
 			this.gbDropAndBounce.SuspendLayout();
 			this.groupBox2.SuspendLayout();
+			this.groupBox3.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// cmdBounceMe
 			// 
 			this.cmdBounceMe.Anchor = System.Windows.Forms.AnchorStyles.Top;
 			this.cmdBounceMe.BackColor = System.Drawing.SystemColors.ButtonFace;
-			this.cmdBounceMe.Location = new System.Drawing.Point(9, 29);
-			this.cmdBounceMe.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.cmdBounceMe.Location = new System.Drawing.Point(6, 19);
 			this.cmdBounceMe.Name = "cmdBounceMe";
-			this.cmdBounceMe.Size = new System.Drawing.Size(298, 52);
+			this.cmdBounceMe.Size = new System.Drawing.Size(199, 34);
 			this.cmdBounceMe.TabIndex = 5;
 			this.cmdBounceMe.Text = "Bounce Me!";
 			this.cmdBounceMe.UseVisualStyleBackColor = false;
@@ -74,10 +77,9 @@
 			// cmdFlashMe
 			// 
 			this.cmdFlashMe.BackColor = System.Drawing.SystemColors.ButtonFace;
-			this.cmdFlashMe.Location = new System.Drawing.Point(9, 29);
-			this.cmdFlashMe.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.cmdFlashMe.Location = new System.Drawing.Point(6, 19);
 			this.cmdFlashMe.Name = "cmdFlashMe";
-			this.cmdFlashMe.Size = new System.Drawing.Size(290, 57);
+			this.cmdFlashMe.Size = new System.Drawing.Size(193, 37);
 			this.cmdFlashMe.TabIndex = 6;
 			this.cmdFlashMe.Text = "Flash Me!";
 			this.cmdFlashMe.UseVisualStyleBackColor = false;
@@ -85,10 +87,9 @@
 			// 
 			// cmdRipple
 			// 
-			this.cmdRipple.Location = new System.Drawing.Point(9, 29);
-			this.cmdRipple.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.cmdRipple.Location = new System.Drawing.Point(6, 19);
 			this.cmdRipple.Name = "cmdRipple";
-			this.cmdRipple.Size = new System.Drawing.Size(290, 57);
+			this.cmdRipple.Size = new System.Drawing.Size(193, 37);
 			this.cmdRipple.TabIndex = 9;
 			this.cmdRipple.Text = "Ripple";
 			this.cmdRipple.UseVisualStyleBackColor = true;
@@ -96,10 +97,9 @@
 			// 
 			// cmdDropAndBounce
 			// 
-			this.cmdDropAndBounce.Location = new System.Drawing.Point(9, 29);
-			this.cmdDropAndBounce.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.cmdDropAndBounce.Location = new System.Drawing.Point(6, 19);
 			this.cmdDropAndBounce.Name = "cmdDropAndBounce";
-			this.cmdDropAndBounce.Size = new System.Drawing.Size(290, 57);
+			this.cmdDropAndBounce.Size = new System.Drawing.Size(193, 37);
 			this.cmdDropAndBounce.TabIndex = 10;
 			this.cmdDropAndBounce.Text = "Drop and bounce";
 			this.cmdDropAndBounce.UseVisualStyleBackColor = true;
@@ -108,10 +108,9 @@
 			// cmdThrowAndCatch
 			// 
 			this.cmdThrowAndCatch.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-			this.cmdThrowAndCatch.Location = new System.Drawing.Point(9, 731);
-			this.cmdThrowAndCatch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.cmdThrowAndCatch.Location = new System.Drawing.Point(6, 583);
 			this.cmdThrowAndCatch.Name = "cmdThrowAndCatch";
-			this.cmdThrowAndCatch.Size = new System.Drawing.Size(298, 52);
+			this.cmdThrowAndCatch.Size = new System.Drawing.Size(199, 34);
 			this.cmdThrowAndCatch.TabIndex = 11;
 			this.cmdThrowAndCatch.Text = "Throw and Catch";
 			this.cmdThrowAndCatch.UseVisualStyleBackColor = true;
@@ -122,11 +121,9 @@
 			this.groupBox1.Controls.Add(this.lblTextTransition2);
 			this.groupBox1.Controls.Add(this.lblTextTransition1);
 			this.groupBox1.Controls.Add(this.cmdTextTransition);
-			this.groupBox1.Location = new System.Drawing.Point(344, 611);
-			this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.groupBox1.Location = new System.Drawing.Point(229, 397);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.groupBox1.Size = new System.Drawing.Size(316, 155);
+			this.groupBox1.Size = new System.Drawing.Size(211, 101);
 			this.groupBox1.TabIndex = 13;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Text transition";
@@ -136,10 +133,9 @@
 			this.lblTextTransition2.AutoSize = true;
 			this.lblTextTransition2.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblTextTransition2.ForeColor = System.Drawing.Color.Crimson;
-			this.lblTextTransition2.Location = new System.Drawing.Point(10, 115);
-			this.lblTextTransition2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.lblTextTransition2.Location = new System.Drawing.Point(7, 75);
 			this.lblTextTransition2.Name = "lblTextTransition2";
-			this.lblTextTransition2.Size = new System.Drawing.Size(286, 22);
+			this.lblTextTransition2.Size = new System.Drawing.Size(192, 16);
 			this.lblTextTransition2.TabIndex = 15;
 			this.lblTextTransition2.Text = "A longer piece of text.";
 			// 
@@ -148,19 +144,17 @@
 			this.lblTextTransition1.AutoSize = true;
 			this.lblTextTransition1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblTextTransition1.ForeColor = System.Drawing.Color.Blue;
-			this.lblTextTransition1.Location = new System.Drawing.Point(9, 91);
-			this.lblTextTransition1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.lblTextTransition1.Location = new System.Drawing.Point(6, 59);
 			this.lblTextTransition1.Name = "lblTextTransition1";
-			this.lblTextTransition1.Size = new System.Drawing.Size(166, 22);
+			this.lblTextTransition1.Size = new System.Drawing.Size(112, 16);
 			this.lblTextTransition1.TabIndex = 14;
 			this.lblTextTransition1.Text = "Hello, World!";
 			// 
 			// cmdTextTransition
 			// 
-			this.cmdTextTransition.Location = new System.Drawing.Point(9, 29);
-			this.cmdTextTransition.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.cmdTextTransition.Location = new System.Drawing.Point(6, 19);
 			this.cmdTextTransition.Name = "cmdTextTransition";
-			this.cmdTextTransition.Size = new System.Drawing.Size(290, 57);
+			this.cmdTextTransition.Size = new System.Drawing.Size(193, 37);
 			this.cmdTextTransition.TabIndex = 13;
 			this.cmdTextTransition.Text = "Text Transition";
 			this.cmdTextTransition.UseVisualStyleBackColor = true;
@@ -171,11 +165,9 @@
 			this.gbBounce.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
 			this.gbBounce.Controls.Add(this.cmdBounceMe);
-			this.gbBounce.Location = new System.Drawing.Point(18, 77);
-			this.gbBounce.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.gbBounce.Location = new System.Drawing.Point(12, 50);
 			this.gbBounce.Name = "gbBounce";
-			this.gbBounce.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.gbBounce.Size = new System.Drawing.Size(316, 792);
+			this.gbBounce.Size = new System.Drawing.Size(211, 623);
 			this.gbBounce.TabIndex = 14;
 			this.gbBounce.TabStop = false;
 			this.gbBounce.Text = "Bounce";
@@ -185,21 +177,18 @@
 			this.gbThrowAndCatch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
 			this.gbThrowAndCatch.Controls.Add(this.cmdThrowAndCatch);
-			this.gbThrowAndCatch.Location = new System.Drawing.Point(-316, 77);
-			this.gbThrowAndCatch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.gbThrowAndCatch.Location = new System.Drawing.Point(-211, 50);
 			this.gbThrowAndCatch.Name = "gbThrowAndCatch";
-			this.gbThrowAndCatch.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.gbThrowAndCatch.Size = new System.Drawing.Size(316, 792);
+			this.gbThrowAndCatch.Size = new System.Drawing.Size(211, 623);
 			this.gbThrowAndCatch.TabIndex = 15;
 			this.gbThrowAndCatch.TabStop = false;
 			this.gbThrowAndCatch.Text = "Throw and Catch";
 			// 
 			// cmdSwap
 			// 
-			this.cmdSwap.Location = new System.Drawing.Point(18, 15);
-			this.cmdSwap.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.cmdSwap.Location = new System.Drawing.Point(12, 10);
 			this.cmdSwap.Name = "cmdSwap";
-			this.cmdSwap.Size = new System.Drawing.Size(124, 52);
+			this.cmdSwap.Size = new System.Drawing.Size(83, 34);
 			this.cmdSwap.TabIndex = 16;
 			this.cmdSwap.Text = "« Swap";
 			this.cmdSwap.UseVisualStyleBackColor = true;
@@ -207,10 +196,9 @@
 			// 
 			// ctrlChangeFormColor
 			// 
-			this.ctrlChangeFormColor.Location = new System.Drawing.Point(152, 15);
-			this.ctrlChangeFormColor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.ctrlChangeFormColor.Location = new System.Drawing.Point(101, 10);
 			this.ctrlChangeFormColor.Name = "ctrlChangeFormColor";
-			this.ctrlChangeFormColor.Size = new System.Drawing.Size(183, 52);
+			this.ctrlChangeFormColor.Size = new System.Drawing.Size(122, 34);
 			this.ctrlChangeFormColor.TabIndex = 17;
 			this.ctrlChangeFormColor.Text = "Change Form Color";
 			this.ctrlChangeFormColor.UseVisualStyleBackColor = true;
@@ -220,31 +208,27 @@
 			// 
 			this.gbRipple.Controls.Add(this.cmdRipple);
 			this.gbRipple.Controls.Add(this.ctrlRipple);
-			this.gbRipple.Location = new System.Drawing.Point(344, 77);
-			this.gbRipple.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.gbRipple.Location = new System.Drawing.Point(229, 50);
 			this.gbRipple.Name = "gbRipple";
-			this.gbRipple.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.gbRipple.Size = new System.Drawing.Size(316, 325);
+			this.gbRipple.Size = new System.Drawing.Size(211, 211);
 			this.gbRipple.TabIndex = 18;
 			this.gbRipple.TabStop = false;
 			this.gbRipple.Text = "Ripple";
 			// 
 			// ctrlRipple
 			// 
-			this.ctrlRipple.Location = new System.Drawing.Point(9, 95);
-			this.ctrlRipple.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+			this.ctrlRipple.Location = new System.Drawing.Point(6, 62);
+			this.ctrlRipple.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.ctrlRipple.Name = "ctrlRipple";
-			this.ctrlRipple.Size = new System.Drawing.Size(290, 215);
+			this.ctrlRipple.Size = new System.Drawing.Size(193, 140);
 			this.ctrlRipple.TabIndex = 8;
 			// 
 			// gbFlash
 			// 
 			this.gbFlash.Controls.Add(this.cmdFlashMe);
-			this.gbFlash.Location = new System.Drawing.Point(344, 775);
-			this.gbFlash.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.gbFlash.Location = new System.Drawing.Point(229, 504);
 			this.gbFlash.Name = "gbFlash";
-			this.gbFlash.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.gbFlash.Size = new System.Drawing.Size(316, 94);
+			this.gbFlash.Size = new System.Drawing.Size(211, 61);
 			this.gbFlash.TabIndex = 19;
 			this.gbFlash.TabStop = false;
 			this.gbFlash.Text = "Flash the Button";
@@ -252,11 +236,9 @@
 			// gbDropAndBounce
 			// 
 			this.gbDropAndBounce.Controls.Add(this.cmdDropAndBounce);
-			this.gbDropAndBounce.Location = new System.Drawing.Point(669, 77);
-			this.gbDropAndBounce.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.gbDropAndBounce.Location = new System.Drawing.Point(446, 267);
 			this.gbDropAndBounce.Name = "gbDropAndBounce";
-			this.gbDropAndBounce.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.gbDropAndBounce.Size = new System.Drawing.Size(784, 792);
+			this.gbDropAndBounce.Size = new System.Drawing.Size(523, 298);
 			this.gbDropAndBounce.TabIndex = 20;
 			this.gbDropAndBounce.TabStop = false;
 			this.gbDropAndBounce.Text = "Drop and Bounce";
@@ -264,10 +246,9 @@
 			// cmdMore
 			// 
 			this.cmdMore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.cmdMore.Location = new System.Drawing.Point(540, 15);
-			this.cmdMore.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.cmdMore.Location = new System.Drawing.Point(1068, 10);
 			this.cmdMore.Name = "cmdMore";
-			this.cmdMore.Size = new System.Drawing.Size(120, 52);
+			this.cmdMore.Size = new System.Drawing.Size(80, 34);
 			this.cmdMore.TabIndex = 21;
 			this.cmdMore.Text = "More »";
 			this.cmdMore.UseVisualStyleBackColor = true;
@@ -277,21 +258,18 @@
 			// 
 			this.groupBox2.Controls.Add(this.cmdSwapPictures);
 			this.groupBox2.Controls.Add(this.ctrlPictures);
-			this.groupBox2.Location = new System.Drawing.Point(344, 411);
-			this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.groupBox2.Location = new System.Drawing.Point(229, 267);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.groupBox2.Size = new System.Drawing.Size(316, 191);
+			this.groupBox2.Size = new System.Drawing.Size(211, 124);
 			this.groupBox2.TabIndex = 22;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Picture transition";
 			// 
 			// cmdSwapPictures
 			// 
-			this.cmdSwapPictures.Location = new System.Drawing.Point(15, 29);
-			this.cmdSwapPictures.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.cmdSwapPictures.Location = new System.Drawing.Point(10, 19);
 			this.cmdSwapPictures.Name = "cmdSwapPictures";
-			this.cmdSwapPictures.Size = new System.Drawing.Size(110, 138);
+			this.cmdSwapPictures.Size = new System.Drawing.Size(73, 90);
 			this.cmdSwapPictures.TabIndex = 1;
 			this.cmdSwapPictures.Text = "Swap Pictures";
 			this.cmdSwapPictures.UseVisualStyleBackColor = true;
@@ -299,18 +277,48 @@
 			// 
 			// ctrlPictures
 			// 
-			this.ctrlPictures.Location = new System.Drawing.Point(142, 29);
-			this.ctrlPictures.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+			this.ctrlPictures.Location = new System.Drawing.Point(95, 19);
+			this.ctrlPictures.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.ctrlPictures.Name = "ctrlPictures";
-			this.ctrlPictures.Size = new System.Drawing.Size(154, 138);
+			this.ctrlPictures.Size = new System.Drawing.Size(103, 90);
 			this.ctrlPictures.TabIndex = 0;
+			// 
+			// groupBox3
+			// 
+			this.groupBox3.Controls.Add(this.label1);
+			this.groupBox3.Controls.Add(this.txtPassword);
+			this.groupBox3.Location = new System.Drawing.Point(452, 50);
+			this.groupBox3.Name = "groupBox3";
+			this.groupBox3.Size = new System.Drawing.Size(287, 119);
+			this.groupBox3.TabIndex = 23;
+			this.groupBox3.TabStop = false;
+			this.groupBox3.Text = "macOS like password box";
+			// 
+			// txtPassword
+			// 
+			this.txtPassword.Location = new System.Drawing.Point(24, 63);
+			this.txtPassword.Name = "txtPassword";
+			this.txtPassword.PasswordChar = '●';
+			this.txtPassword.Size = new System.Drawing.Size(226, 20);
+			this.txtPassword.TabIndex = 0;
+			this.txtPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPassword_KeyDown);
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(24, 44);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(206, 13);
+			this.label1.TabIndex = 1;
+			this.label1.Text = "Enter the secret password and hit [Return]";
 			// 
 			// Form1
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(668, 878);
+			this.ClientSize = new System.Drawing.Size(1153, 679);
+			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.cmdMore);
 			this.Controls.Add(this.gbDropAndBounce);
@@ -321,7 +329,6 @@
 			this.Controls.Add(this.gbThrowAndCatch);
 			this.Controls.Add(this.gbBounce);
 			this.Controls.Add(this.groupBox1);
-			this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.Name = "Form1";
 			this.Text = "Transitions TestApp";
 			this.groupBox1.ResumeLayout(false);
@@ -332,6 +339,8 @@
 			this.gbFlash.ResumeLayout(false);
 			this.gbDropAndBounce.ResumeLayout(false);
 			this.groupBox2.ResumeLayout(false);
+			this.groupBox3.ResumeLayout(false);
+			this.groupBox3.PerformLayout();
 			this.ResumeLayout(false);
 
         }
@@ -359,6 +368,9 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button cmdSwapPictures;
         private KittenPuppyControl ctrlPictures;
-    }
+		private System.Windows.Forms.GroupBox groupBox3;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.TextBox txtPassword;
+	}
 }
 

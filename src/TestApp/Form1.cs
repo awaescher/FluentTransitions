@@ -318,5 +318,15 @@ namespace TestApp
 					.Build(new Linear(TimeSpan.FromSeconds(1)))
 				);
 		}
+
+		private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Return)
+			{
+				Transition
+					.With(txtPassword, "Left", txtPassword.Left - 10)
+					.Flash(4, TimeSpan.FromMilliseconds(120));
+			}
+		}
 	}
 }
