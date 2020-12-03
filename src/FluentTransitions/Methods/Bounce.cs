@@ -8,7 +8,7 @@ namespace FluentTransitions.Methods
 	/// original value. It is accelerated to the destination and then decelerated back
 	/// as if being dropped with gravity and bouncing back against gravity.
 	/// </summary>
-	public class Bounce : UserDefined
+	public class Bounce : Sequence
 	{
 		/// <summary>
 		/// Bounces the property values to their destination values and back to the original ones.

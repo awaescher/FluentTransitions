@@ -80,7 +80,7 @@ namespace FluentTransitions
 		/// <param name="duration">The duration until the properties should have reached their destination values</param>
 		public void Accelerate(TimeSpan duration)
 		{
-			BuildAndRun(new Acceleration((int)duration.TotalMilliseconds));
+			BuildAndRun(new Acceleration(duration));
 		}
 
 		/// <summary>
@@ -90,7 +90,7 @@ namespace FluentTransitions
 		/// <param name="duration">The duration until the properties should have reached their destination values</param>
 		public void Bounce(TimeSpan duration)
 		{
-			BuildAndRun(new Bounce((int)duration.TotalMilliseconds));
+			BuildAndRun(new Bounce(duration));
 		}
 
 		/// <summary>
@@ -100,7 +100,7 @@ namespace FluentTransitions
 		/// <param name="duration">The duration until the properties should have reached their destination values</param>
 		public void CriticalDamp(TimeSpan duration)
 		{
-			BuildAndRun(new CriticalDamping((int)duration.TotalMilliseconds));
+			BuildAndRun(new CriticalDamping(duration));
 		}
 
 		/// <summary>
@@ -109,7 +109,7 @@ namespace FluentTransitions
 		/// <param name="duration">The duration until the properties should have reached their destination values</param>
 		public void Decelerate(TimeSpan duration)
 		{
-			BuildAndRun(new Deceleration((int)duration.TotalMilliseconds));
+			BuildAndRun(new Deceleration(duration));
 		}
 
 		/// <summary>
@@ -119,7 +119,7 @@ namespace FluentTransitions
 		/// <param name="duration">The duration until the properties should have reached their destination values</param>
 		public void EaseInEaseOut(TimeSpan duration)
 		{
-			BuildAndRun(new EaseInEaseOut((int)duration.TotalMilliseconds));
+			BuildAndRun(new EaseInEaseOut(duration));
 		}
 
 		/// <summary>
@@ -129,7 +129,7 @@ namespace FluentTransitions
 		/// <param name="durationOfEachFlash">The duration of each flash</param>
 		public void Flash(int numberOfFlashes, TimeSpan durationOfEachFlash)
 		{
-			BuildAndRun(new Flash(numberOfFlashes, (int)durationOfEachFlash.TotalMilliseconds));
+			BuildAndRun(new Flash(numberOfFlashes, durationOfEachFlash));
 		}
 
 		/// <summary>
@@ -138,7 +138,7 @@ namespace FluentTransitions
 		/// <param name="duration">The duration until the properties should have reached their destination values</param>
 		public void Linear(TimeSpan duration)
 		{
-			BuildAndRun(new Linear((int)duration.TotalMilliseconds));
+			BuildAndRun(new Linear(duration));
 		}
 
 		/// <summary>
@@ -148,7 +148,7 @@ namespace FluentTransitions
 		/// <param name="duration">The duration until the properties should have reached their destination values</param>
 		public void ThrowAndCatch(TimeSpan duration)
 		{
-			BuildAndRun(new ThrowAndCatch((int)duration.TotalMilliseconds));
+			BuildAndRun(new ThrowAndCatch(duration));
 		}
 
 		/// <summary>
@@ -186,9 +186,33 @@ namespace FluentTransitions
 		/// </summary>
 		/// <param name="elements">The elements to process during the transition</param>
 		/// <param name="duration">The duration until the properties should have reached their destination values</param>
-		public void UserDefined(IList<TransitionElement> elements, TimeSpan duration)
+		public void Sequence(IList<TransitionElement> elements, TimeSpan duration)
 		{
-			BuildAndRun(new UserDefined(elements, (int)duration.TotalMilliseconds));
+			BuildAndRun(new Sequence(elements, duration));
+		}
+
+		/// <summary>
+		/// Interpolates values with EasingFunctions.ElasticEaseOut to mimic the behavior of a loaded spring.
+		/// </summary>
+		/// <param name="duration">The duration until the properties should have reached their destination values</param>
+		public void Spring(TimeSpan duration)
+		{
+			BuildAndRun(new Spring(duration));
+		}
+
+		/// <summary>
+		/// Allows natural transitions with custom or predefined easing functions.
+		/// Easing functions are mathematical functions that are used to interpolate values between two endpoints
+		/// usually with non-linear results.
+		/// </summary>
+		/// <param name="easingFunction">
+		/// The function to interpolate values with. See "<see cref="FluentTransitions.Methods.EasingFunctions"/>" for prebuilt easing functions.
+		/// Based on Mauro Sampietro's article on CodeProject: https://www.codeproject.com/Articles/827808/Control-Animation-in-Winforms
+		/// </param>
+		/// <param name="duration">The duration until the properties should have reached their destination values</param>
+		public void EaseWithFunction(EasingFunction easingFunction, TimeSpan duration)
+		{
+			BuildAndRun(new EaseWithFunction(easingFunction, duration));
 		}
 
 		/// <summary>

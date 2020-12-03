@@ -36,7 +36,7 @@ namespace FluentTransitions.Methods
 	/// heights each time.
 	/// 
 	/// </summary>
-	public class UserDefined : IMethod
+	public class Sequence : IMethod
 	{
 		// The collection of elements that make up the transition...
 		private IList<TransitionElement> _elements = null;
@@ -48,9 +48,9 @@ namespace FluentTransitions.Methods
 		private int _currentElement = 0;
 
 		/// <summary>
-		/// Constructor.
+		/// Allows the creation of user-defined transition methods, specified by a list of individual transition elements.
 		/// </summary>
-		public UserDefined()
+		public Sequence()
 		{
 		}
 
@@ -59,7 +59,7 @@ namespace FluentTransitions.Methods
 		/// </summary>
 		/// <param name="elements">The elements to process during the transition</param>
 		/// <param name="duration">The duration until the properties should have reached their destination values</param>
-		public UserDefined(IList<TransitionElement> elements, TimeSpan duration) : this(elements, (int)duration.TotalMilliseconds)
+		public Sequence(IList<TransitionElement> elements, TimeSpan duration) : this(elements, (int)duration.TotalMilliseconds)
 		{
 		}
 
@@ -68,7 +68,7 @@ namespace FluentTransitions.Methods
 		/// </summary>
 		/// <param name="elements">The elements to process during the transition</param>
 		/// <param name="duration">The duration in milliseconds until the properties should have reached their destination values</param>
-		public UserDefined(IList<TransitionElement> elements, int duration)
+		public Sequence(IList<TransitionElement> elements, int duration)
 		{
 			Setup(elements, duration);
 		}
@@ -83,7 +83,7 @@ namespace FluentTransitions.Methods
 
 			// We check that the elements list has some members...
 			if (elements?.Count == 0)
-				throw new ArgumentException($"The list of elements passed to the constructor of {nameof(UserDefined)} had zero elements. It must have at least one element.");
+				throw new ArgumentException($"The list of elements passed to the constructor of {nameof(Sequence)} had zero elements. It must have at least one element.");
 		}
 
 		/// <summary>

@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Collections.Generic;
 using FluentTransitions.Methods;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace TestApp
 {
@@ -36,11 +37,53 @@ namespace TestApp
 			InitializeComponent();
 		}
 
+		protected override void OnLocationChanged(EventArgs e)
+		{
+			base.OnLocationChanged(e);
+
+			Center();
+		}
+
+		protected override void OnSizeChanged(EventArgs e)
+		{
+			base.OnSizeChanged(e);
+
+			Center();
+		}
+
+		private void Center()
+		{
+			if (_moving)
+				return;
+			
+			_moving = true;
+
+			Task.Delay(10).ContinueWith(_ =>
+			{
+				BeginInvoke(new MethodInvoker(() => 
+				{
+
+					var area = Screen.FromControl(this).WorkingArea;
+					var targetX = (area.Width / 2) - (Width / 2);
+					var targetY = (area.Height / 2) - (Height / 2);
+
+					Transition
+						.With(this, nameof(Left), targetX)
+						.With(this, nameof(Top), targetY)
+						.HookOnCompletion(() => _moving = false)
+						.Spring(TimeSpan.FromSeconds(0.75));
+				}));
+			});
+		}
+
+		private bool _moving = false;
+
 		/// <summary>
 		/// Called when the "Swap" button is pressed.
 		/// </summary>
 		private void cmdSwap_Click(object sender, EventArgs e)
 		{
+
 			// We swap over the group-boxes that show the "Bounce" and 
 			// "Throw and Catch" transitions. The active one is animated 
 			// left off the screen and the inactive one is animated right
@@ -90,7 +133,7 @@ namespace TestApp
 
 			Transition
 				.With(cmdBounceMe, nameof(Top), destination)
-				.Bounce(TimeSpan.FromSeconds(1.5));
+				.Bounce(TimeSpan.FromSeconds(1));
 		}
 
 		/// <summary>
@@ -213,7 +256,7 @@ namespace TestApp
 			// We animate it with an ease-in-ease-out transition...
 			Transition
 				.With(this, nameof(Width), formWidth)
-				.EaseInEaseOut(TimeSpan.FromSeconds(1));
+				.Spring(TimeSpan.FromSeconds(1));
 		}
 
 		/// <summary>
@@ -250,7 +293,7 @@ namespace TestApp
 
 			Transition
 				.With(cmdDropAndBounce, nameof(Top), destination)
-				.UserDefined(elements, TimeSpan.FromSeconds(2));
+				.Sequence(elements, TimeSpan.FromSeconds(2));
 
 			// The transition above just animates the vertical bounce of the button, but not
 			// the left-to-right movement. This can't use the same transition, as otherwise the

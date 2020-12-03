@@ -8,7 +8,7 @@ namespace FluentTransitions.Methods
 	/// up by reverting them to their initial values. You specify the number of bounces and
 	/// the length of each bounce. 
 	/// </summary>
-	public class Flash : UserDefined
+	public class Flash : Sequence
 	{
 		/// <summary>
 		/// Flashes the property values a specified number of times, ending up by reverting them to their initial values.
