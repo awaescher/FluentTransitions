@@ -91,7 +91,7 @@ Idea and initial implementation by [Richard S. Shepherd on Google Code](https://
 
 Dec 2020 [Andreas Wäscher](https://github.com/awaescher)
 - Added support for [Easing Functions](https://easings.net/)
-- Added built-in easing implementations by [Mauro Sampietro](https://www.codeproject.com/Articles/827808/Control-Animation-in-Winforms).
+- Added built-in easing implementations by [Mauro Sampietro](https://www.codeproject.com/Articles/827808/Control-Animation-in-Winforms)
 
 Oct 2020 [Andreas Wäscher](https://github.com/awaescher)
 - Migrated to .NET Core 3.1 and .NET Framework 4.8
@@ -103,6 +103,6 @@ Apr 2020 [zhenyuan0502](https://github.com/zhenyuan0502)
 - Migrated to .NET Core 3.0
 
 Jul 2015 [Uwe Keim](https://github.com/UweKeim)
-- Copied this repository from [Google Code](https://code.google.com/p/dot-net-transitions/) to save it from disappearing when Google Code shuts down.
+- Copied this repository from [Google Code](https://code.google.com/p/dot-net-transitions/) to save it from disappearing when Google Code shuts down
 
 &copy; 2009 Richard S. Shepherd.
