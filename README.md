@@ -79,7 +79,7 @@ Back in the year 2011, I used these transitions to spice up two login forms for 
 
 ![Login form sample 2](./doc/itv2.gif)
 
-But FluentTransitinons is more that just smoothly moving and sizing controls, you can do pretty much everything if you're creative enough.
+But FluentTransitions is more that just smoothly moving and sizing controls, you can do pretty much everything if you're creative enough.
 
 ![Ripple effect sample](./doc/ripple.gif)
 
