@@ -21,7 +21,6 @@
   <PropertyGroup Condition="!$(MSBuildProjectName.Contains('Test')) And !$(MSBuildProjectName.Contains('Example'))">
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsPackable>true</IsPackable>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="!$(MSBuildProjectName.Contains('Test')) And !$(MSBuildProjectName.Contains('Example'))">
@@ -50,10 +49,6 @@
   </PropertyGroup>
   
   <ItemGroup Condition="!$(MSBuildProjectName.Contains('Test')) And !$(MSBuildProjectName.Contains('Example'))">
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.2.31">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
     <None Include="$(SolutionDir)..\doc\FluentTransitions.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
