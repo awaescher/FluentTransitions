@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
 		<OutputType>Library</OutputType>
-    <TargetFrameworks>net45;netcoreapp3.1</TargetFrameworks>
-    <UseWindowsForms>true</UseWindowsForms>
+		<TargetFrameworks>net48;net6.0-windows;net8.0-windows</TargetFrameworks>
+		<UseWindowsForms>true</UseWindowsForms>
+		<EnableWindowsTargeting>true</EnableWindowsTargeting>
 		<Description>FluentTransitions lets you create animated transitions of any property of user-interface elements in .NET.
 It provides an easy way to perform UI animations in a similar way to Apple's Core Animation library for iOS, iPadOS and macOS.
 
