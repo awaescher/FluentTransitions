@@ -50,6 +50,9 @@ namespace FluentTransitions
 		// know how to perform transitions on...
 		private static readonly IDictionary<Type, IManagedType> _mapManagedTypes = new Dictionary<Type, IManagedType>();
 
+		// Flag to prevent running a transition multiple times before it completes
+		private bool _running;
+
 		// The transition method used by this transition...
 		private readonly IMethod _method = null;
 
@@ -160,6 +163,8 @@ namespace FluentTransitions
 		/// </summary>
 		public void Run()
 		{
+			if (_running) return;
+			_running = true;
 			// We find the current start values for the properties we 
 			// are animating...
 			foreach (TransitionedPropertyInfo info in TransitionedProperties)
@@ -231,6 +236,7 @@ namespace FluentTransitions
 			{
 				// We stop the stopwatch and the timer...
 				_stopwatch.Stop();
+				_running = false;
 
 				// We raise an event to notify any observers that the transition has completed...
 				Utility.RaiseEvent(TransitionCompleted, this, EventArgs.Empty);
